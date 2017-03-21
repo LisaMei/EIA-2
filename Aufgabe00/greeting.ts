@@ -1,7 +1,5 @@
  document.addEventListener('DOMContentLoaded', function() {
-    
-    var name = prompt("Geben Sie Ihren Namen ein");
+        var name = prompt("Gäben Sie Ihren Nömen ein");
     alert("Hallo "+ name + "!");
-    
      
     });
