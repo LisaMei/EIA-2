@@ -5,14 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let field: number = 0;
     let line: number = 0;
     let rice: number = 1 ;
+   
 
     
         for (field = 0; field < 64; field++){           
            let div: HTMLElement = document.createElement("div");    
            
+          
            div.innerText= "" + rice;
            
            rice=rice * 2;
+          
            document.body.appendChild(div);
            
                if (field % 8 == 0){

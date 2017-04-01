@@ -1,10 +1,8 @@
 @CHARSET "UTF-8";
-@import url('https://fonts.googleapis.com/css?family=Space+Mono');
-@import url('https://fonts.googleapis.com/css?family=Ultra');
-
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
 body {
 	width:800px;
-	font-family: 'Ultra', serif;
+	font-family: 'Merriweather', serif;
 	
 }
 
