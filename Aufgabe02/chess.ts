@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
         for (field = 0; field < 64; field++){           
            let div: HTMLElement = document.createElement("div");    
            
-           div.innerText=""+rice;
+           div.innerText= "" + rice;
+           
            rice=rice * 2;
            document.body.appendChild(div);
            
