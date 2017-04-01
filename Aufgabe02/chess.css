@@ -1,16 +1,21 @@
 @CHARSET "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Space+Mono');
+@import url('https://fonts.googleapis.com/css?family=Ultra');
 
 body {
 	width:800px;
+	font-family: 'Ultra', serif;
 	
 }
 
 div {
 	border: solid black;
-	width:96px;
-	height:96px;
+	width:95px;
+	height:95px;
 	float:left;
-	
+	padding:1px;
+	text-align: center;	
+	overflow: auto;
 }
 
 
