@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (field = 0; field < 64; field++) {
         let div: HTMLElement = document.createElement("div");
+        div.style.border = "solid black";
         div.innerText = "" + rice;
         rice = rice * 2;
         document.body.appendChild(div);
@@ -50,16 +51,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function selection(_event: Event): void {
          let clickedDiv: HTMLDivElement = <HTMLDivElement> _event.target;
-         clickedDiv.style.border = "solid black";
+         console.log("border color = " + clickedDiv.style.border);
          
          
             if (clickedDiv.style.border == "solid black") {
                 clickedDiv.style.border = "solid red";
                 console.log("border color = " + clickedDiv.style.border);
-            } else {
-                clickedDiv.style.borderStyle = "solid black";
+                 }
+                 else {
+                clickedDiv.style.border = "solid black";
             }
-         
+//           if (clickedDiv.style.border == "solid red") {
+//                clickedDiv.style.border = "solid black";
+//                console.log("border color = " + clickedDiv.style.border);
+//   }
             
         }
     
