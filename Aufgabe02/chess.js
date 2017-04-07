@@ -31,33 +31,28 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     document.getElementsByTagName("div")[0];
     let divList = document.getElementsByTagName("div");
-    let selected = false;
     for (let i = 0; i < 8; i++) {
-        //                divList[i].addEventListener("click", handleEvent);
-        //document.addEventListener("mousemove", handleEvent);
-        if (selected == false) {
-            divList[i].addEventListener("click", select);
-            selected = true;
+        divList[i].addEventListener("click", selection);
+    }
+    function selection(_event) {
+        let clickedDiv = _event.target;
+        clickedDiv.style.border = "solid black";
+        if (clickedDiv.style.border == "solid black") {
+            clickedDiv.style.border = "solid red";
+            console.log("border color = " + clickedDiv.style.border);
         }
         else {
-            divList[i].addEventListener("click", deselect);
-            selected = false;
+            clickedDiv.style.borderStyle = "solid black";
         }
-        function deselect() {
-            divList[i].style.borderColor = "blue";
-            selected = false;
-            console.log(selected);
-        }
-        function select() {
-            divList[i].style.borderColor = "red";
-            selected = true;
-            console.log(selected);
-        }
-        divList[i].addEventListener("mousemove", function (Event) {
-            let box = document.createElement("box");
-            document.body.appendChild(box);
-            document.getElementById("box").style.display = "block";
-        });
     }
+    //            function box (_event: Event) {
+    //                let box: HTMLElement = document.createElement("div");
+    //                document.body.appendChild(box);
+    //                box.innerText = "" + rice;
+    //                
+    //                
+    //                document.getElementById("box").style.display = "block";
+    //
+    //        }
 });
 //# sourceMappingURL=chess.js.map
