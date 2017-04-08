@@ -36,15 +36,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-
+    
     document.getElementsByTagName("div")[0];
     let divList: NodeListOf<HTMLElement> = document.getElementsByTagName("div");
-
+    
+    //Box, die sich mitbewegt
+    let box: HTMLElement = document.createElement("div");
+    document.body.appendChild(box);
+    box.innerText = "" + rice;
+    box.style.display = "none";
 
     for (let i: number = 0; i < 8; i++) {
 
         divList[i].addEventListener("click", selection);
-//        divList[i].addEventListener("mousemove", box);
+        divList[i].addEventListener("mousemove", movingBox);
 
     }
    
@@ -60,26 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
                  }
                  else {
                 clickedDiv.style.border = "solid black";
-            }
-//           if (clickedDiv.style.border == "solid red") {
-//                clickedDiv.style.border = "solid black";
-//                console.log("border color = " + clickedDiv.style.border);
-//   }
-            
+                }
+    }
+    
+   
+     function movingBox (_event: Event): void {  
+        document.getElementById("box").style.display = "block"; //Box wird sichtbar
+                
         }
-    
-    
-    
-    
-    
-//            function box (_event: Event) {
-//                let box: HTMLElement = document.createElement("div");
-//                document.body.appendChild(box);
-//                box.innerText = "" + rice;
-//                
-//                
-//                document.getElementById("box").style.display = "block";
-//
-//        }
     
 });

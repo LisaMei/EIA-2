@@ -32,8 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     document.getElementsByTagName("div")[0];
     let divList = document.getElementsByTagName("div");
+    //Box, die sich mitbewegt
+    let box = document.createElement("div");
+    document.body.appendChild(box);
+    box.innerText = "" + rice;
+    box.style.display = "none";
     for (let i = 0; i < 8; i++) {
         divList[i].addEventListener("click", selection);
+        divList[i].addEventListener("mousemove", movingBox);
     }
     function selection(_event) {
         let clickedDiv = _event.target;
@@ -45,19 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
         else {
             clickedDiv.style.border = "solid black";
         }
-        //           if (clickedDiv.style.border == "solid red") {
-        //                clickedDiv.style.border = "solid black";
-        //                console.log("border color = " + clickedDiv.style.border);
-        //   }
     }
-    //            function box (_event: Event) {
-    //                let box: HTMLElement = document.createElement("div");
-    //                document.body.appendChild(box);
-    //                box.innerText = "" + rice;
-    //                
-    //                
-    //                document.getElementById("box").style.display = "block";
-    //
-    //        }
+    function movingBox(_event) {
+        document.getElementById("box").style.display = "block"; //Box wird sichtbar
+    }
 });
 //# sourceMappingURL=chess.js.map
