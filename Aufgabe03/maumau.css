@@ -23,10 +23,10 @@
 
 
 
-#hand{
+div{
 	clear:both;
+	width: 60px;
 	height: 100px;
-	width:auto;
 	margin: 2px;
 	border: 1px solid;
 }

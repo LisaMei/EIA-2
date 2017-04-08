@@ -21,19 +21,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let handCards: string[] = [];
 
     deck.addEventListener("click", take);
-    hand.addEventListener("click", giveAway);
-
-
+   
+    
+   
 
 
         
           let i:number = 0; 
             function take(_event: Event): void {
                  if(i<5){
+                    let handCard: HTMLElement = document.createElement("div");
+                    document.body.appendChild(handCard);
                     let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-                    hand.innerText += randomCard;
+                    handCard.innerText += randomCard;
                     i++;
                     handCards[i] = randomCard;
+                    handCard.addEventListener("click", giveAway);
                 }
                 console.log(Event, handCards);
              }
