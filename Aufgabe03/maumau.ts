@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let deck: HTMLElement = document.getElementById("deck");
     let hand = document.getElementById("hand");
-
+    let handCards: string[] = [];
 
     deck.addEventListener("click", take);
     hand.addEventListener("click", giveAway);
@@ -28,21 +28,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
           let i:number = 0; 
-           if(i<5){
             function take(_event: Event): void {
-            let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-            hand.innerText += randomCard;
-             
-                i++;
-            console.log(Event);
+                 if(i<5){
+                    let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
+                    hand.innerText += randomCard;
+                    i++;
+                    handCards[i] = randomCard;
                 }
+                console.log(Event, handCards);
              }
+    
                
 
-    function giveAway(): void {
-
-
-    }
+   function giveAway(_event: Event): void {
+                 if(i<5){
+                    
+                    
+                    i++;
+                }
+                console.log(Event);
+             }
 
 
 

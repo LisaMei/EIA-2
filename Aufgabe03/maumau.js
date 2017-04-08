@@ -14,18 +14,24 @@ document.addEventListener('DOMContentLoaded', function () {
         "Kreuz 7", "Kreuz 8", "Kreuz 9", "Karo 10", "Kreuz Ass", "Kreuz Bube", "Kreuz Dame"];
     let deck = document.getElementById("deck");
     let hand = document.getElementById("hand");
+    let handCards = [];
     deck.addEventListener("click", take);
     hand.addEventListener("click", giveAway);
     let i = 0;
-    if (i < 5) {
-        function take(_event) {
+    function take(_event) {
+        if (i < 5) {
             let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
             hand.innerText += randomCard;
             i++;
-            console.log(Event);
+            handCards[i] = randomCard;
         }
+        console.log(Event, handCards);
     }
-    function giveAway() {
+    function giveAway(_event) {
+        if (i < 5) {
+            i++;
+        }
+        console.log(Event);
     }
 });
 //# sourceMappingURL=maumau.js.map
