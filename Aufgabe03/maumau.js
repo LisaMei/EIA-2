@@ -16,10 +16,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let hand = document.getElementById("hand");
     deck.addEventListener("click", take);
     hand.addEventListener("click", giveAway);
-    function take(_event) {
-        let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-        hand.innerText += randomCard;
-        console.log(Event);
+    let i = 0;
+    if (i < 5) {
+        function take(_event) {
+            let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
+            hand.innerText += randomCard;
+            i++;
+            console.log(Event);
+        }
     }
     function giveAway() {
     }

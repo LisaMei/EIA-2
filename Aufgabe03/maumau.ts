@@ -26,12 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-        function take(_event: Event): void {
+        
+          let i:number = 0; 
+           if(i<5){
+            function take(_event: Event): void {
             let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
             hand.innerText += randomCard;
-    
+             
+                i++;
             console.log(Event);
-        }
+                }
+             }
+               
 
     function giveAway(): void {
 
