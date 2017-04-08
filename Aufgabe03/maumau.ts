@@ -23,23 +23,15 @@ document.addEventListener('DOMContentLoaded', function() {
     deck.addEventListener("click", take);
     hand.addEventListener("click", giveAway);
 
-    //for (let i:number = 0;i<5;i++){
-    //    
-    //    function take(_event: Event): void {
-    //   let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-    //        hand.innerText += randomCard;
-    //   
-    //        console.lognt);
-    //    }
-    //}
-    
-   
-    function take(_event: Event): void {
-        let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-        hand.innerText += randomCard;
 
-        console.log(Event);
-    }
+
+
+        function take(_event: Event): void {
+            let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
+            hand.innerText += randomCard;
+    
+            console.log(Event);
+        }
 
     function giveAway(): void {
 
