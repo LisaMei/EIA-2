@@ -8,49 +8,51 @@ Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert.
 */
 document.addEventListener('DOMContentLoaded', function () {
-    let field = 0;
+    let fields = 0;
     let line = 0;
     let rice = 1;
-    for (field = 0; field < 64; field++) {
-        let div = document.createElement("div");
-        document.body.appendChild(div);
-        div.style.border = "solid black";
-        div.innerText = "" + rice;
+    for (fields = 0; fields < 64; fields++) {
+        let field = document.createElement("div");
+        document.body.appendChild(field);
+        field.style.border = "solid black";
+        field.innerText = "" + rice;
         rice = rice * 2;
-        if (field % 8 == 0) {
+        if (fields % 8 == 0) {
             line = line + 1;
         }
         if (line % 2 == 0) {
-            if (field % 2 != 0) {
-                div.style.backgroundColor = "black";
-                div.style.color = "white";
+            if (fields % 2 != 0) {
+                field.style.backgroundColor = "black";
+                field.style.color = "white";
             }
             else {
-                div.style.backgroundColor = "white";
+                field.style.backgroundColor = "white";
             }
         }
         else {
-            if (field % 2 != 0) {
-                div.style.backgroundColor = "white";
+            if (fields % 2 != 0) {
+                field.style.backgroundColor = "white";
             }
             else {
-                div.style.backgroundColor = "black";
-                div.style.color = "white";
+                field.style.backgroundColor = "black";
+                field.style.color = "white";
             }
         }
     }
     document.getElementsByTagName("div")[0];
-    let divList = document.getElementsByTagName("div");
+    let fieldList = document.getElementsByTagName("div");
+    let clickedDiv;
     //Box, die sich mitbewegt
-    let box = document.createElement("div");
-    document.body.appendChild(box);
-    box.innerText = "" + rice;
-    box.style.display = "none";
+    //    let box: HTMLElement = document.createElement("div");
+    //    document.body.appendChild(box);
+    //    let box: HTMLElement = document.getElementById("box");
+    //    box.innerText = "" + rice;
+    //    box.style.display = "none";
     for (let i = 0; i < 8; i++) {
-        divList[i].addEventListener("click", selection);
+        fieldList[i].addEventListener("click", selection);
     }
     function selection(_event) {
-        let clickedDiv = _event.target;
+        clickedDiv = _event.target;
         console.log("border color = " + clickedDiv.style.border);
         if (clickedDiv.style.border == "solid black") {
             clickedDiv.style.border = "solid red";
@@ -61,8 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         clickedDiv.addEventListener("mousemove", coordinates);
     }
+    function removeHandler() {
+        clickedDiv.removeEventListener('mousemove', coordinates);
+    }
     function coordinates(_event) {
-        //        document.getElementById("box").style.display = "block"; //Box wird sichtbar
+        let x = _event.clientX;
+        let y = _event.clientY;
+        //        box.style.display = "block";
     }
 });
 //# sourceMappingURL=chess.js.map
