@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             handCard.innerText += randomCard; //Zufallswert in gezogener Karte speichern
             i++; //Anzahl der Karten in der Hand plus 1
             handCards[i] = randomCard;
+//            allCards.splice(randomCard, 1);
             handCard.addEventListener("click", giveAway);
         }
         console.log(Event, handCards);

@@ -1,13 +1,22 @@
+/*
+Aufgabe: Aufgabe 3
+Name: Lisa Meister
+Matrikel: 254761
+Datum: 06.04.2017
+Hiermit versichere ich, dass ich diesen
+Code selbst geschrieben habe. Er wurde
+nicht kopiert und auch nicht diktiert.
+*/
 document.addEventListener('DOMContentLoaded', function () {
     let field = 0;
     let line = 0;
     let rice = 1;
     for (field = 0; field < 64; field++) {
         let div = document.createElement("div");
+        document.body.appendChild(div);
         div.style.border = "solid black";
         div.innerText = "" + rice;
         rice = rice * 2;
-        document.body.appendChild(div);
         if (field % 8 == 0) {
             line = line + 1;
         }
@@ -39,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
     box.style.display = "none";
     for (let i = 0; i < 8; i++) {
         divList[i].addEventListener("click", selection);
-        divList[i].addEventListener("mousemove", movingBox);
     }
     function selection(_event) {
         let clickedDiv = _event.target;
@@ -51,9 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
         else {
             clickedDiv.style.border = "solid black";
         }
+        clickedDiv.addEventListener("mousemove", coordinates);
     }
-    function movingBox(_event) {
-        document.getElementById("box").style.display = "block"; //Box wird sichtbar
+    function coordinates(_event) {
+        //        document.getElementById("box").style.display = "block"; //Box wird sichtbar
     }
 });
 //# sourceMappingURL=chess.js.map
