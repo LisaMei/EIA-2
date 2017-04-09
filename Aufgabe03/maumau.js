@@ -13,27 +13,30 @@ document.addEventListener('DOMContentLoaded', function () {
         "Pik 7", "Pik 8", "Pik 9", "Pik 10", "Pik Ass", "Pik Bube", "Pik Dame",
         "Kreuz 7", "Kreuz 8", "Kreuz 9", "Karo 10", "Kreuz Ass", "Kreuz Bube", "Kreuz Dame"];
     let deck = document.getElementById("deck");
+    let discard = document.getElementById("discard");
     let hand = document.getElementById("hand");
-    let handCards = [];
-    deck.addEventListener("click", take);
+    let handCards = []; //Array mit 5 gezogenen Karten 
     let i = 0;
+    deck.addEventListener("click", take);
     function take(_event) {
         if (i < 5) {
-            let handCard = document.createElement("div");
-            document.body.appendChild(handCard);
+            let handCard = document.createElement("div"); //gezogene Karte
+            document.body.appendChild(handCard); //Div an den Body hängen
             let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-            handCard.innerText += randomCard;
-            i++;
+            handCard.innerText += randomCard; //Zufallswert in gezogener Karte speichern
+            i++; //Anzahl der Karten in der Hand plus 1
             handCards[i] = randomCard;
             handCard.addEventListener("click", giveAway);
         }
         console.log(Event, handCards);
     }
     function giveAway(_event) {
-        if (i < 5) {
-            i++;
-        }
-        console.log(Event);
+        let clickedCard = _event.target;
+        let cardContent = clickedCard.innerText;
+        clickedCard.style.display = "none"; //Karte ausblenden
+        i--;
+        discard.innerText = cardContent; //Wert der geklickten Karte auf dem Ablagestapel anzeigen
+        console.log(cardContent, Event);
     }
 });
 //# sourceMappingURL=maumau.js.map

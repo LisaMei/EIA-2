@@ -10,6 +10,7 @@
 	height: 100px;
 	float:left;
 	margin: 2px;
+	padding:1px;
 }
 
 #discard{
@@ -19,6 +20,10 @@
 	height: 100px;
 	float:left;
 	margin: 2px;
+	padding:1px;
+	background-color: lightgray;
+	
+	
 }
 
 
@@ -29,4 +34,6 @@ div{
 	height: 100px;
 	margin: 2px;
 	border: 1px solid;
+	text-align: center;
+	padding:1px;
 }

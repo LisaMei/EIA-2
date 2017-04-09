@@ -17,46 +17,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     let deck: HTMLElement = document.getElementById("deck");
+    let discard: HTMLElement = document.getElementById("discard");
     let hand = document.getElementById("hand");
-    let handCards: string[] = [];
+    let handCards: string[] = [];  //Array mit 5 gezogenen Karten 
+    let i: number = 0;
 
     deck.addEventListener("click", take);
-   
-    
-   
+
+    function take(_event: Event): void {
+        if (i < 5) {
+            let handCard: HTMLElement = document.createElement("div"); //gezogene Karte
+            document.body.appendChild(handCard); //Div an den Body hängen
+
+            let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
+            handCard.innerText += randomCard; //Zufallswert in gezogener Karte speichern
+            i++; //Anzahl der Karten in der Hand plus 1
+            handCards[i] = randomCard;
+            handCard.addEventListener("click", giveAway);
+        }
+        console.log(Event, handCards);
+    }
 
 
-        
-          let i:number = 0; 
-            function take(_event: Event): void {
-                 if(i<5){
-                    let handCard: HTMLElement = document.createElement("div");
-                    document.body.appendChild(handCard);
-                    let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-                    handCard.innerText += randomCard;
-                    i++;
-                    handCards[i] = randomCard;
-                    handCard.addEventListener("click", giveAway);
-                }
-                console.log(Event, handCards);
-             }
-    
-               
-
-   function giveAway(_event: Event): void {
-                 if(i<5){
-                    
-                    
-                    i++;
-                }
-                console.log(Event);
-             }
-
-
-
-
-
-
+    function giveAway(_event: Event): void {
+        let clickedCard: HTMLDivElement = <HTMLDivElement>_event.target;
+        let cardContent: string = clickedCard.innerText;
+        clickedCard.style.display = "none"; //Karte ausblenden
+        i--;
+        discard.innerText = cardContent; //Wert der geklickten Karte auf dem Ablagestapel anzeigen
+        console.log(cardContent, Event);
+    }
 
 });
 
