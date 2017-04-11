@@ -12,17 +12,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let fields: number = 0;
     let line: number = 0;
-    let rice: number = 1;
+//    let rice: number = 1;
      let box: HTMLElement = document.getElementById("box");
 
     for (fields = 0; fields < 64; fields++) {
 
         let field: HTMLElement = document.createElement("div");
+        field.id = fields.toString();
 
         document.body.appendChild(field);
         field.style.border = "solid black";
 //        field.innerText = "" + rice;
-        rice = rice * 2;
+//        rice = rice * 2;
        
         
         
@@ -61,21 +62,24 @@ console.log(box.innerText);
     box.style.display = "none";
     let i:number;
     
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
         fieldList[i].addEventListener("click", selection);
-        box.innerText = "Dezimalzahl: " + rice + "Hexadezimalzahl: " + rice.toString(16);
+    
     }
 
     function selection(_event: Event): void {
         clickedDiv = <HTMLDivElement>_event.target;
+        let nummer: number = parseInt(clickedDiv.id);
+        let rice: number = Math.pow(2, nummer);
+        
         console.log("border color = " + clickedDiv.style.border);
 
         if (clickedDiv.style.border == "solid black") {
             clickedDiv.style.border = "solid red";
-            clickedDiv.addEventListener("mousemove", coordinates);
+            clickedDiv.addEventListener("mousemove", coordinates);       
 //            console.log("border color = " + clickedDiv.style.border);
 //            rice = rice + Number(fieldList[i].textContent);
-            
+            box.innerText = "Dezimalzahl: " + rice + "Hexadezimalzahl: " + rice.toString(16); 
             box.style.display = "inline-block";
         }
         
@@ -95,11 +99,7 @@ console.log(box.innerText);
 
     function coordinates(_event: MouseEvent): void {
         document.getElementById("box").style.left = (_event.clientX + 10) + "px";
-        document.getElementById("box").style.top = (_event.clientY + 10) + "px";
-        
-        
-       
-            
+        document.getElementById("box").style.top = (_event.clientY + 10) + "px";     
     }
 
 
