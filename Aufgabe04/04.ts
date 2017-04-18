@@ -89,8 +89,8 @@ namespace L4_Canvas {
             }
         }
         drawTree(40, 275);
-        drawFlower(60, 260, "#196F3D", "#F8C471", "#FBFCFC");
-        drawTulip(100, 280, "#196F3D", "#CB4335");
+//        drawFlower(60, 260, "#196F3D", "#F8C471", "#FBFCFC");
+//        drawTulip(100, 280, "#196F3D", "#CB4335");
         drawCloud(160, 90, "white");
         
 
