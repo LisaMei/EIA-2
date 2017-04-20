@@ -16,17 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let discard = document.getElementById("discard");
     let hand = document.getElementById("hand");
     let handCards = []; //Array mit 5 gezogenen Karten 
-    let i = 0;
+    //    let i: number = 0;
     deck.addEventListener("click", take);
     function take(_event) {
-        if (i < 5) {
+        if (handCards.length < 5) {
             let handCard = document.createElement("div"); //gezogene Karte
             document.body.appendChild(handCard); //Div an den Body hängen
             let randomCard = allCards[Math.floor(Math.random() * allCards.length)];
             handCard.innerText += randomCard; //Zufallswert in gezogener Karte speichern
-            i++; //Anzahl der Karten in der Hand plus 1
-            handCards[i] = randomCard;
-            //            allCards.splice(randomCard, 1);
+            //            i++; //Anzahl der Karten in der Hand plus 1
+            handCards.push(randomCard);
+            allCards.splice(allCards.indexOf(randomCard), 1);
             handCard.addEventListener("click", giveAway);
         }
         console.log(Event, handCards);
@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         let clickedCard = _event.target;
         let cardContent = clickedCard.innerText;
         clickedCard.style.display = "none"; //Karte ausblenden
-        i--;
+        //        i--;
+        handCards.splice(handCards.indexOf(cardContent), 1);
         discard.innerText = cardContent; //Wert der geklickten Karte auf dem Ablagestapel anzeigen
         console.log(cardContent, Event);
     }
