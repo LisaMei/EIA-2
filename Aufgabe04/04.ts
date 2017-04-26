@@ -10,19 +10,20 @@ nicht kopiert und auch nicht diktiert.
 
 namespace L4_Canvas {
     window.addEventListener("load", init);
+
     let crc2: CanvasRenderingContext2D;
+    let x: number = 100;
+    let y: number = 100;
+
+    window.setTimeout(animate, 20);
+
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
-        canvas = document.getElementsByTagName("canvas")[0];
-        console.log(canvas);
+        canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
-        console.log(crc2);
+        console.log(crc2, canvas);
         crc2.fillRect(0, 0, canvas.width, canvas.height);
-
-
-
-
 
         //Himmel
         crc2.beginPath();
@@ -33,6 +34,7 @@ namespace L4_Canvas {
         crc2.fillStyle = "#D6EAF8";
         crc2.fill();
 
+        //Berg zeichnen
         drawMountain(300, 170, "#BDC3C7", "#BDC3C7");
 
         //Sonne
@@ -50,20 +52,7 @@ namespace L4_Canvas {
         crc2.closePath();
         //        crc2.fillStyle = "#7DCEA0";
         crc2.fillStyle = "#89bc71";
-
         crc2.fill();
-
-        
-
-
-
-
-
-
-
-
-
-
 
         //        var flowers = [
         //            drawFlower(randomX, randomY, "#196F3D", "#F8C471", "#FBFCFC"),
@@ -80,7 +69,7 @@ namespace L4_Canvas {
             var randomColor = colors[Math.floor(Math.random() * colors.length)];
             //            var randomFlower = flowers[Math.floor(Math.random() * flowers.length)];
             console.log("X ist " + randomX, "Y ist " + randomY, randomFlower);
-            
+
             var randomFlower: number = Math.floor((Math.random() * 2)) + 1;
             if (randomFlower == 1) {
                 drawFlower(randomX, randomY, "#196F3D", "#F8C471", randomColor);
@@ -88,15 +77,17 @@ namespace L4_Canvas {
                 drawTulip(randomX, randomY, "#196F3D", randomColor);
             }
         }
-        drawTree(40, 275);
-//        drawFlower(60, 260, "#196F3D", "#F8C471", "#FBFCFC");
-//        drawTulip(100, 280, "#196F3D", "#CB4335");
-        drawCloud(160, 90, "white");
-        
 
+        drawHive(65, 183);
+        drawTree(40, 275); //Baum zeichnen
+        //        drawFlower(60, 260, "#196F3D", "#F8C471", "#FBFCFC");
+        //        drawTulip(100, 280, "#196F3D", "#CB4335");
+        drawCloud(160, 90, "white"); //Wolke zeichnen
+
+
+
+        //BAUM
         function drawTree(_x: number, _y: number): void {
-
-
             //Stamm 20, 250
             crc2.beginPath();
             crc2.moveTo(_x, _y);
@@ -107,13 +98,13 @@ namespace L4_Canvas {
             crc2.lineTo(_x + 40, _y - 65);
             crc2.lineTo(_x + 40, _y - 60);
             crc2.lineTo(_x + 20, _y - 60);
-            //stamm
+
+            //Rest Stamm
             crc2.lineTo(_x + 20, _y - 100);
             crc2.lineTo(_x, _y - 100);
             crc2.fillStyle = "#8e795e";
             crc2.fill();
             crc2.closePath();
-
 
             //Krone
             crc2.fillStyle = "#2d774c";
@@ -131,7 +122,7 @@ namespace L4_Canvas {
         }
 
 
-
+        //BERG
         function drawMountain(_x: number, _y: number, _strokeColor: string, _fillColor: string): void {
             crc2.beginPath();
             crc2.fillStyle = _fillColor;
@@ -144,7 +135,6 @@ namespace L4_Canvas {
             crc2.closePath();
             crc2.fill();
             //        crc2.stroke();
-
             //Bergkuppe
             crc2.beginPath();
             crc2.fillStyle = "white";
@@ -163,7 +153,7 @@ namespace L4_Canvas {
             crc2.stroke();
         }
 
-
+        //BLUME
         function drawFlower(_x: number, _y: number, _stalkColor: string, _centerColor: string, _petalColor: string): void {
             //stalk
             crc2.beginPath();
@@ -179,12 +169,10 @@ namespace L4_Canvas {
             crc2.lineTo(_x, _y - 7);
             crc2.lineTo(_x + 5, _y - 7);
             crc2.lineTo(_x, _y);
-
             crc2.stroke();
             crc2.closePath();
             crc2.fillStyle = _stalkColor;
             crc2.fill();
-
             //petals
             crc2.fillStyle = _petalColor;
             crc2.beginPath();
@@ -202,7 +190,7 @@ namespace L4_Canvas {
             crc2.beginPath();
             crc2.arc(_x, _y - 15, 5, 0, 2 * Math.PI);
             crc2.fill();
-
+            
             //center
             crc2.beginPath();
             crc2.arc(_x, _y - 20, 5, 0, 2 * Math.PI);
@@ -216,8 +204,6 @@ namespace L4_Canvas {
             crc2.strokeStyle = _stalkColor;
             crc2.moveTo(_x, _y);
             crc2.lineTo(_x, _y - 20);
-
-
             crc2.stroke();
             crc2.closePath();
             //leafs
@@ -242,8 +228,6 @@ namespace L4_Canvas {
             crc2.closePath();
             crc2.fillStyle = _stalkColor;
             crc2.fill();
-
-
             //blossom
             crc2.fillStyle = _petalColor;
             crc2.beginPath();
@@ -259,13 +243,10 @@ namespace L4_Canvas {
             crc2.lineTo(_x + 5, _y - 25);
             crc2.closePath();
             crc2.fill();
-
-            //    crc2            
         }
 
 
         function drawCloud(_x: number, _y: number, _fillColor: string): void {
-
             crc2.fillStyle = _fillColor;
             crc2.beginPath();
             crc2.arc(_x, _y, 30, 0, 2 * Math.PI);
@@ -279,10 +260,88 @@ namespace L4_Canvas {
             crc2.beginPath();
             crc2.arc(_x + 35, _y + 8, 28, 0, 2 * Math.PI);
             crc2.fill();
+            crc2.closePath();
         }
+
+        function drawHive(_x: number, _y: number): void {
+            crc2.beginPath();
+            crc2.strokeStyle = "#CF882B";
+            crc2.fillStyle = "#CF882B";
+            crc2.moveTo(_x, _y);
+            crc2.lineTo(_x + 15, _y);
+            crc2.lineTo(_x + 20, _y + 20);
+            crc2.lineTo(_x - 5, _y + 20);
+            crc2.closePath();
+            crc2.moveTo(_x - 5, _y + 20);
+            crc2.lineTo(_x, _y + 25);
+            crc2.lineTo(_x + 15, _y + 25);
+            crc2.lineTo(_x + 20, _y + 20);
+            crc2.stroke();
+            crc2.fill();
+
+
+
+            crc2.closePath();
+
+            crc2.beginPath();
+            crc2.strokeStyle = "#CF882B";
+            crc2.moveTo(_x + 5, _y);
+            crc2.lineTo(_x + 5, _y - 5);
+            crc2.lineTo(_x + 10, _y - 5);
+            crc2.lineTo(_x + 10, _y);
+            crc2.stroke();
+            crc2.closePath();
+
+
+            crc2.beginPath();
+            crc2.moveTo(_x + 5, _y + 15);
+            crc2.lineTo(_x + 10, _y + 15);
+            crc2.lineTo(_x + 12, _y + 20);
+            crc2.lineTo(_x + 3, _y + 20);
+            crc2.lineTo(_x + 5, _y + 15);
+
+
+            crc2.strokeStyle = "#A66F27";
+            crc2.fillStyle = "#A66F27";
+
+
+
+
+
+            crc2.stroke();
+            crc2.fill();
+
+
+        }
+
+
+    } //init
+
+
+    function animate(): void {
+        console.log("Animate called");
+
+        //        crc2.fillStyle = "#00000";
+        //        crc2.fillRect(0,0, crc2.canvas.width, crc2.canvas.height         
+
+        x = x + 2;
+        drawBee(x, y, "#F4D03F"); //Biene zeichnen -- >Variablen nötig
+        window.setTimeout(animate, 20);
     }
 
-}
+    function drawBee(_x: number, _y: number, _fillColor: string): void {
+        crc2.fillStyle = _fillColor;
+        crc2.beginPath();
+        crc2.moveTo(10, 50);
+        //        crc2.ellipse(125, 125, 100, 50, 0, 0, 2 * Math.PI, false);
+
+        crc2.fill();
+        crc2.closePath();
+
+    }
+
+
+} //namespace
 
 
 

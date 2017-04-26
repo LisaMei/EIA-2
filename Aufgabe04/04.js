@@ -11,12 +11,14 @@ var L4_Canvas;
 (function (L4_Canvas) {
     window.addEventListener("load", init);
     let crc2;
+    let x = 100;
+    let y = 100;
+    window.setTimeout(animate, 20);
     function init(_event) {
         let canvas;
-        canvas = document.getElementsByTagName("canvas")[0];
-        console.log(canvas);
+        canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
-        console.log(crc2);
+        console.log(crc2, canvas);
         crc2.fillRect(0, 0, canvas.width, canvas.height);
         //Himmel
         crc2.beginPath();
@@ -26,6 +28,7 @@ var L4_Canvas;
         crc2.lineTo(400, 300);
         crc2.fillStyle = "#D6EAF8";
         crc2.fill();
+        //Berg zeichnen
         drawMountain(300, 170, "#BDC3C7", "#BDC3C7");
         //Sonne
         crc2.beginPath();
@@ -63,10 +66,12 @@ var L4_Canvas;
                 drawTulip(randomX, randomY, "#196F3D", randomColor);
             }
         }
-        drawTree(40, 275);
+        drawHive(65, 183);
+        drawTree(40, 275); //Baum zeichnen
         //        drawFlower(60, 260, "#196F3D", "#F8C471", "#FBFCFC");
         //        drawTulip(100, 280, "#196F3D", "#CB4335");
-        drawCloud(160, 90, "white");
+        drawCloud(160, 90, "white"); //Wolke zeichnen
+        //BAUM
         function drawTree(_x, _y) {
             //Stamm 20, 250
             crc2.beginPath();
@@ -77,7 +82,7 @@ var L4_Canvas;
             crc2.lineTo(_x + 40, _y - 65);
             crc2.lineTo(_x + 40, _y - 60);
             crc2.lineTo(_x + 20, _y - 60);
-            //stamm
+            //Rest Stamm
             crc2.lineTo(_x + 20, _y - 100);
             crc2.lineTo(_x, _y - 100);
             crc2.fillStyle = "#8e795e";
@@ -97,6 +102,7 @@ var L4_Canvas;
             crc2.arc(_x - 10, _y - 95, 10, 0, 2 * Math.PI);
             crc2.fill();
         }
+        //BERG
         function drawMountain(_x, _y, _strokeColor, _fillColor) {
             crc2.beginPath();
             crc2.fillStyle = _fillColor;
@@ -126,6 +132,7 @@ var L4_Canvas;
             crc2.fill();
             crc2.stroke();
         }
+        //BLUME
         function drawFlower(_x, _y, _stalkColor, _centerColor, _petalColor) {
             //stalk
             crc2.beginPath();
@@ -208,7 +215,6 @@ var L4_Canvas;
             crc2.lineTo(_x + 5, _y - 25);
             crc2.closePath();
             crc2.fill();
-            //    crc2            
         }
         function drawCloud(_x, _y, _fillColor) {
             crc2.fillStyle = _fillColor;
@@ -224,7 +230,59 @@ var L4_Canvas;
             crc2.beginPath();
             crc2.arc(_x + 35, _y + 8, 28, 0, 2 * Math.PI);
             crc2.fill();
+            crc2.closePath();
         }
+        function drawHive(_x, _y) {
+            crc2.beginPath();
+            crc2.strokeStyle = "#CF882B";
+            crc2.fillStyle = "#CF882B";
+            crc2.moveTo(_x, _y);
+            crc2.lineTo(_x + 15, _y);
+            crc2.lineTo(_x + 20, _y + 20);
+            crc2.lineTo(_x - 5, _y + 20);
+            crc2.closePath();
+            crc2.moveTo(_x - 5, _y + 20);
+            crc2.lineTo(_x, _y + 25);
+            crc2.lineTo(_x + 15, _y + 25);
+            crc2.lineTo(_x + 20, _y + 20);
+            crc2.stroke();
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.strokeStyle = "#CF882B";
+            crc2.moveTo(_x + 5, _y);
+            crc2.lineTo(_x + 5, _y - 5);
+            crc2.lineTo(_x + 10, _y - 5);
+            crc2.lineTo(_x + 10, _y);
+            crc2.stroke();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.moveTo(_x + 5, _y + 15);
+            crc2.lineTo(_x + 10, _y + 15);
+            crc2.lineTo(_x + 12, _y + 20);
+            crc2.lineTo(_x + 3, _y + 20);
+            crc2.lineTo(_x + 5, _y + 15);
+            crc2.strokeStyle = "#A66F27";
+            crc2.fillStyle = "#A66F27";
+            crc2.stroke();
+            crc2.fill();
+        }
+    } //init
+    function animate() {
+        console.log("Animate called");
+        //        crc2.fillStyle = "#00000";
+        //        crc2.fillRect(0,0, crc2.canvas.width, crc2.canvas.height         
+        x = x + 2;
+        drawBee(x, y, "#F4D03F"); //Biene zeichnen -- >Variablen nötig
+        window.setTimeout(animate, 20);
     }
-})(L4_Canvas || (L4_Canvas = {}));
+    function drawBee(_x, _y, _fillColor) {
+        crc2.fillStyle = _fillColor;
+        crc2.beginPath();
+        crc2.moveTo(10, 50);
+        //        crc2.ellipse(125, 125, 100, 50, 0, 0, 2 * Math.PI, false);
+        crc2.fill();
+        crc2.closePath();
+    }
+})(L4_Canvas || (L4_Canvas = {})); //namespace
 //# sourceMappingURL=04.js.map
