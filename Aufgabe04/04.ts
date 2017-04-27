@@ -24,7 +24,12 @@ namespace L4_Canvas {
         crc2 = canvas.getContext("2d");
         console.log(crc2, canvas);
         crc2.fillRect(0, 0, canvas.width, canvas.height);
+        animate();
+        
+        }
 
+    
+    
         //Himmel
         crc2.beginPath();
         crc2.moveTo(0, 230); //Wiese Startpunkt
@@ -190,7 +195,7 @@ namespace L4_Canvas {
             crc2.beginPath();
             crc2.arc(_x, _y - 15, 5, 0, 2 * Math.PI);
             crc2.fill();
-            
+
             //center
             crc2.beginPath();
             crc2.arc(_x, _y - 20, 5, 0, 2 * Math.PI);
@@ -315,7 +320,7 @@ namespace L4_Canvas {
         }
 
 
-    } //init
+   
 
 
     function animate(): void {
