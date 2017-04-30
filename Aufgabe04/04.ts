@@ -87,15 +87,12 @@ namespace L4_Canvas {
         crc2.strokeStyle = "#3ECFFF";
         crc2.stroke();
 
-
         //vorderer Flügel
         crc2.beginPath();
         crc2.arc(_x + 1, _y - 2, 3, 0, 2 * Math.PI);
         crc2.closePath();
         crc2.strokeStyle = "#B2ECFF";
         crc2.stroke();
-
-
 
         //Stachel
         crc2.beginPath();
@@ -105,8 +102,6 @@ namespace L4_Canvas {
         crc2.closePath();
         crc2.fillStyle = "#000000";
         crc2.fill();
-
-
 
         //Hinterteil
         crc2.beginPath();
@@ -121,8 +116,6 @@ namespace L4_Canvas {
         crc2.closePath();
         crc2.fillStyle = "#F8C471";
         crc2.fill();
-
-
 
         //Körpermitte
         crc2.beginPath();
@@ -140,13 +133,6 @@ namespace L4_Canvas {
         crc2.closePath();
         crc2.fillStyle = "#000000";
         crc2.fill();
-
-
-
-
-
-
-
     }
 
     //neue Biene bei Klick
