@@ -11,15 +11,19 @@ var L4_Canvas;
 (function (L4_Canvas) {
     window.addEventListener("load", init);
     let crc2;
-    let x = [];
-    let y = [];
+    //    let x: number[] = [];
+    //    let y: number[] = [];
+    let bees = [];
     let beeNumber = 10;
+    let beeColors = [
+        "#F8C471", "#f7a92c", "#ffca2b"
+    ];
+    let randomBeeColor = beeColors[Math.floor(Math.random() * beeColors.length)];
     let imgData;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
-        console.log(crc2, canvas);
         crc2.fillRect(0, 0, canvas.width, canvas.height);
         //Landschaft Aufrufe
         drawSky();
@@ -34,88 +38,96 @@ var L4_Canvas;
         drawCloud(160, 90, "white"); //Wolke zeichnen
         //Fertige Landschaft wird gespeichert
         imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
-        animate();
+        //animate();
         for (let i = 0; i < beeNumber; i++) {
-            x[i] = 65; //Start am beeHive
-            y[i] = 183;
+            let b = { x: 65, y: 183, color: "#F8C471" };
+            //            b.x = 65; //Start am beeHive
+            //            b.y = 183;
+            //b.size = 
+            bees[i] = b;
         }
-        window.setTimeout(animate, 20, canvas.width, canvas.height);
+        console.log(bees);
+        window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
     }
     function animate() {
         console.log("Animate called");
         crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwenden
-        for (let i = 0; i < beeNumber; i++) {
-            x[i] += Math.random() * 4.5 - 2;
-            y[i] += Math.random() * 4 - 2;
+        for (let i = 0; i < bees.length; i++) {
+            let b = bees[i];
+            b.x += Math.random() * 4.5 - 2;
+            b.y += Math.random() * 4 - 2;
+            b.color = randomBeeColor;
             //Bienen kommen immer an der entgegengesetzten Seite wieder ins Bild geflogen
-            if (x[i] > crc2.canvas.width) {
-                x[i] = 0;
+            if (b.x > crc2.canvas.width) {
+                b.x = 0;
             }
-            if (y[i] > crc2.canvas.height) {
-                y[i] = 0;
+            if (b.y > crc2.canvas.height) {
+                b.y = 0;
             }
-            if (y[i] < 0) {
-                y[i] = crc2.canvas.height;
+            if (b.y < 0) {
+                b.y = crc2.canvas.height;
             }
-            drawBee(x[i], y[i]); //Bienen erhalten neue Werte aus Schleife
+            drawBee(b); //Bienen erhalten neue Werte aus Schleife
         }
         window.setTimeout(animate, 20);
     }
-    function drawBee(_x, _y) {
+    function drawBee(_b) {
         //hinterer Flügel
         crc2.beginPath();
-        crc2.arc(_x + 2, _y - 1, 3, 0, 2 * Math.PI);
+        crc2.arc(_b.x + 2, _b.y - 1, 3, 0, 2 * Math.PI);
         crc2.closePath();
         crc2.strokeStyle = "#3ECFFF";
         crc2.stroke();
         //vorderer Flügel
         crc2.beginPath();
-        crc2.arc(_x + 1, _y - 2, 3, 0, 2 * Math.PI);
+        crc2.arc(_b.x + 1, _b.y - 2, 3, 0, 2 * Math.PI);
         crc2.closePath();
         crc2.strokeStyle = "#B2ECFF";
         crc2.stroke();
         //Stachel
         crc2.beginPath();
-        crc2.moveTo(_x - 3, _y - 1); //obere Ecke Dreieck
-        crc2.lineTo(_x - 5, _y); //linke Ecke
-        crc2.lineTo(_x - 3, _y + 1);
+        crc2.moveTo(_b.x - 3, _b.y - 1); //obere Ecke Dreieck
+        crc2.lineTo(_b.x - 5, _b.y); //linke Ecke
+        crc2.lineTo(_b.x - 3, _b.y + 1);
         crc2.closePath();
         crc2.fillStyle = "#000000";
         crc2.fill();
         //Hinterteil
         crc2.beginPath();
-        crc2.arc(_x, _y, 3, 0, 2 * Math.PI);
+        crc2.arc(_b.x, _b.y, 3, 0, 2 * Math.PI);
         crc2.closePath();
-        crc2.fillStyle = "#F8C471";
+        //        crc2.fillStyle = "#F8C471";
+        crc2.fillStyle = randomBeeColor;
         crc2.fill();
         //Bienenkopf
         crc2.beginPath();
-        crc2.arc(_x + 3, _y, 3, 0, 2 * Math.PI);
+        crc2.arc(_b.x + 3, _b.y, 3, 0, 2 * Math.PI);
         crc2.closePath();
-        crc2.fillStyle = "#F8C471";
+        //        crc2.fillStyle = "#F8C471";
+        crc2.fillStyle = randomBeeColor;
         crc2.fill();
         //Körpermitte
         crc2.beginPath();
-        crc2.moveTo(_x - 1, _y - 3); //Rechteck linke obere Ecke
-        crc2.lineTo(_x + 3, _y - 3); //Ecke rechts oben
-        crc2.lineTo(_x + 3, _y + 3); //Ecke rechts unten
-        crc2.lineTo(_x - 1, _y + 3); //Ecke links unten
+        crc2.moveTo(_b.x - 1, _b.y - 3); //Rechteck linke obere Ecke
+        crc2.lineTo(_b.x + 3, _b.y - 3); //Ecke rechts oben
+        crc2.lineTo(_b.x + 3, _b.y + 3); //Ecke rechts unten
+        crc2.lineTo(_b.x - 1, _b.y + 3); //Ecke links unten
         crc2.closePath();
         crc2.fillStyle = "#000000";
         crc2.fill();
         //Auge
         crc2.beginPath();
-        crc2.arc(_x + 4.5, _y - 0.5, 0.5, 0, 2 * Math.PI);
+        crc2.arc(_b.x + 4.5, _b.y - 0.5, 0.5, 0, 2 * Math.PI);
         crc2.closePath();
         crc2.fillStyle = "#000000";
         crc2.fill();
     }
     //neue Biene bei Klick
     function addBee() {
-        x.push(65);
-        y.push(183);
-        beeNumber++;
+        //        bees.push(65);
+        //        bees.y.push(183);
+        //        beeNumber++;
     }
     //Himmel  
     function drawSky() {
