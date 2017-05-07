@@ -9,16 +9,18 @@ nicht kopiert und auch nicht diktiert.
 */
 var L4_Canvas;
 (function (L4_Canvas) {
+    let randomBeeColor;
+    let randomStripeColor;
+    let beeColors = [
+        "#F8C471", "#f7a92c", "#ffca2b"
+    ];
+    let stripeColors = ["#000000", "#443622"];
     window.addEventListener("load", init);
     let crc2;
     //    let x: number[] = [];
     //    let y: number[] = [];
     let bees = [];
     let beeNumber = 10;
-    let beeColors = [
-        "#F8C471", "#f7a92c", "#ffca2b"
-    ];
-    let randomBeeColor = beeColors[Math.floor(Math.random() * beeColors.length)];
     let imgData;
     function init(_event) {
         let canvas;
@@ -38,26 +40,23 @@ var L4_Canvas;
         drawCloud(160, 90, "white"); //Wolke zeichnen
         //Fertige Landschaft wird gespeichert
         imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
-        //animate();
         for (let i = 0; i < beeNumber; i++) {
-            let b = { x: 65, y: 183, color: "#F8C471" };
-            //            b.x = 65; //Start am beeHive
-            //            b.y = 183;
-            //b.size = 
+            let b = { x: 65, y: 183, color: "#F8C471", stripeColor: "#000000" };
             bees[i] = b;
+            randomBeeColor = beeColors[Math.floor(Math.random() * beeColors.length)];
+            randomStripeColor = stripeColors[Math.floor(Math.random() * stripeColors.length)];
+            b.color = randomBeeColor;
+            b.stripeColor = randomStripeColor;
         }
-        console.log(bees);
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
     }
     function animate() {
-        console.log("Animate called");
         crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwenden
         for (let i = 0; i < bees.length; i++) {
             let b = bees[i];
             b.x += Math.random() * 4.5 - 2;
             b.y += Math.random() * 4 - 2;
-            b.color = randomBeeColor;
             //Bienen kommen immer an der entgegengesetzten Seite wieder ins Bild geflogen
             if (b.x > crc2.canvas.width) {
                 b.x = 0;
@@ -98,14 +97,14 @@ var L4_Canvas;
         crc2.arc(_b.x, _b.y, 3, 0, 2 * Math.PI);
         crc2.closePath();
         //        crc2.fillStyle = "#F8C471";
-        crc2.fillStyle = randomBeeColor;
+        crc2.fillStyle = _b.color;
         crc2.fill();
         //Bienenkopf
         crc2.beginPath();
         crc2.arc(_b.x + 3, _b.y, 3, 0, 2 * Math.PI);
         crc2.closePath();
         //        crc2.fillStyle = "#F8C471";
-        crc2.fillStyle = randomBeeColor;
+        crc2.fillStyle = _b.color;
         crc2.fill();
         //Körpermitte
         crc2.beginPath();
@@ -114,7 +113,7 @@ var L4_Canvas;
         crc2.lineTo(_b.x + 3, _b.y + 3); //Ecke rechts unten
         crc2.lineTo(_b.x - 1, _b.y + 3); //Ecke links unten
         crc2.closePath();
-        crc2.fillStyle = "#000000";
+        crc2.fillStyle = _b.stripeColor;
         crc2.fill();
         //Auge
         crc2.beginPath();
@@ -125,9 +124,13 @@ var L4_Canvas;
     }
     //neue Biene bei Klick
     function addBee() {
-        //        bees.push(65);
-        //        bees.y.push(183);
-        //        beeNumber++;
+        let b = { x: 65, y: 183, color: "#F8C471", stripeColor: "#000000" };
+        randomBeeColor = beeColors[Math.floor(Math.random() * beeColors.length)];
+        randomStripeColor = stripeColors[Math.floor(Math.random() * stripeColors.length)];
+        b.color = randomBeeColor;
+        b.stripeColor = randomStripeColor;
+        bees.push(b);
+        beeNumber++;
     }
     //Himmel  
     function drawSky() {
