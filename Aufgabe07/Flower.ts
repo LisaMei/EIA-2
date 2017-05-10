@@ -5,7 +5,7 @@ namespace Classes {
         y: number;
         position: string;
         petalColor:string;
-        
+         
 //    constructor() {
 //            console.log("Hey, I'm Bob!");
 //            //            this.setRandomStyle();

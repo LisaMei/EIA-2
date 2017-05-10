@@ -6,7 +6,7 @@ namespace Classes {
         color: string;
         stripeColor: string;
 
-
+ 
         constructor(_x: number, _y: number) {
             console.log("Hey, I'm Bob!");
             //            this.setRandomStyle();

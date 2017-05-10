@@ -37,7 +37,6 @@ var Classes;
             Classes.crc2.beginPath();
             Classes.crc2.arc(this.x, this.y, 3, 0, 2 * Math.PI);
             Classes.crc2.closePath();
-            //        crc2.fillStyle = "#F8C471";
             Classes.crc2.fillStyle = this.color;
             Classes.crc2.fill();
             //Bienenkopf
