@@ -7,7 +7,7 @@ namespace Classes {
         petalColor:string;
          
 //    constructor() {
-//            console.log("Hey, I'm Bob!");
+//            console.log("Hey");
 //            //            this.setRandomStyle();
 //            //this.setRandomPosition();
 //            this.x = randomX

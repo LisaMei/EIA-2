@@ -92,7 +92,7 @@ namespace Classes {
         crc2.lineTo(400, 300);
         crc2.lineTo(0, 300);
         crc2.closePath();
-        //        crc2.fillStyle = "#7DCEA0";
+        
         crc2.fillStyle = "#89bc71";
         crc2.fill();
     }

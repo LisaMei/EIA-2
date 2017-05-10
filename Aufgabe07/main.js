@@ -72,7 +72,6 @@ var Classes;
         Classes.crc2.lineTo(400, 300);
         Classes.crc2.lineTo(0, 300);
         Classes.crc2.closePath();
-        //        crc2.fillStyle = "#7DCEA0";
         Classes.crc2.fillStyle = "#89bc71";
         Classes.crc2.fill();
     }

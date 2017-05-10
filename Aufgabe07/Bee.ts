@@ -50,7 +50,7 @@ namespace Classes {
             crc2.beginPath();
             crc2.arc(this.x, this.y, 3, 0, 2 * Math.PI);
             crc2.closePath();
-            //        crc2.fillStyle = "#F8C471";
+            
             crc2.fillStyle = this.color;
             crc2.fill();
 
