@@ -38,18 +38,12 @@ namespace Classes {
         //        drawTulip(100, 280, "#196F3D", "#CB4335");
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
-        
+
         for (let i: number = 0; i < 5; i++) {
-            
             let f: Flower = new Flower(200, 200);
-            f.x+=5;
-            f.y+=5;
-            f.drawTulip();
-            
-            
+            f.drawNectarFlower();
             flowers.push(f);
         }
-
         console.log(flowers);
 
         //Fertige Landschaft wird gespeichert

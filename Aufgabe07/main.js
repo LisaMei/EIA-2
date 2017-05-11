@@ -32,9 +32,7 @@ var Classes;
         drawCloud(160, 90, "white"); //Wolke zeichnen
         for (let i = 0; i < 5; i++) {
             let f = new Classes.Flower(200, 200);
-            f.x += 5;
-            f.y += 5;
-            f.drawTulip();
+            f.drawNectarFlower();
             flowers.push(f);
         }
         console.log(flowers);

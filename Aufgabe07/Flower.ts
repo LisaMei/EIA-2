@@ -1,15 +1,14 @@
 namespace Classes {
-    
-//let randomPosition:number = (Math.random() * (400 - 1)) + 1;
-    
+
+    //let randomPosition:number = (Math.random() * (400 - 1)) +     
     export class Flower {
         x: number;
         y: number;
         petalColor: string;
         stalkColor: string;
-        
-        
-       
+
+
+
 
         constructor(_x: number, _y: number) {
             console.log("Hey");
@@ -21,7 +20,14 @@ namespace Classes {
             this.y = _y;
         }
 
+        drawNectarFlower(): void {
+
+            this.setRandomPosition();
+            this.drawTulip();
+            //            flower
+   
         
+        }
 
         //BLUME
         drawFlower(_centerColor: string): void {
@@ -128,8 +134,8 @@ namespace Classes {
             this.x = (Math.random() * (400 - 1)) + 1;
             this.y = (Math.random() * (300 - 230)) + 230;
         }
-        
-        drawRandomFlowers():void{
+
+        drawRandomFlowers(): void {
             var randomFlower: number = Math.floor((Math.random() * 2)) + 1;
             if (randomFlower == 1) {
                 this.setRandomColor();
@@ -139,7 +145,7 @@ namespace Classes {
                 this.setRandomColor();
                 this.setRandomPosition();
                 this.drawTulip();
-            }        
+            }
         }
 
     }

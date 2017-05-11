@@ -1,6 +1,6 @@
 var Classes;
 (function (Classes) {
-    //let randomPosition:number = (Math.random() * (400 - 1)) + 1;
+    //let randomPosition:number = (Math.random() * (400 - 1)) +     
     class Flower {
         constructor(_x, _y) {
             console.log("Hey");
@@ -10,6 +10,11 @@ var Classes;
             this.setRandomColor();
             this.x = _x;
             this.y = _y;
+        }
+        drawNectarFlower() {
+            this.setRandomPosition();
+            this.drawTulip();
+            //            flower
         }
         //BLUME
         drawFlower(_centerColor) {
