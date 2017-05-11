@@ -1,32 +1,35 @@
 var Classes;
 (function (Classes) {
+    //let randomPosition:number = (Math.random() * (400 - 1)) + 1;
     class Flower {
-        //    constructor() {
-        //            console.log("Hey");
-        //            //            this.setRandomStyle();
-        //            //this.setRandomPosition();
-        //            this.x = randomX
-        //            this.y = _y;
-        //        }
+        constructor(_x, _y) {
+            console.log("Hey");
+            //            this.setRandomStyle();
+            //this.setRandomPosition();
+            this.stalkColor = "#196F3D";
+            this.setRandomColor();
+            this.x = _x;
+            this.y = _y;
+        }
         //BLUME
-        drawFlower(_stalkColor, _centerColor) {
+        drawFlower(_centerColor) {
             //stalk
             Classes.crc2.beginPath();
-            Classes.crc2.strokeStyle = _stalkColor;
+            Classes.crc2.strokeStyle = this.stalkColor;
             Classes.crc2.moveTo(this.x, this.y);
             Classes.crc2.lineTo(this.x, this.y - 20);
             Classes.crc2.stroke();
             Classes.crc2.closePath();
             //leafs
             Classes.crc2.beginPath();
-            Classes.crc2.strokeStyle = _stalkColor;
+            Classes.crc2.strokeStyle = this.stalkColor;
             Classes.crc2.moveTo(this.x, this.y);
             Classes.crc2.lineTo(this.x, this.y - 7);
             Classes.crc2.lineTo(this.x + 5, this.y - 7);
             Classes.crc2.lineTo(this.x, this.y);
             Classes.crc2.stroke();
             Classes.crc2.closePath();
-            Classes.crc2.fillStyle = _stalkColor;
+            Classes.crc2.fillStyle = this.stalkColor;
             Classes.crc2.fill();
             //petals
             Classes.crc2.fillStyle = this.petalColor;
@@ -48,34 +51,34 @@ var Classes;
             Classes.crc2.fillStyle = _centerColor;
             Classes.crc2.fill();
         }
-        drawTulip(_stalkColor) {
+        drawTulip() {
             //stalk
             Classes.crc2.beginPath();
-            Classes.crc2.strokeStyle = _stalkColor;
+            Classes.crc2.strokeStyle = this.stalkColor;
             Classes.crc2.moveTo(this.x, this.y);
             Classes.crc2.lineTo(this.x, this.y - 20);
             Classes.crc2.stroke();
             Classes.crc2.closePath();
             //leafs
             Classes.crc2.beginPath();
-            Classes.crc2.strokeStyle = _stalkColor;
+            Classes.crc2.strokeStyle = this.stalkColor;
             Classes.crc2.moveTo(this.x, this.y);
             Classes.crc2.lineTo(this.x, this.y - 12);
             Classes.crc2.lineTo(this.x - 5, this.y - 18);
             Classes.crc2.lineTo(this.x, this.y - 5);
             Classes.crc2.stroke();
             Classes.crc2.closePath();
-            Classes.crc2.fillStyle = _stalkColor;
+            Classes.crc2.fillStyle = this.stalkColor;
             Classes.crc2.fill();
             Classes.crc2.beginPath();
-            Classes.crc2.strokeStyle = _stalkColor;
+            Classes.crc2.strokeStyle = this.stalkColor;
             Classes.crc2.moveTo(this.x, this.y);
             Classes.crc2.lineTo(this.x, this.y - 12);
             Classes.crc2.lineTo(this.x + 5, this.y - 18);
             Classes.crc2.lineTo(this.x, this.y - 5);
             Classes.crc2.stroke();
             Classes.crc2.closePath();
-            Classes.crc2.fillStyle = _stalkColor;
+            Classes.crc2.fillStyle = this.stalkColor;
             Classes.crc2.fill();
             //blossom
             Classes.crc2.fillStyle = this.petalColor;
@@ -101,6 +104,19 @@ var Classes;
         setRandomPosition() {
             this.x = (Math.random() * (400 - 1)) + 1;
             this.y = (Math.random() * (300 - 230)) + 230;
+        }
+        drawRandomFlowers() {
+            var randomFlower = Math.floor((Math.random() * 2)) + 1;
+            if (randomFlower == 1) {
+                this.setRandomColor();
+                this.setRandomPosition();
+                this.drawFlower("#F8C471");
+            }
+            else {
+                this.setRandomColor();
+                this.setRandomPosition();
+                this.drawTulip();
+            }
         }
     }
     Classes.Flower = Flower;

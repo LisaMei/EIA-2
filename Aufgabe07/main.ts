@@ -13,8 +13,12 @@ namespace Classes {
     window.addEventListener("load", init);
     export let crc2: CanvasRenderingContext2D;
     let bees: Bee[] = [];
+    let flowers: Flower[] = [];
     let beeNumber: number = 10;
     let imgData: ImageData;
+
+
+
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
@@ -35,6 +39,15 @@ namespace Classes {
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
 
+        for (let i: number = 0; i < 5; i++) {
+            
+            let flower: Flower = new Flower(200, 200);
+            flower.drawTulip();
+            flowers.push(flower);
+        }
+
+        console.log(flowers);
+
         //Fertige Landschaft wird gespeichert
         imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
 
@@ -44,7 +57,7 @@ namespace Classes {
             let b: Bee = new Bee(65, 183);
             bees[i] = b;
             b.setRandomStyle();
-            
+
         }
 
         window.setTimeout(animate, 20);
@@ -92,7 +105,7 @@ namespace Classes {
         crc2.lineTo(400, 300);
         crc2.lineTo(0, 300);
         crc2.closePath();
-        
+
         crc2.fillStyle = "#89bc71";
         crc2.fill();
     }
@@ -170,30 +183,20 @@ namespace Classes {
         crc2.stroke();
     }
 
-     
-    
+
+
 
 
     //Zufällige Blumenwiese
     function drawRandomFlowers(): void {
         for (var i = 0; i < 25; i++) {
-            let f: Flower = new Flower;
-
-            
-        var randomFlower: number = Math.floor((Math.random() * 2)) + 1;
-            if (randomFlower == 1) {
-                f.drawFlower("#196F3D", "#F8C471");
-                f.setRandomColor();
-                f.setRandomPosition();
-            } else {
-                f.drawTulip("#196F3D");
-                f.setRandomColor();
-                f.setRandomPosition();
-            }    
-    }    
+            //            let randomPosition:number = f.x;
+            let f: Flower = new Flower(1, 1);
+            f.drawRandomFlowers();
         }
-    
-    
+    }
+
+
 
     function drawCloud(_x: number, _y: number, _fillColor: string): void {
         crc2.fillStyle = _fillColor;
@@ -253,6 +256,8 @@ namespace Classes {
         crc2.stroke();
         crc2.fill();
     }
+
+
 
 } //namespace
 

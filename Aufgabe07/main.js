@@ -11,6 +11,7 @@ var Classes;
 (function (Classes) {
     window.addEventListener("load", init);
     let bees = [];
+    let flowers = [];
     let beeNumber = 10;
     let imgData;
     function init(_event) {
@@ -29,6 +30,12 @@ var Classes;
         //        drawTulip(100, 280, "#196F3D", "#CB4335");
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
+        for (let i = 0; i < 5; i++) {
+            let flower = new Classes.Flower(200, 200);
+            flower.drawTulip();
+            flowers.push(flower);
+        }
+        console.log(flowers);
         //Fertige Landschaft wird gespeichert
         imgData = Classes.crc2.getImageData(0, 0, Classes.crc2.canvas.width, Classes.crc2.canvas.height);
         for (let i = 0; i < beeNumber; i++) {
@@ -146,18 +153,9 @@ var Classes;
     //Zufällige Blumenwiese
     function drawRandomFlowers() {
         for (var i = 0; i < 25; i++) {
-            let f = new Classes.Flower;
-            var randomFlower = Math.floor((Math.random() * 2)) + 1;
-            if (randomFlower == 1) {
-                f.drawFlower("#196F3D", "#F8C471");
-                f.setRandomColor();
-                f.setRandomPosition();
-            }
-            else {
-                f.drawTulip("#196F3D");
-                f.setRandomColor();
-                f.setRandomPosition();
-            }
+            //            let randomPosition:number = f.x;
+            let f = new Classes.Flower(1, 1);
+            f.drawRandomFlowers();
         }
     }
     function drawCloud(_x, _y, _fillColor) {
