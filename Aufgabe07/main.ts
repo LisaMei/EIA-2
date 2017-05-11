@@ -38,12 +38,16 @@ namespace Classes {
         //        drawTulip(100, 280, "#196F3D", "#CB4335");
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
-
+        
         for (let i: number = 0; i < 5; i++) {
             
-            let flower: Flower = new Flower(200, 200);
-            flower.drawTulip();
-            flowers.push(flower);
+            let f: Flower = new Flower(200, 200);
+            f.x+=5;
+            f.y+=5;
+            f.drawTulip();
+            
+            
+            flowers.push(f);
         }
 
         console.log(flowers);

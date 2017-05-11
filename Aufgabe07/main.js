@@ -31,9 +31,11 @@ var Classes;
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
         for (let i = 0; i < 5; i++) {
-            let flower = new Classes.Flower(200, 200);
-            flower.drawTulip();
-            flowers.push(flower);
+            let f = new Classes.Flower(200, 200);
+            f.x += 5;
+            f.y += 5;
+            f.drawTulip();
+            flowers.push(f);
         }
         console.log(flowers);
         //Fertige Landschaft wird gespeichert
