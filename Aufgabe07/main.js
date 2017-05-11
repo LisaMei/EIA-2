@@ -35,7 +35,7 @@ var Classes;
             f.drawNectarFlower();
             flowers.push(f);
         }
-        console.log(flowers);
+        console.log("Blumen-Array: " + flowers);
         //Fertige Landschaft wird gespeichert
         imgData = Classes.crc2.getImageData(0, 0, Classes.crc2.canvas.width, Classes.crc2.canvas.height);
         for (let i = 0; i < beeNumber; i++) {

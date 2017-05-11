@@ -17,9 +17,6 @@ namespace Classes {
     let beeNumber: number = 10;
     let imgData: ImageData;
 
-
-
-
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
@@ -44,11 +41,10 @@ namespace Classes {
             f.drawNectarFlower();
             flowers.push(f);
         }
-        console.log(flowers);
+        console.log("Blumen-Array: " + flowers);
 
         //Fertige Landschaft wird gespeichert
         imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
-
 
 
         for (let i: number = 0; i < beeNumber; i++) {
@@ -182,9 +178,6 @@ namespace Classes {
     }
 
 
-
-
-
     //Zufällige Blumenwiese
     function drawRandomFlowers(): void {
         for (var i = 0; i < 25; i++) {
@@ -193,7 +186,6 @@ namespace Classes {
             f.drawRandomFlowers();
         }
     }
-
 
 
     function drawCloud(_x: number, _y: number, _fillColor: string): void {
@@ -239,14 +231,12 @@ namespace Classes {
         crc2.stroke();
         crc2.closePath();
 
-
         crc2.beginPath();
         crc2.moveTo(_x + 5, _y + 15);
         crc2.lineTo(_x + 10, _y + 15);
         crc2.lineTo(_x + 12, _y + 20);
         crc2.lineTo(_x + 3, _y + 20);
         crc2.lineTo(_x + 5, _y + 15);
-
 
         crc2.strokeStyle = "#A66F27";
         crc2.fillStyle = "#A66F27";
