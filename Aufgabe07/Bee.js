@@ -2,9 +2,8 @@ var Classes;
 (function (Classes) {
     class Bee {
         constructor(_x, _y) {
-            console.log("Hey, I'm Bob!");
-            //            this.setRandomStyle();
-            //this.setRandomPosition();
+            console.log("Bee");
+            this.setRandomStyle();
             this.x = _x;
             this.y = _y;
         }
@@ -13,6 +12,7 @@ var Classes;
             this.draw();
         }
         draw() {
+            //abstract
             //hinterer Flügel
             Classes.crc2.beginPath();
             Classes.crc2.arc(this.x + 2, this.y - 1, 3, 0, 2 * Math.PI);
@@ -62,6 +62,16 @@ var Classes;
             Classes.crc2.fillStyle = "#000000";
             Classes.crc2.fill();
         }
+        setRandomStyle() {
+            let beeColors = [
+                "#F8C471", "#f7a92c", "#ffca2b"
+            ];
+            let stripeColors = ["#000000", "#443622"];
+            let randomBeeColor = beeColors[Math.floor(Math.random() * beeColors.length)];
+            let randomStripeColor = stripeColors[Math.floor(Math.random() * stripeColors.length)];
+            this.color = randomBeeColor;
+            this.stripeColor = randomStripeColor;
+        }
         move() {
             this.x += Math.random() * 4.5 - 2;
             this.y += Math.random() * 4 - 2;
@@ -74,18 +84,6 @@ var Classes;
             if (this.y < 0) {
                 this.y = Classes.crc2.canvas.height;
             }
-        }
-        setRandomStyle() {
-            let beeColors = [
-                "#F8C471", "#f7a92c", "#ffca2b"
-            ];
-            let stripeColors = ["#000000", "#443622"];
-            let randomBeeColor;
-            let randomStripeColor;
-            randomBeeColor = beeColors[Math.floor(Math.random() * beeColors.length)];
-            randomStripeColor = stripeColors[Math.floor(Math.random() * stripeColors.length)];
-            this.color = randomBeeColor;
-            this.stripeColor = randomStripeColor;
         }
     }
     Classes.Bee = Bee;

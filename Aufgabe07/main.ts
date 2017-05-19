@@ -1,18 +1,23 @@
 /*  
-Aufgabe: Aufgabe 4
+Aufgabe: Aufgabe 8
 Name: Lisa Meister
 Matrikel: 254761
-Datum: 06.04.2017
+Datum: 18.05.2017
 Hiermit versichere ich, dass ich diesen
 Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert.
 */
 
 namespace Classes {
-
     window.addEventListener("load", init);
     export let crc2: CanvasRenderingContext2D;
+
     let bees: Bee[] = [];
+    let nectarBees: NectarBee[] = [];
+
+    //    let randomTargetX:number = targetX[Math.floor(Math.random() * targetX.length)];
+    //    let randomTargetY:number = targetY[Math.floor(Math.random() * targetY.len)]  
+
     let flowers: Flower[] = [];
     let beeNumber: number = 10;
     let imgData: ImageData;
@@ -37,11 +42,12 @@ namespace Classes {
         drawCloud(160, 90, "white"); //Wolke zeichnen
 
         for (let i: number = 0; i < 5; i++) {
-            let f: Flower = new Flower(200, 200);
-            f.drawNectarFlower();
-            flowers.push(f);
+            let r: RegularFlower = new RegularFlower(200, 200);
+            r.draw();
+            flowers.push(r);
         }
         console.log("Blumen-Array: " + flowers);
+
 
         //Fertige Landschaft wird gespeichert
         imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
@@ -50,13 +56,23 @@ namespace Classes {
         for (let i: number = 0; i < beeNumber; i++) {
             let b: Bee = new Bee(65, 183);
             bees[i] = b;
-            b.setRandomStyle();
-
         }
 
+        for (let i: number = 0; i < 5; i++) {
+
+            let targetX: number = flowers[Math.floor(Math.random() * flowers.length)].x;
+            let targetY: number = flowers[Math.floor(Math.random() * flowers.length)].y;
+
+            let nB: NectarBee = new NectarBee(65, 183, targetX, targetY);
+            bees.push(nB);
+
+
+            //            nectarBees[i] = nB;
+            //            nB.draw();
+        }
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
-
+        console.log(bees);
     }
 
 
@@ -66,6 +82,7 @@ namespace Classes {
         for (let i: number = 0; i < bees.length; i++) {
             let b: Bee = bees[i];
             b.update(); //Bienen erhalten neue Werte aus Schleife
+
         }
         window.setTimeout(animate, 20);
     }
@@ -181,7 +198,6 @@ namespace Classes {
     //Zufällige Blumenwiese
     function drawRandomFlowers(): void {
         for (var i = 0; i < 25; i++) {
-            //            let randomPosition:number = f.x;
             let f: Flower = new Flower(1, 1);
             f.drawRandomFlowers();
         }
@@ -244,8 +260,6 @@ namespace Classes {
         crc2.stroke();
         crc2.fill();
     }
-
-
 
 } //namespace
 

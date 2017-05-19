@@ -1,8 +1,8 @@
 /*
-Aufgabe: Aufgabe 4
+Aufgabe: Aufgabe 8
 Name: Lisa Meister
 Matrikel: 254761
-Datum: 06.04.2017
+Datum: 18.05.2017
 Hiermit versichere ich, dass ich diesen
 Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert.
@@ -11,6 +11,9 @@ var Classes;
 (function (Classes) {
     window.addEventListener("load", init);
     let bees = [];
+    let nectarBees = [];
+    //    let randomTargetX:number = targetX[Math.floor(Math.random() * targetX.length)];
+    //    let randomTargetY:number = targetY[Math.floor(Math.random() * targetY.len)]  
     let flowers = [];
     let beeNumber = 10;
     let imgData;
@@ -31,9 +34,9 @@ var Classes;
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
         for (let i = 0; i < 5; i++) {
-            let f = new Classes.Flower(200, 200);
-            f.drawNectarFlower();
-            flowers.push(f);
+            let r = new Classes.RegularFlower(200, 200);
+            r.draw();
+            flowers.push(r);
         }
         console.log("Blumen-Array: " + flowers);
         //Fertige Landschaft wird gespeichert
@@ -41,10 +44,16 @@ var Classes;
         for (let i = 0; i < beeNumber; i++) {
             let b = new Classes.Bee(65, 183);
             bees[i] = b;
-            b.setRandomStyle();
+        }
+        for (let i = 0; i < 5; i++) {
+            let targetX = flowers[Math.floor(Math.random() * flowers.length)].x;
+            let targetY = flowers[Math.floor(Math.random() * flowers.length)].y;
+            let nB = new Classes.NectarBee(65, 183, targetX, targetY);
+            bees.push(nB);
         }
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
+        console.log(bees);
     }
     function animate() {
         Classes.crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwenden
@@ -153,7 +162,6 @@ var Classes;
     //Zufällige Blumenwiese
     function drawRandomFlowers() {
         for (var i = 0; i < 25; i++) {
-            //            let randomPosition:number = f.x;
             let f = new Classes.Flower(1, 1);
             f.drawRandomFlowers();
         }
