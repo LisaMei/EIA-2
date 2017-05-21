@@ -33,7 +33,7 @@ var Classes;
         //        drawTulip(100, 280, "#196F3D", "#CB4335");
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 10; i++) {
             let r = new Classes.RegularFlower(200, 200);
             r.draw();
             flowers.push(r);
@@ -46,9 +46,11 @@ var Classes;
             bees[i] = b;
         }
         for (let i = 0; i < 5; i++) {
-            let targetX = flowers[Math.floor(Math.random() * flowers.length)].x;
-            let targetY = flowers[Math.floor(Math.random() * flowers.length)].y;
+            let randomNectarFlower = flowers[Math.floor(Math.random() * flowers.length)];
+            let targetX = randomNectarFlower.x;
+            let targetY = randomNectarFlower.y - 20;
             let nB = new Classes.NectarBee(65, 183, targetX, targetY);
+            console.log(randomNectarFlower);
             bees.push(nB);
         }
         window.setTimeout(animate, 20);

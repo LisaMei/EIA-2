@@ -41,7 +41,7 @@ namespace Classes {
         drawRandomFlowers();
         drawCloud(160, 90, "white"); //Wolke zeichnen
 
-        for (let i: number = 0; i < 5; i++) {
+        for (let i: number = 0; i < 10; i++) {
             let r: RegularFlower = new RegularFlower(200, 200);
             r.draw();
             flowers.push(r);
@@ -59,11 +59,11 @@ namespace Classes {
         }
 
         for (let i: number = 0; i < 5; i++) {
-
-            let targetX: number = flowers[Math.floor(Math.random() * flowers.length)].x;
-            let targetY: number = flowers[Math.floor(Math.random() * flowers.length)].y;
-
+            let randomNectarFlower: Flower = flowers[Math.floor(Math.random() * flowers.length)];
+            let targetX: number = randomNectarFlower.x;
+            let targetY: number = randomNectarFlower.y-20;
             let nB: NectarBee = new NectarBee(65, 183, targetX, targetY);
+            console.log(randomNectarFlower);
             bees.push(nB);
 
 
@@ -82,7 +82,7 @@ namespace Classes {
         for (let i: number = 0; i < bees.length; i++) {
             let b: Bee = bees[i];
             b.update(); //Bienen erhalten neue Werte aus Schleife
-
+           
         }
         window.setTimeout(animate, 20);
     }
