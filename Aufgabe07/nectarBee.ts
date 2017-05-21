@@ -33,15 +33,13 @@ namespace Classes {
                 this.y += yDiff * this.speed;
             }
 
-            if (this.x == this.xTarget && this.y == this.yTarget) { //Biene ist angekommen
-                this.moveUp;
-
+            if (d <1) { //Biene ist angekommen
+              
+                this.y -= 100 * this.speed;
             }
-        }
+            }
 
-        moveUp(): void {
-            this.y -= 20 * this.speed;
-        }
+        
 
     }
 }

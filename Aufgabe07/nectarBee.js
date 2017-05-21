@@ -24,12 +24,9 @@ var Classes;
                 this.x += xDiff * this.speed;
                 this.y += yDiff * this.speed;
             }
-            if (this.x == this.xTarget && this.y == this.yTarget) {
-                this.moveUp;
+            if (d < 1) {
+                this.y -= 100 * this.speed;
             }
-        }
-        moveUp() {
-            this.y -= 20 * this.speed;
         }
     }
     Classes.NectarBee = NectarBee;
