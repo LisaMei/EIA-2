@@ -12,14 +12,14 @@ namespace Classes {
     window.addEventListener("load", init);
     export let crc2: CanvasRenderingContext2D;
 
+    let beeNumber: number = 10;
     let bees: Bee[] = [];
     let nectarBees: NectarBee[] = [];
-
-    //    let randomTargetX:number = targetX[Math.floor(Math.random() * targetX.length)];
-    //    let randomTargetY:number = targetY[Math.floor(Math.random() * targetY.len)]  
-
+    
+    let targetX: number;
+    let targetY: number;
     let flowers: Flower[] = [];
-    let beeNumber: number = 10;
+
     let imgData: ImageData;
 
     function init(_event: Event): void {
@@ -27,7 +27,6 @@ namespace Classes {
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
-
 
         //Landschaft Aufrufe
         drawSky();
@@ -44,7 +43,7 @@ namespace Classes {
         for (let i: number = 0; i < 10; i++) {
             let r: RegularFlower = new RegularFlower(200, 200);
             r.draw();
-            flowers.push(r);
+            flowers.push(r); 
         }
         console.log("Blumen-Array: " + flowers);
 
@@ -52,23 +51,19 @@ namespace Classes {
         //Fertige Landschaft wird gespeichert
         imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
 
-
         for (let i: number = 0; i < beeNumber; i++) {
             let b: Bee = new Bee(65, 183);
             bees[i] = b;
         }
 
+        //Ansteuerbare Nektarblumen
         for (let i: number = 0; i < 5; i++) {
             let randomNectarFlower: Flower = flowers[Math.floor(Math.random() * flowers.length)];
-            let targetX: number = randomNectarFlower.x;
-            let targetY: number = randomNectarFlower.y-20;
+            targetX = randomNectarFlower.x;
+            targetY = randomNectarFlower.y - 20; // -20 -> am Blumenkopf
             let nB: NectarBee = new NectarBee(65, 183, targetX, targetY);
             console.log(randomNectarFlower);
-            bees.push(nB);
-
-
-            //            nectarBees[i] = nB;
-            //            nB.draw();
+            bees.push(nB); //Nektarbienen zu normalen Bienen in Array pushen
         }
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
@@ -82,7 +77,6 @@ namespace Classes {
         for (let i: number = 0; i < bees.length; i++) {
             let b: Bee = bees[i];
             b.update(); //Bienen erhalten neue Werte aus Schleife
-           
         }
         window.setTimeout(animate, 20);
     }

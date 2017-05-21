@@ -10,12 +10,12 @@ nicht kopiert und auch nicht diktiert.
 var Classes;
 (function (Classes) {
     window.addEventListener("load", init);
+    let beeNumber = 10;
     let bees = [];
     let nectarBees = [];
-    //    let randomTargetX:number = targetX[Math.floor(Math.random() * targetX.length)];
-    //    let randomTargetY:number = targetY[Math.floor(Math.random() * targetY.len)]  
+    let targetX;
+    let targetY;
     let flowers = [];
-    let beeNumber = 10;
     let imgData;
     function init(_event) {
         let canvas;
@@ -45,13 +45,14 @@ var Classes;
             let b = new Classes.Bee(65, 183);
             bees[i] = b;
         }
+        //Ansteuerbare Nektarblumen
         for (let i = 0; i < 5; i++) {
             let randomNectarFlower = flowers[Math.floor(Math.random() * flowers.length)];
-            let targetX = randomNectarFlower.x;
-            let targetY = randomNectarFlower.y - 20;
+            targetX = randomNectarFlower.x;
+            targetY = randomNectarFlower.y - 20; // -20 -> am Blumenkopf
             let nB = new Classes.NectarBee(65, 183, targetX, targetY);
             console.log(randomNectarFlower);
-            bees.push(nB);
+            bees.push(nB); //Nektarbienen zu normalen Bienen in Array pushen
         }
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
