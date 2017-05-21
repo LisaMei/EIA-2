@@ -23,17 +23,32 @@ namespace Classes {
             let xDiff: number = this.xTarget - this.x; // Strecke x-Achse
             let yDiff: number = this.yTarget - this.y; // Strecke y-Achse
             let d: number = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2)); //Differenz "direkter Weg"
+            
 
-            if (this.x < this.xTarget && this.y > this.yTarget) { //zufällige Blume rechts von der Biene
+            if (xDiff > 0 &&yDiff>0){
                 this.x += xDiff * this.speed;
                 this.y += yDiff * this.speed;
             }
-            if (this.y < this.yTarget) { //zufällige Blume links von der Biene
+            if (xDiff < 0 &&yDiff>0){
                 this.x += xDiff * this.speed;
                 this.y += yDiff * this.speed;
             }
+            
+//            if (this.x < this.xTarget && this.y > this.yTarget) { //zufällige Blume rechts von der Biene
+//                this.x += xDiff * this.speed;
+//                this.y += yDiff * this.speed;
+//            } 
+//            
+            
+//                if (this.x > this.xTarget) { //zufällige Blume links von der Biene
+//                this.x += xDiff * this.speed;
+//                this.y += yDiff * this.speed;
+//            
+//                }
+            
+            
 
-            if (d <1) { //Biene ist angekommen
+            if (d<1) { //Biene ist angekommen
               
                 this.y -= 100 * this.speed;
             }
