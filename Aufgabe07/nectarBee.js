@@ -35,7 +35,6 @@ var Classes;
             //            
             //                }
             if (d < 1) {
-                this.y -= 100 * this.speed;
             }
         }
     }
