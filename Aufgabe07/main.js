@@ -13,9 +13,7 @@ var Classes;
     let beeNumber = 10;
     let bees = [];
     let nectarBees = [];
-    let targetX;
-    let targetY;
-    let flowers = [];
+    Classes.flowers = [];
     let imgData;
     function init(_event) {
         let canvas;
@@ -36,9 +34,9 @@ var Classes;
         for (let i = 0; i < 10; i++) {
             let r = new Classes.RegularFlower(200, 200);
             r.draw();
-            flowers.push(r);
+            Classes.flowers.push(r);
         }
-        console.log("Blumen-Array: " + flowers);
+        console.log("Blumen-Array: " + Classes.flowers);
         //Fertige Landschaft wird gespeichert
         imgData = Classes.crc2.getImageData(0, 0, Classes.crc2.canvas.width, Classes.crc2.canvas.height);
         for (let i = 0; i < beeNumber; i++) {
@@ -47,11 +45,11 @@ var Classes;
         }
         //Ansteuerbare Nektarblumen
         for (let i = 0; i < 5; i++) {
-            let randomNectarFlower = flowers[Math.floor(Math.random() * flowers.length)];
-            targetX = randomNectarFlower.x;
-            targetY = randomNectarFlower.y - 20; // -20 -> am Blumenkopf
-            let nB = new Classes.NectarBee(65, 183, targetX, targetY);
-            console.log(randomNectarFlower);
+            //            let randomNectarFlower: Flower = flowers[Math.floor(Math.random() * flowers.length)];
+            //            targetX = randomNectarFlower.x;
+            //            targetY = randomNectarFlower.y - 20; // -20 -> am Blumenkopf
+            let nB = new Classes.NectarBee(65, 183);
+            console.log(nB.setRandomTargetPosition);
             bees.push(nB); //Nektarbienen zu normalen Bienen in Array pushen
         }
         window.setTimeout(animate, 20);

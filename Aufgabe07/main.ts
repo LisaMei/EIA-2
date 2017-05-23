@@ -16,9 +16,10 @@ namespace Classes {
     let bees: Bee[] = [];
     let nectarBees: NectarBee[] = [];
     
-    let targetX: number;
-    let targetY: number;
-    let flowers: Flower[] = [];
+     
+    export let targetX: number;
+   export let targetY: number;
+   export let flowers: Flower[] = [];
 
     let imgData: ImageData;
 
@@ -58,12 +59,14 @@ namespace Classes {
 
         //Ansteuerbare Nektarblumen
         for (let i: number = 0; i < 5; i++) {
-            let randomNectarFlower: Flower = flowers[Math.floor(Math.random() * flowers.length)];
-            targetX = randomNectarFlower.x;
-            targetY = randomNectarFlower.y - 20; // -20 -> am Blumenkopf
-            let nB: NectarBee = new NectarBee(65, 183, targetX, targetY);
-            console.log(randomNectarFlower);
+            
+//            let randomNectarFlower: Flower = flowers[Math.floor(Math.random() * flowers.length)];
+//            targetX = randomNectarFlower.x;
+//            targetY = randomNectarFlower.y - 20; // -20 -> am Blumenkopf
+            let nB: NectarBee = new NectarBee(65, 183);
+            console.log(nB.setRandomTargetPosition);
             bees.push(nB); //Nektarbienen zu normalen Bienen in Array pushen
+            
         }
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
@@ -77,6 +80,7 @@ namespace Classes {
         for (let i: number = 0; i < bees.length; i++) {
             let b: Bee = bees[i];
             b.update(); //Bienen erhalten neue Werte aus Schleife
+            
         }
         window.setTimeout(animate, 20);
     }
