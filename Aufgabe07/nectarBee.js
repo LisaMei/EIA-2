@@ -4,7 +4,7 @@ var Classes;
         constructor(_x, _y) {
             console.log("NectarBee");
             super(_x, _y);
-            this.speed = 0.05;
+            this.speed = 0.06;
             this.setRandomTargetPosition();
             //            this.xTarget = targetX;
             //            this.yTarget = targetY;

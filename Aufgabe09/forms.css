@@ -1,0 +1,63 @@
+{
+	display: block;
+	vertical-align: top
+}
+input[type="radio"], input[type="checkbox"], label {
+	display: inline;
+}
+label::after {
+	content:"";
+	display: block;
+}
+head {
+	display: none;
+}
+input:invalid {
+	background: #fe8181;
+}
+input:valid {
+	background: white;
+}
+input:required {
+	background: #c0c0c0;
+}
+fieldset {
+	width: 300px;
+}
+svg, figure, button, option {
+	display: inline;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*
+#flavors {
+	display:none;
+	
+}
+*/	
+
+#extras{
+	display:none;
+	
+}
+
+div{
+	
+	float:left;
+}
+
+aside{
+	float:left;
+}
+
+button{ 
+	width: 100px;
+    height: 20px;
+	
+}
+
+select, number, input, button{
+	display:block;
+	
+}

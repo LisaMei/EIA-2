@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Nice Ice</title>
+<link rel="stylesheet" href="forms.css" type="text/css" media="screen" />
+<script src="forms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+	<div id= "main"> 
+	<!-- radio button in einzelnes fieldset?-->
+	
+	<fieldset id="radio">
+		<legend> Choose a Type </legend>
+		<input type="radio" name="type" value="cone" id="radio1" /> <label
+			for="radio1">Waffle Cone</label> <input type="radio" name="type"
+			value="cup" id="radio2" /> <label for="radio2">Cup</label>
+<button id="addScoop1" name="ScoopButton" type="button">Add Scoop</button>
+	<!--<button id ="addScoop">Add Scoop</button>-->
+	</fieldset>
+	
+	
+	<!--	
+	<fieldset id="flavors">
+		<legend>Choose Your Flavors!</legend>
+	
+		Select Box <select name="Select" id="select">
+			<optgroup label="Classics"></optgroup>
+			<option value="option1">Strawberry</option>
+			<option value="option2">Chocolate</option>
+			<option value="option3">Vanilla</option>
+			<option value="option4">Lemon</option>
+
+			<optgroup label="Special Flavors"></optgroup>
+			<option value="option5">Cinnamon</option>
+			<option value="option6">Banana</option>
+			<option value="option7">Pomegranate</option>
+		</select>
+
+		<hr />
+		Scoops <input type="number" name="Stepper" step="1" min="1" max="10"
+			value="0" />
+		<hr />
+		
+		
+		
+		<button class="addTopping" name="ToppingButton" type="button">Add Topping</button>
+	
+	</fieldset>
+	-->
+	<fieldset id="extras">
+		<legend>Choose Your Toppings!</legend>
+
+	
+		<input type="checkbox" name="Checkbox1" value="Chocolate Chips" id="check1" />
+		<label for="check1">Chocolate Chips</label> 
+		
+		<input type="checkbox" name="Checkbox2" value="Maple Syrup" id="check2" /> 
+		<label for="check2">Maple Syrup</label> 
+		
+		<input type="checkbox" name="Checkbox3" value="Whipped Cream" id="check3" />
+		<label for="check3">Whipped Cream</label>
+		
+		<input type="checkbox" name="Checkbox4" value="Rainbow Sprinkles" id="check4" />
+		<label for="check4">Rainbow Sprinkles</label>
+		
+		<input type="checkbox" name="Checkbox5" value="Strawberries" id="check5" />
+		<label for="check5">Strawberries</label>
+<button id="addScoop2" name="ScoopButton" type="button">Add Scoop</button>
+
+	</fieldset>
+	
+
+<!--
+	<fieldset id="text">
+		<legend> Text-Input </legend>
+		Simple <input type="text" name="Text" placeholder="type here" required />
+		<hr />
+		Password <input type="password" name="Password"
+			placeholder="type password here" />
+		<hr />
+		Pattern <input type="text" name="Pattern" pattern="[0-9]{3}"
+			placeholder="use RegEx" />
+		<hr />
+		Mail <input type="email" name="Mail" placeholder="place @ between" />
+		<hr />
+		Url <input type="url" name="Url" placeholder="start with http:" />
+		<hr />
+		Area
+		<textarea name="Area" cols="30" rows="3" placeholder="long text here"></textarea>
+	</fieldset>
+	
+	<fieldset id="radio">
+		<legend> Radiobutton Group </legend>
+		<input type="radio" name="Radiogroup" value="radio1" id="radio1" /> <label
+			for="radio1">Radio Button 1</label> <input type="radio"
+			name="Radiogroup" value="radio2" id="radio2" /> <label for="radio2">Radio
+			Button 2</label> <input type="radio" name="Radiogroup" value="radio3"
+			id="radio3" /> <label for="radio3">Radio Button 3</label>
+	</fieldset>
+	
+	 -->
+	
+	
+	</div>
+	
+	<aside>
+	<fieldset id="output">
+		<legend> Output </legend>
+		Output
+		<output name="out">--- Here's a result</output>
+		<hr />
+		Progress
+		<progress value="0" max="1"> </progress>
+		<hr />
+		Meter
+		<meter value="0" min="-1" max="1"> </meter>
+	</fieldset>
+	
+	</aside>
+</body>
+</html>

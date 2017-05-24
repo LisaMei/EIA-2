@@ -11,7 +11,7 @@ namespace Classes {
         constructor(_x: number, _y: number) {
             console.log("NectarBee");
             super(_x, _y);
-            this.speed = 0.05;
+            this.speed = 0.06;
             this.setRandomTargetPosition();
             
            
