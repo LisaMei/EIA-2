@@ -11,14 +11,14 @@ namespace Form {
         console.log("Init");
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
 
-
+        // hier werden EventListener für vorhandene Fieldsets installiert. Später hinzukommende sind nicht berücksichtigt, geht ja auch gar nicht...
         for (let i: number = 0; i < fieldsets.length; i++) {
             let fieldset: HTMLFieldSetElement = fieldsets[i];
             fieldset.addEventListener("change", handleChange);
         }
         
         
-
+        // anonyme Funktion nicht erforderlich! Besser gleich ("click", createFlavorField). Dann könnte man im Handler noch das Event auswerten...
         document.getElementById("addScoop1").addEventListener("click", function() {
             createFlavorField();
             
@@ -32,12 +32,12 @@ namespace Form {
            
 
  
-
-        document.getElementById("addScoop2").addEventListener("click", function() {
+        // besser keine anonymen Funktionen, wenn nicht erforderlich. Derzeit ist es übersichtlicher, wenn wir Funktionen klar benennen.
+        document.getElementById("addScoop2").addEventListener("click", function() { // wird es noch "addScoop3" geben, "addScoop4" ? Dann trägt das System so nicht...
             let flavors = document.getElementById("flavors");
             var flavorsCopy = flavors.cloneNode(true);
             document.getElementById("main").appendChild(flavorsCopy);
-            document.getElementById("flavors").style.display = "block";
+            document.getElementById("flavors").style.display = "block";  // das wird mit der id problematisch, wenn man die immer wieder klont.
 
 
         });
@@ -116,16 +116,17 @@ namespace Form {
         scoopNumber.value = "0";
         flavorField.appendChild(scoopNumber);
 
+        // hier wird der Topping-Button erzeugt und ist somit bekannt...
         let toppingButton = document.createElement("button");
         toppingButton.type = "button";
         toppingButton.name = "ToppingButton";
         toppingButton.id="addTopping";
         toppingButton.innerText = "Add Topping";
         flavorField.appendChild(toppingButton);
-        
+                
         
 
-    
+        // ... er muss also hier nicht mehr gesucht werden um den Listener zu installieren. Es genügt toppingButton.addEventListener(...)
 document.getElementById("addTopping").addEventListener("click", function() {
                 let toppings = document.getElementById("toppings");
                 var toppingsCopy = toppings.cloneNode(true);
@@ -133,6 +134,13 @@ document.getElementById("addTopping").addEventListener("click", function() {
                 document.getElementById("toppings").style.display = "block";
 
             }); 
+        
+        // Potzblitz! Es kümmert sich tatsächlich niemand um die Änderungsevents innerhalb dieses Fieldsets...
+        // man könnte nun
+        // - den gewünschten Elementen Listener installieren, die dann ganz spezifisch darauf reagiert (z.B. mit scoopNumber.addEventListener...)
+        // - dem Fieldset einen Listener installieren, der sich um Ereignisse der Kinder kümmert (mit flavorField.addEventListener...)
+        // - oder dem Dokument einen Listener installieren, der sich um alles kümmert (der wäre dann aber sehr mächtig...)
 }
 
+    // bitte Autoformat nutzen, macht die Codeprüfung erheblich leichter für die Betreuer und mich
 } //namespace
