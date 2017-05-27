@@ -16,9 +16,12 @@ namespace Form {
             let fieldset: HTMLFieldSetElement = fieldsets[i];
             fieldset.addEventListener("change", handleChange);
         }
+        
+        
 
         document.getElementById("addScoop1").addEventListener("click", function() {
             createFlavorField();
+            
         });
 
 
@@ -28,7 +31,7 @@ namespace Form {
 
            
 
-
+ 
 
         document.getElementById("addScoop2").addEventListener("click", function() {
             let flavors = document.getElementById("flavors");
@@ -38,7 +41,12 @@ namespace Form {
 
 
         });
+        
+       
+        
     }
+    
+    
 
     function handleChange(_event: Event): void {
         //console.log(_event);
@@ -47,10 +55,12 @@ namespace Form {
         console.log("Changed " + target.name + " to " + target.value);
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
-        if (this.id == "extras")
+        if (this.id == "toppings")
             console.log("Changed " + target.name + " to " + target.checked);
 
-
+        if (this.id=="toppings"){
+           console.log("Changed " + target.name + " to " + target.value);
+        }
         //*/
         //*/
         if (target.name == "Slider") {
@@ -65,6 +75,7 @@ namespace Form {
         }
     }
 
+    
     function createFlavorField(): void {
         //        document.getElementById("flavors").style.display = "block";
 
@@ -93,8 +104,8 @@ namespace Form {
             //                if(flavorSelections[n].childElementCount=0){
             //                    flavorSelections[n].appendChild(fla           //                }    
 
-        }
-
+//        }
+}
 
         let scoopNumber = document.createElement("input");
         scoopNumber.type = "number";
@@ -112,16 +123,16 @@ namespace Form {
         toppingButton.innerText = "Add Topping";
         flavorField.appendChild(toppingButton);
         
-         document.getElementById("addTopping").addEventListener("click", function() {
-                let toppings = document.getElementById("extras");
+        
+
+    
+document.getElementById("addTopping").addEventListener("click", function() {
+                let toppings = document.getElementById("toppings");
                 var toppingsCopy = toppings.cloneNode(true);
                 document.getElementById("main").appendChild(toppingsCopy);
-                document.getElementById("extras").style.display = "block";
+                document.getElementById("toppings").style.display = "block";
 
-            });
-
-    }
-
-
-
+            }); 
 }
+
+} //namespace

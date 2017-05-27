@@ -31,8 +31,11 @@ var Form;
         console.log("Changed " + target.name + " to " + target.value);
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
-        if (this.id == "extras")
+        if (this.id == "toppings")
             console.log("Changed " + target.name + " to " + target.checked);
+        if (this.id == "toppings") {
+            console.log("Changed " + target.name + " to " + target.value);
+        }
         //*/
         //*/
         if (target.name == "Slider") {
@@ -80,11 +83,11 @@ var Form;
         toppingButton.innerText = "Add Topping";
         flavorField.appendChild(toppingButton);
         document.getElementById("addTopping").addEventListener("click", function () {
-            let toppings = document.getElementById("extras");
+            let toppings = document.getElementById("toppings");
             var toppingsCopy = toppings.cloneNode(true);
             document.getElementById("main").appendChild(toppingsCopy);
-            document.getElementById("extras").style.display = "block";
+            document.getElementById("toppings").style.display = "block";
         });
     }
-})(Form || (Form = {}));
+})(Form || (Form = {})); //namespace
 //# sourceMappingURL=forms.js.map
