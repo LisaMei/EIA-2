@@ -14,87 +14,17 @@
 	</header>
 
 	<div id="main">
-		<!-- radio button in einzelnes fieldset?
-	
-	<fieldset id="radio">
-		<legend> Choose a Type </legend>
-		<input type="radio" name="type" value="cone" id="radio1" /> <label
-			for="radio1">Waffle Cone</label> 
-			
-		<input type="radio" name="type"
-			value="cup" id="radio2" /> <label for="radio2">Cup</label>
-<button class="addScoop" name="ScoopButton" type="button">Add Scoop</button>
-	
-	</fieldset>
-	-->
-
-		<!--	
-	<fieldset id="flavors">
-		<legend>Choose Your Flavors!</legend>
-	
-		Select Box <select name="Select" id="select">
-			<optgroup label="Classics"></optgroup>
-			<option value="option1">Strawberry</option>
-			<option value="option2">Chocolate</option>
-			<option value="option3">Vanilla</option>
-			<option value="option4">Lemon</option>
-
-			<optgroup label="Special Flavors"></optgroup>
-			<option value="option5">Cinnamon</option>
-			<option value="option6">Banana</option>
-			<option value="option7">Pomegranate</option>
-		</select>
-
-		<hr />
-		Scoops <input type="number" name="Stepper" step="1" min="1" max="10"
-			value="0" />
-		<hr />
-		
-		
-		
-		<button class="addTopping" name="ToppingButton" type="button">Add Topping</button>
-	
-	</fieldset>
-	-->
-
-		<!--
-	<fieldset id="toppings">
-		<legend>Choose Your Toppings!</legend>
-
-	
-		<input type="checkbox" name="Checkbox1" value="Chocolate Chips" id="check1" />
-		<label for="check1">Chocolate Chips</label> 
-		
-		<input type="checkbox" name="Checkbox2" value="Maple Syrup" id="check2" /> 
-		<label for="check2">Maple Syrup</label> 
-		
-		<input type="checkbox" name="Checkbox3" value="Whipped Cream" id="check3" />
-		<label for="check3">Whipped Cream</label>
-		
-		<input type="checkbox" name="Checkbox4" value="Rainbow Sprinkles" id="check4" />
-		<label for="check4">Rainbow Sprinkles</label>
-		
-		<input type="checkbox" name="Checkbox5" value="Strawberries" id="check5" />
-		<label for="check5">Strawberries</label>
-<button id="addScoop" name="ScoopButton" type="button">Add Scoop</button>
-
-	</fieldset>
-	-->
-
-
-
 	</div>
 
 	<aside>
-
-		<fieldset>
+		<fieldset id="cart">
 			<legend>Your Cart</legend>
 			Products
-			<p></p>
+			<div id="products"></div>
 			Total
-			<p></p>
+			<div id="total"></div>
 		</fieldset>
-		<fieldset id="radio">
+		<fieldset id="delivery">
 			<legend>Delivery Options</legend>
 			<input type="radio" name="Delivery" value="Express" id="radio1" />
 			<label for="radio1">Express</label> 
@@ -125,9 +55,9 @@
 				placeholder="NR147PZ" />
 			<hr />
 			Email <input type="email" name="Email" placeholder="smith@example.com" />
-			
 		</fieldset>
-		<fieldset id="output">
+		
+		<!--<fieldset id="output">
 			<legend> Output </legend>
 			Output
 			<output name="out">--- Here's a result</output>
@@ -137,7 +67,7 @@
 			<hr />
 			Meter
 			<meter value="0" min="-1" max="1"> </meter>
-		</fieldset>
+		</fieldset>-->
 	</aside>
 </body>
 </html>

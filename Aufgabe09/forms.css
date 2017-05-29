@@ -25,6 +25,9 @@ body{
 legend{
 	font-size:24px;
 }
+aside legend{
+	font-size:20px;
+}
 
 header img{
 	height: 50px;
@@ -61,32 +64,45 @@ svg, figure, button, option {
 }
 
 #main{
-	
 	float:left;
 	width:45%;
 	margin-right:6%;
 }
 
 aside{
-	float:left;;
-	
+	float:left;
 	width:45%;
-	
+	font-size:15px;
 	
 }
 
 #main fieldset, aside fieldset {
 	margin-bottom:15px;
+	padding:15px;
+	
+	
+}
+#main fieldset{
+	border-color: lightblue;
+	border-width:4px;
+}
+
+aside fieldset{
+	border-color:#eeeeee;
 	
 }
 
-
+#flavors select, #flavors input{
+	display:inline;
+}
 
 button{ 
 	width: 100px;
     height: 30px;
     display:block;
 	margin:auto;
+	margin-top:15px;
+	
 }
 
 
