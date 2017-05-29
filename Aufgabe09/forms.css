@@ -2,9 +2,11 @@
 	display: block;
 	vertical-align: top
 }
-input[type="radio"], input[type="checkbox"], label {
+input[type="radio"] {
 	display: inline;
 }
+
+
 label::after {
 	content:"";
 	display: block;
@@ -35,13 +37,13 @@ svg, figure, button, option {
 	display:none;
 	
 }
-*/	
+	
 
 #toppings{
 	display:none;
 	
 }
-
+*/
 div{
 	
 	float:left;
@@ -57,7 +59,15 @@ button{
 	
 }
 
-select, number, input, button{
+fieldset button{
+	display:block;
+}
+
+#toppings label{
+	display:inline;
+}
+select, number, input, checkbox {
 	display:block;
 	
 }
+
