@@ -3,7 +3,7 @@ var Form;
     window.addEventListener("load", init);
     let flavors = ["Chocolate", "Strawberry", "Vanilla", "Cinnamon"];
     let toppings = ["Chocolate Chips", "Strawberries", "Maple Syrup"];
-    let container = [];
+    let containers = ["Waffle Cone", "Cup"];
     let flavorSelections = document.getElementsByName("Select");
     function init(_event) {
         console.log("Init");
@@ -17,6 +17,7 @@ var Form;
             let scoopButton = scoopButtons[i];
             scoopButton.addEventListener("click", createFlavorField);
         }
+        createContainerField();
     }
     ;
     function handleChange(_event) {
@@ -40,6 +41,38 @@ var Form;
         if (target.name == "Stepper") {
             let progress = document.getElementsByTagName("meter")[0];
             progress.value = parseFloat(target.value);
+        }
+    }
+    function createContainerField() {
+        let containerField = document.createElement("fieldset");
+        containerField.id = "radio";
+        let mainDiv = document.getElementById("main");
+        mainDiv.appendChild(containerField);
+        let legend = document.createElement("legend");
+        legend.innerText = "Cone or Cup?";
+        containerField.appendChild(legend);
+        for (let i = 0; i < containers.length; i++) {
+            let container = document.createElement("input");
+            container.type = "checkbox";
+            container.value = containers[i];
+            container.name = "Checkbox" + i;
+            containerField.appendChild(container);
+            let containerLabel = document.createElement("label");
+            containerLabel.textContent = containers[i];
+            containerLabel.htmlFor = "radio" + i + 1;
+            containerField.appendChild(containerLabel);
+            container.addEventListener("change", handleChange);
+        }
+        let scoopButton = document.createElement("button");
+        scoopButton.type = "button";
+        scoopButton.name = "ScoopButton";
+        scoopButton.className = "addScoop";
+        scoopButton.innerText = "Add Scoop";
+        containerField.appendChild(scoopButton);
+        let scoopButtons = document.getElementsByClassName("addScoop");
+        for (let i = 0; i < scoopButtons.length; i++) {
+            let scoopButton = scoopButtons[i];
+            scoopButton.addEventListener("click", createFlavorField);
         }
     }
     function createFlavorField() {

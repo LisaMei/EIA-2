@@ -11,6 +11,7 @@ label::after {
 	content:"";
 	display: block;
 }
+
 head {
 	display: none;
 }
@@ -66,7 +67,11 @@ fieldset button{
 #toppings label{
 	display:inline;
 }
-select, number, input, checkbox {
+
+#container label{
+	display:inline;
+}
+select, number, checkbox, radio {
 	display:block;
 	
 }

@@ -4,7 +4,7 @@ namespace Form {
 
     let flavors: string[] = ["Chocolate", "Strawberry", "Vanilla", "Cinnamon"];
     let toppings: string[] = ["Chocolate Chips", "Strawberries", "Maple Syrup"];
-    let container: string[] = [];
+    let containers: string[] = ["Waffle Cone", "Cup"];
     let flavorSelections = document.getElementsByName("Select");
 
     function init(_event: Event): void {
@@ -24,6 +24,8 @@ namespace Form {
             let scoopButton = scoopButtons[i];
             scoopButton.addEventListener("click", createFlavorField);
         }
+        
+        createContainerField();
     };
 
 
@@ -55,7 +57,50 @@ namespace Form {
         }
     }
 
+    
+    function createContainerField(): void{
+         let containerField = document.createElement("fieldset");
+        containerField.id = "radio";
+        let mainDiv = document.getElementById("main");
+        mainDiv.appendChild(containerField);
+        
+        let legend = document.createElement("legend");
+        legend.innerText = "Cone or Cup?";
+        containerField.appendChild(legend);
+        
+       for (let i: number = 0; i < containers.length; i++) {
+            let container = document.createElement("input");
+            container.type = "checkbox";
+            container.value = containers[i];
+            container.name = "Checkbox" + i;
+            containerField.appendChild(container);
+           
+           let containerLabel = document.createElement("label");
+            containerLabel.textContent = containers[i];
+            containerLabel.htmlFor = "radio" + i+1;
+            containerField.appendChild(containerLabel);
+            container.addEventListener("change", handleChange);
+        
+    }
+        let scoopButton = document.createElement("button");
+        scoopButton.type = "button";
+        scoopButton.name = "ScoopButton";
+        scoopButton.className = "addScoop";
 
+        scoopButton.innerText = "Add Scoop";
+        containerField.appendChild(scoopButton);
+
+
+        let scoopButtons: NodeListOf<Element> = document.getElementsByClassName("addScoop");
+
+        for (let i: number = 0; i < scoopButtons.length; i++) {
+            let scoopButton = scoopButtons[i];
+            scoopButton.addEventListener("click", createFlavorField);
+        }
+
+        }
+    
+    
     function createFlavorField(): void {
         //        document.getElementById("flavors").style.display = "block";
 
@@ -117,7 +162,7 @@ namespace Form {
         //        var toppingsCopy = toppings.cloneNode(true);
         //        document.getElementById("main").appendChild(toppingsCopy);
         //        document.getElementById("toppi).style.display = "block";
-    
+
         let toppingField = document.createElement("fieldset");
         toppingField.id = "toppings";
         let mainDiv = document.getElementById("main");
@@ -141,9 +186,7 @@ namespace Form {
             toppingLabel.textContent = toppings[i];
             toppingLabel.htmlFor = topping.name;
             toppingField.appendChild(toppingLabel);
-            
-             topping.addEventListener("change", handleChange);
-
+            topping.addEventListener("change", handleChange);
         }
 
 
