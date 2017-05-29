@@ -5,6 +5,9 @@ var Form;
     let toppings = ["Chocolate Chips", "Strawberries", "Maple Syrup"];
     let containers = ["Waffle Cone", "Cup"];
     let flavorSelections = document.getElementsByName("Select");
+    let scoopPrice = 1;
+    let toppingPrice = 0.4;
+    let sum = 0;
     function init(_event) {
         console.log("Init");
         let fieldsets = document.getElementsByTagName("fieldset");
@@ -141,6 +144,17 @@ var Form;
             toppingLabel.htmlFor = topping.name;
             toppingField.appendChild(toppingLabel);
             topping.addEventListener("change", handleChange);
+        }
+        let scoopButton = document.createElement("button");
+        scoopButton.type = "button";
+        scoopButton.name = "ScoopButton";
+        scoopButton.className = "addScoop";
+        scoopButton.innerText = "Add Scoop";
+        toppingField.appendChild(scoopButton);
+        let scoopButtons = document.getElementsByClassName("addScoop");
+        for (let i = 0; i < scoopButtons.length; i++) {
+            let scoopButton = scoopButtons[i];
+            scoopButton.addEventListener("click", createFlavorField);
         }
     }
 })(Form || (Form = {})); //namespace

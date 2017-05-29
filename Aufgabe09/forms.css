@@ -1,7 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css?family=Yantramanav');
 {
 	display: block;
 	vertical-align: top
 }
+
+
+header{
+	text-align:center;
+	font-family: 'Lobster', cursive;
+	float: left;
+    width: 100%;
+    margin-bottom:10px;
+}
+
+body{
+	font-family: 'Yantramanav', sans-serif;
+	
+	width: 80%;
+    margin: 4%;
+	
+}
+
+legend{
+	font-size:24px;
+}
+
+header img{
+	height: 50px;
+}
+
+
 input[type="radio"] {
 	display: inline;
 }
@@ -24,45 +53,43 @@ input:valid {
 input:required {
 	background: #c0c0c0;
 }
-fieldset {
-	width: 300px;
-}
+
 svg, figure, button, option {
 	display: inline;
 	margin: 0px;
 	padding: 0px;
 }
 
-/*
-#flavors {
-	display:none;
-	
-}
-	
-
-#toppings{
-	display:none;
-	
-}
-*/
-div{
+#main{
 	
 	float:left;
+	width:45%;
+	margin-right:6%;
 }
 
 aside{
-	float:left;
-}
-
-button{ 
-	width: 100px;
-    height: 20px;
+	float:left;;
+	
+	width:45%;
+	
 	
 }
 
-fieldset button{
-	display:block;
+#main fieldset, aside fieldset {
+	margin-bottom:15px;
+	
 }
+
+
+
+button{ 
+	width: 100px;
+    height: 30px;
+    display:block;
+	margin:auto;
+}
+
+
 
 #toppings label{
 	display:inline;
@@ -70,6 +97,13 @@ fieldset button{
 
 #container label{
 	display:inline;
+}
+
+#address {
+	line-height: 1.5em;
+}
+#address input{
+	float:right;
 }
 select, number, checkbox, radio {
 	display:block;

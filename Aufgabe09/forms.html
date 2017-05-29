@@ -8,8 +8,13 @@
 </head>
 <body>
 
-	<div id= "main"> 
-	<!-- radio button in einzelnes fieldset?
+	<header>
+		<h1>Nice Ice</h1>
+		<img alt="ice" src="ice-cream.png">
+	</header>
+
+	<div id="main">
+		<!-- radio button in einzelnes fieldset?
 	
 	<fieldset id="radio">
 		<legend> Choose a Type </legend>
@@ -22,8 +27,8 @@
 	
 	</fieldset>
 	-->
-	
-	<!--	
+
+		<!--	
 	<fieldset id="flavors">
 		<legend>Choose Your Flavors!</legend>
 	
@@ -51,8 +56,8 @@
 	
 	</fieldset>
 	-->
-	
-	<!--
+
+		<!--
 	<fieldset id="toppings">
 		<legend>Choose Your Toppings!</legend>
 
@@ -76,52 +81,63 @@
 	</fieldset>
 	-->
 
-<!--
-	<fieldset id="text">
-		<legend> Text-Input </legend>
-		Simple <input type="text" name="Text" placeholder="type here" required />
-		<hr />
-		Password <input type="password" name="Password"
-			placeholder="type password here" />
-		<hr />
-		Pattern <input type="text" name="Pattern" pattern="[0-9]{3}"
-			placeholder="use RegEx" />
-		<hr />
-		Mail <input type="email" name="Mail" placeholder="place @ between" />
-		<hr />
-		Url <input type="url" name="Url" placeholder="start with http:" />
-		<hr />
-		Area
-		<textarea name="Area" cols="30" rows="3" placeholder="long text here"></textarea>
-	</fieldset>
-	
-	<fieldset id="radio">
-		<legend> Radiobutton Group </legend>
-		<input type="radio" name="Radiogroup" value="radio1" id="radio1" /> <label
-			for="radio1">Radio Button 1</label> <input type="radio"
-			name="Radiogroup" value="radio2" id="radio2" /> <label for="radio2">Radio
-			Button 2</label> <input type="radio" name="Radiogroup" value="radio3"
-			id="radio3" /> <label for="radio3">Radio Button 3</label>
-	</fieldset>
-	
-	 -->
-	
-	
+
+
 	</div>
-	
+
 	<aside>
-	<fieldset id="output">
-		<legend> Output </legend>
-		Output
-		<output name="out">--- Here's a result</output>
-		<hr />
-		Progress
-		<progress value="0" max="1"> </progress>
-		<hr />
-		Meter
-		<meter value="0" min="-1" max="1"> </meter>
-	</fieldset>
-	
+
+		<fieldset>
+			<legend>Your Cart</legend>
+			Products
+			<p></p>
+			Total
+			<p></p>
+		</fieldset>
+		<fieldset id="radio">
+			<legend>Delivery Options</legend>
+			<input type="radio" name="Delivery" value="Express" id="radio1" />
+			<label for="radio1">Express</label> 
+			<input type="radio"
+				name="Delivery" value="Premium Shipping" id="radio2" /> 
+					<label for="radio2">Premium Shipping</label> 
+				<input type="radio" name="Delivery" value="Standard Shipping"
+				id="radio3" /> <label for="radio3">Standard Shipping</label>
+		</fieldset>
+		<fieldset id="address">
+			<legend> Address </legend>
+			First Name  <input type="text" name="FirstName" placeholder="John"
+				required />
+			<br>
+			Last Name  <input type="text" name="LastName" placeholder="Smith"
+				required />
+			<br>
+			Address Line 1  <input type="text" name="AddressLine1" placeholder="869 Oakwood"
+				required />
+			<br>
+			Address Line 2  <input type="text" name="AddressLine2" placeholder="Additional"
+				required />
+			<br>
+			Town/City  <input type="text" name="Town/City" placeholder="New York"
+				required />
+			<br>
+			Postal Code <input type="text" name="PostalCode" pattern="[0-9, A-Z]{5}"
+				placeholder="NR147PZ" />
+			<hr />
+			Email <input type="email" name="Email" placeholder="smith@example.com" />
+			
+		</fieldset>
+		<fieldset id="output">
+			<legend> Output </legend>
+			Output
+			<output name="out">--- Here's a result</output>
+			<hr />
+			Progress
+			<progress value="0" max="1"> </progress>
+			<hr />
+			Meter
+			<meter value="0" min="-1" max="1"> </meter>
+		</fieldset>
 	</aside>
 </body>
 </html>
