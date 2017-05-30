@@ -8,8 +8,9 @@ var Form;
     let scoopPrice = 1;
     let toppingPrice = 0.4;
     let sum = 0;
-    let selectedFlavors = [];
-    let selectedToppings = [];
+    let flavorInputs = [];
+    let toppingInputs = [];
+    let scoopNumber = 0;
     function init(_event) {
         console.log("Init");
         let fieldsets = document.getElementsByTagName("fieldset");
@@ -21,21 +22,33 @@ var Form;
         createContainerField();
     }
     ;
-    //value der Nummernfelder sammeln
-    let numberFields = document.getElementsByName("scoopNumber");
-    for (let i = 0; i < numberFields.length; i++) {
-        let numberField = numberFields[i];
-    }
     //ausgewählte Eissorten & Toppings in Cart schreiben
-    for (let i = 0; i < selectedFlavors.length; i++) {
-        document.getElementById("products").textContent = selectedFlavors[i];
+    //    for (let i: number = 0; i < flavorInputs.length; i++) {
+    //        document.getElementById("products").textContent = flavorInputs[i];
+    //    }
+    //    for (let i: number = 0; i < toppingInputs.length; i++) {
+    //        document.getElementById("products").textContent = toppingInputs[i];
+    //    }
+    function calculatePrice(_event) {
+        scoopNumber += parseInt(this.value);
+        sum = scoopNumber * scoopPrice + toppingInputs.length * 0.4;
+        ;
+        document.getElementById("total").textContent = "" + sum;
+        console.log(scoopNumber);
     }
-    for (let i = 0; i < selectedToppings.length; i++) {
-        document.getElementById("products").textContent = selectedToppings[i];
+    function displayFlavorInput(_event) {
+        flavorInputs.push(this.value);
+        for (let i = 0; i < flavorInputs.length; i++) {
+            document.getElementById("products").innerHTML += flavorInputs[i] + "<br>";
+        }
+        console.log(flavorInputs);
     }
-    //Summe in Cart schreiben
-    sum = selectedFlavors.length * scoopPrice + selectedToppings.length * 0.4;
-    document.getElementById("total").textContent = "" + sum;
+    function handleToppingInput(_event) {
+        let target = _event.target;
+        console.log("Changed " + target.name + " to " + target.value);
+        toppingInputs.push(target.value);
+        console.log(toppingInputs);
+    }
     function handleChange(_event) {
         //console.log(_event);
         //*/
@@ -73,7 +86,7 @@ var Form;
             let container = document.createElement("input");
             container.type = "checkbox";
             container.value = containers[i];
-            container.name = "Checkbox" + i;
+            container.name = "Checkbox" + i + 1;
             containerField.appendChild(container);
             //Labels für Behälterauswahl
             let containerLabel = document.createElement("label");
@@ -135,8 +148,10 @@ var Form;
             let toppingButton = toppingButtons[i];
             toppingButton.addEventListener("click", createToppingField);
         }
+        flavorSelection.addEventListener("change", displayFlavorInput); //eventListener an flavorSelect-Feld
         flavorSelection.addEventListener("change", handleChange); //eventListener an flavorSelect-Feld
         scoopNumber.addEventListener("change", handleChange); //eventListener an scoopNumber-Feld
+        scoopNumber.addEventListener("change", calculatePrice);
     } //createFlavorField
     function createToppingField() {
         //toppingField erstellen
@@ -152,7 +167,7 @@ var Form;
         for (let i = 0; i < toppings.length; i++) {
             let topping = document.createElement("input");
             topping.type = "checkbox";
-            topping.value = flavors[i];
+            topping.value = toppings[i];
             topping.name = "Checkbox" + i;
             toppingField.appendChild(topping);
             //Label für checkboxen
@@ -160,7 +175,7 @@ var Form;
             toppingLabel.textContent = toppings[i];
             toppingLabel.htmlFor = topping.name;
             toppingField.appendChild(toppingLabel);
-            topping.addEventListener("change", handleChange);
+            topping.addEventListener("change", handleToppingInput);
         }
         //scoopButton
         let scoopButton = document.createElement("button");
