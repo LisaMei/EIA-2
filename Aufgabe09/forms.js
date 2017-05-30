@@ -30,24 +30,11 @@ var Form;
     //        document.getElementById("products").textContent = toppingInputs[i];
     //    }
     function calculatePrice(_event) {
-        scoopNumber += parseInt(this.value);
+        scoopNumber = parseInt(this.value);
         sum = scoopNumber * scoopPrice + toppingInputs.length * 0.4;
         ;
-        document.getElementById("total").textContent = "" + sum;
+        document.getElementById("total").textContent = "" + sum + "€";
         console.log(scoopNumber);
-    }
-    function displayFlavorInput(_event) {
-        flavorInputs.push(this.value);
-        for (let i = 0; i < flavorInputs.length; i++) {
-            document.getElementById("products").innerHTML += flavorInputs[i] + "<br>";
-        }
-        console.log(flavorInputs);
-    }
-    function handleToppingInput(_event) {
-        let target = _event.target;
-        console.log("Changed " + target.name + " to " + target.value);
-        toppingInputs.push(target.value);
-        console.log(toppingInputs);
     }
     function handleChange(_event) {
         //console.log(_event);
@@ -56,21 +43,27 @@ var Form;
         console.log("Changed " + target.name + " to " + target.value);
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
-        if (this.id == "toppings") {
+        if (this.className == "flavorSelection") {
+            document.getElementById("products").innerHTML = target.value;
+            console.log("!!!!!!");
+        }
+        if (this.id == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
+            toppingInputs.push(target.value);
+            toppingPrice = toppingInputs.length;
         }
-        //*/
-        //*/
-        if (target.name == "Slider") {
-            let progress = document.getElementsByTagName("progress")[0];
-            progress.value = parseFloat(target.value);
-        }
-        //*/
-        //*/
-        if (target.name == "Stepper") {
-            let progress = document.getElementsByTagName("meter")[0];
-            progress.value = parseFloat(target.value);
-        }
+        //        //*/
+        //        //*/
+        //        if (target.name == "Slider") {
+        //            let progress: HTMLProgressElement = <HTMLProgressElement>document.getElementsByTagName("progress")[0];
+        //            progress.value = parseFloat(target.value);
+        //        }
+        //        //*/
+        //        //*/
+        //        if (target.name == "Stepper") {
+        //            let progress: HTMLProgressElement = <HTMLProgressElement>document.getElementsByTagName("meter")[0];
+        //            progress.value = parseFloat(target.value);
+        //        }
     }
     function createContainerField() {
         let containerField = document.createElement("fieldset");
@@ -84,9 +77,10 @@ var Form;
         //Behälter-Optionen für Array-Einträge
         for (let i = 0; i < containers.length; i++) {
             let container = document.createElement("input");
-            container.type = "checkbox";
+            container.type = "radio";
             container.value = containers[i];
-            container.name = "Checkbox" + i + 1;
+            container.name = "containerChoice";
+            container.id = "radio" + i + 1;
             containerField.appendChild(container);
             //Labels für Behälterauswahl
             let containerLabel = document.createElement("label");
@@ -117,7 +111,7 @@ var Form;
         //Select-Form
         let flavorSelection = document.createElement("select");
         flavorSelection.name = "Select";
-        flavorSelection.id = "flavorSelection";
+        flavorSelection.className = "flavorSelection";
         flavorField.appendChild(flavorSelection);
         //Optionen für Array-Einträge
         for (let i = 0; i < flavors.length; i++) {
@@ -148,7 +142,7 @@ var Form;
             let toppingButton = toppingButtons[i];
             toppingButton.addEventListener("click", createToppingField);
         }
-        flavorSelection.addEventListener("change", displayFlavorInput); //eventListener an flavorSelect-Feld
+        //        flavorSelection.addEventListener("change", displayFlavorInput);//eventListener an flavorSelect-Feld
         flavorSelection.addEventListener("change", handleChange); //eventListener an flavorSelect-Feld
         scoopNumber.addEventListener("change", handleChange); //eventListener an scoopNumber-Feld
         scoopNumber.addEventListener("change", calculatePrice);
@@ -168,14 +162,15 @@ var Form;
             let topping = document.createElement("input");
             topping.type = "checkbox";
             topping.value = toppings[i];
-            topping.name = "Checkbox" + i;
+            topping.name = "toppingCheckbox";
+            topping.id = "Checkbox" + i;
             toppingField.appendChild(topping);
             //Label für checkboxen
             let toppingLabel = document.createElement("label");
             toppingLabel.textContent = toppings[i];
-            toppingLabel.htmlFor = topping.name;
+            toppingLabel.htmlFor = topping.id;
             toppingField.appendChild(toppingLabel);
-            topping.addEventListener("change", handleToppingInput);
+            topping.addEventListener("change", handleChange);
         }
         //scoopButton
         let scoopButton = document.createElement("button");
