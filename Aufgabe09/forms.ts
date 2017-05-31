@@ -61,7 +61,7 @@ namespace Form {
 
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
-           
+            
             calculatePrice();
             toppingInputs.push(target);
             let output = document.getElementById("products");
