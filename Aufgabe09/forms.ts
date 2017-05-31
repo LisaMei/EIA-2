@@ -57,7 +57,7 @@ namespace Form {
                 
             }
 
-        }
+        } 
 
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
