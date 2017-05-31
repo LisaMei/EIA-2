@@ -4,13 +4,15 @@ namespace Form {
     let flavors: string[] = ["Chocolate", "Strawberry", "Vanilla", "Cinnamon"];
     let toppings: string[] = ["Chocolate Chips", "Strawberries", "Maple Syrup"];
     let containers: string[] = ["Waffle Cone", "Cup"];
-    let flavorSelections = document.getElementsByName("Select");
     let scoopPrice: number = 1;
-    let toppingPrice: number = 0.4;
-    let sum: number = 0;
-    let flavorInputs: string[] = [];
-    let toppingInputs: string[] = [];
+    let toppingInputs: HTMLInputElement[] = [];
+    
+    
+    let selectionBoxes: HTMLSelectElement[] = [];
+    
+    
     let scoopNumber: number = 0;
+    let numberInputs: HTMLInputElement[] = [];
 
 
     function init(_event: Event): void {
@@ -23,29 +25,26 @@ namespace Form {
             fieldset.addEventListener("change", handleChange);
         }
         createContainerField();
-        
+
+
     };
 
 
-    //ausgewählte Eissorten & Toppings in Cart schreiben
-    //    for (let i: number = 0; i < flavorInputs.length; i++) {
-    //        document.getElementById("products").textContent = flavorInputs[i];
-    //    }
-    //    for (let i: number = 0; i < toppingInputs.length; i++) {
-    //        document.getElementById("products").textContent = toppingInputs[i];
-    //    }
-
-    function calculatePrice(_event: Event): void {
-        scoopNumber = parseInt(this.value);
-        sum = scoopNumber * scoopPrice + toppingInputs.length * 0.4;;
-        document.getElementById("total").textContent = "" + sum + "€";
-        console.log(scoopNumber);
-    }
     
-   
+
+    function calculatePrice(): void {
+        let toppingPrice: number = toppingInputs.length*0.4;
+        let sum:number = scoopNumber * scoopPrice + toppingPrice;
+        
+        document.getElementById("total").textContent = "" + (sum.toFixed(2)) + "€";
+        console.log("Kugeln: "+scoopNumber + "|Kugelpreis: "+scoopPrice + "|toppinganzahl:"+ toppingInputs.length + "|toppingPrice:" +toppingPrice);
+        
+    }
 
 
-   
+
+
+
 
 
     function handleChange(_event: Event): void {
@@ -57,31 +56,42 @@ namespace Form {
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
 
-        if( this.className == "flavorSelection"){
-                document.getElementById("products").innerHTML = target.value;
-                console.log("!!!!!!");
-        }
-        
-        if (this.id == "toppingCheckbox") {
-            console.log("Changed " + target.name + " to " + target.value);
-            toppingInputs.push(target.value);
-            toppingPrice = toppingInputs.length;
+        if (this.className == "flavorSelection") {
+            for (let i: number = 0; i < selectionBoxes.length; i++) {
+                let output = document.getElementById("products");
+                if (output.innerText != selectionBoxes[i].value)  //gleiche Sorte wird nicht angezeigt
+                    output.innerText += selectionBoxes[i].value;
+                console.log(selectionBoxes[i]);
+            }
             
         }
+
+        if (this.name == "toppingCheckbox") {
+            console.log("Changed " + target.name + " to " + target.value);
+            toppingInputs.push(target);
+            calculatePrice();
+        }
+
+        if (this.className == "numberInput") {
+            for (let i: number = 0; i < numberInputs.length; i++) {
+                let valueString: string = numberInputs[i].value;
+                let valueNr: number = parseInt(valueString);
+                scoopNumber = valueNr;
+                calculatePrice();
+                
+
+            }
+        }
+        
+        if (this.name == "containerChoice") {
+           document.getElementById("container").innerText=target.value;
+
+            }
         
         
-//        //*/
-//        //*/
-//        if (target.name == "Slider") {
-//            let progress: HTMLProgressElement = <HTMLProgressElement>document.getElementsByTagName("progress")[0];
-//            progress.value = parseFloat(target.value);
-//        }
-//        //*/
-//        //*/
-//        if (target.name == "Stepper") {
-//            let progress: HTMLProgressElement = <HTMLProgressElement>document.getElementsByTagName("meter")[0];
-//            progress.value = parseFloat(target.value);
-//        }
+        
+
+      
     }
 
 
@@ -132,6 +142,7 @@ namespace Form {
         let mainDiv = document.getElementById("main");
         mainDiv.appendChild(flavorField);
 
+
         //Legende
         let legend = document.createElement("legend");
         legend.innerText = "Choose Your Flavors";
@@ -142,24 +153,30 @@ namespace Form {
         flavorSelection.name = "Select";
         flavorSelection.className = "flavorSelection";
         flavorField.appendChild(flavorSelection);
+        selectionBoxes.push(flavorSelection);
+
 
         //Optionen für Array-Einträge
         for (let i: number = 0; i < flavors.length; i++) {
             let flavor = document.createElement("option");
             flavor.value = flavors[i];
+            flavor.className="flavorOptions";
             flavor.text = flavors[i];
             flavorSelection.appendChild(flavor);
         }
 
         //Number-Feld für Eiskugel-Anzahl
-        let scoopNumber = document.createElement("input");
-        scoopNumber.type = "number";
-        scoopNumber.name = "scoopNumber";
-        scoopNumber.step = "1";
-        scoopNumber.min = "1";
-        scoopNumber.max = "5";
-        scoopNumber.value = "0";
-        flavorField.appendChild(scoopNumber);
+        let numberInput = document.createElement("input");
+        numberInput.type = "number";
+        numberInput.className = "numberInput";
+        numberInput.name = "numberInput";
+        numberInput.step = "1";
+        numberInput.min = "1";
+        numberInput.max = "5";
+        numberInput.value = "0";
+        flavorField.appendChild(numberInput);
+        numberInputs.push(numberInput);
+
 
         //toppingButton erstellen
         let toppingButton = document.createElement("button");
@@ -175,11 +192,11 @@ namespace Form {
             let toppingButton = toppingButtons[i];
             toppingButton.addEventListener("click", createToppingField);
         }
-//        flavorSelection.addEventListener("change", displayFlavorInput);//eventListener an flavorSelect-Feld
+        //        flavorSelection.addEventListener("change", displayFlavorInput);//eventListener an flavorSelect-Feld
         flavorSelection.addEventListener("change", handleChange);//eventListener an flavorSelect-Feld
 
-        scoopNumber.addEventListener("change", handleChange);//eventListener an scoopNumber-Feld
-        scoopNumber.addEventListener("change", calculatePrice);
+        numberInput.addEventListener("change", handleChange);//eventListener an scoopNumber-Feld
+//       numberInput.addEventListener("change", calculatePrice);
 
     }//createFlavorField
 
@@ -203,8 +220,9 @@ namespace Form {
             topping.value = toppings[i];
             topping.name = "toppingCheckbox";
             topping.id = "Checkbox" + i;
-            
+
             toppingField.appendChild(topping);
+            
 
             //Label für checkboxen
             let toppingLabel = document.createElement("label");
@@ -212,7 +230,9 @@ namespace Form {
             toppingLabel.htmlFor = topping.id;
             toppingField.appendChild(toppingLabel);
             topping.addEventListener("change", handleChange);
+//            topping.addEventListener("change", calculatePrice);
             
+
         }
 
         //scoopButton
