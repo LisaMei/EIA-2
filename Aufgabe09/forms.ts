@@ -6,11 +6,10 @@ namespace Form {
     let containers: string[] = ["Waffle Cone", "Cup"];
     let scoopPrice: number = 1;
     let toppingInputs: HTMLInputElement[] = [];
-    
-    
-    let selectionBoxes: HTMLSelectElement[] = [];
-    
-    
+
+    let selectBoxes: HTMLSelectElement[] = [];
+
+
     let scoopNumber: number = 0;
     let numberInputs: HTMLInputElement[] = [];
 
@@ -30,22 +29,16 @@ namespace Form {
     };
 
 
-    
+
 
     function calculatePrice(): void {
-        let toppingPrice: number = toppingInputs.length*0.4;
-        let sum:number = scoopNumber * scoopPrice + toppingPrice;
-        
+        let toppingPrice: number = toppingInputs.length * 0.4;
+        let sum: number = scoopNumber * scoopPrice + toppingPrice;
+
         document.getElementById("total").textContent = "" + (sum.toFixed(2)) + "€";
-        console.log("Kugeln: "+scoopNumber + "|Kugelpreis: "+scoopPrice + "|toppinganzahl:"+ toppingInputs.length + "|toppingPrice:" +toppingPrice);
-        
+        console.log("Kugeln: " + scoopNumber + "|Kugelpreis: " + scoopPrice + "|toppinganzahl:" + toppingInputs.length + "|toppingPrice:" + toppingPrice);
+
     }
-
-
-
-
-
-
 
     function handleChange(_event: Event): void {
         //console.log(_event);
@@ -57,41 +50,50 @@ namespace Form {
         //*/ note: this == _event.currentTarget in an event-handler
 
         if (this.className == "flavorSelection") {
-            for (let i: number = 0; i < selectionBoxes.length; i++) {
+            for (let i: number = 0; i < selectBoxes.length; i++) {
                 let output = document.getElementById("products");
-                if (output.innerText != selectionBoxes[i].value)  //gleiche Sorte wird nicht angezeigt
-                    output.innerText += selectionBoxes[i].value;
-                console.log(selectionBoxes[i]);
+               console.log(selectBoxes[i].value);
+                output.innerText += selectBoxes[i].value;
+                
             }
-            
+
         }
 
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
-            toppingInputs.push(target);
+           
             calculatePrice();
+            toppingInputs.push(target);
+            let output = document.getElementById("products");
+            
+            for (let i: number = 0; i < toppingInputs.length; i++) {
+//               let inputValue:string=toppingInputs[i].value;
+               
+               
+               output.innerText += toppingInputs[i].value; 
+               console.log(toppingInputs[i].value);
+            }
         }
 
         if (this.className == "numberInput") {
             for (let i: number = 0; i < numberInputs.length; i++) {
                 let valueString: string = numberInputs[i].value;
-                let valueNr: number = parseInt(valueString);
-                scoopNumber = valueNr;
+                scoopNumber = parseInt(valueString);
                 calculatePrice();
-                
+
 
             }
         }
-        
+
         if (this.name == "containerChoice") {
-           document.getElementById("container").innerText=target.value;
+            document.getElementById("container").innerText = target.value;
 
-            }
-        
-        
-        
+        }
 
-      
+
+
+
+
     }
 
 
@@ -151,16 +153,18 @@ namespace Form {
         //Select-Form
         let flavorSelection = document.createElement("select");
         flavorSelection.name = "Select";
+
         flavorSelection.className = "flavorSelection";
         flavorField.appendChild(flavorSelection);
-        selectionBoxes.push(flavorSelection);
+        selectBoxes.push(flavorSelection);
+
 
 
         //Optionen für Array-Einträge
         for (let i: number = 0; i < flavors.length; i++) {
             let flavor = document.createElement("option");
             flavor.value = flavors[i];
-            flavor.className="flavorOptions";
+            flavor.className = "flavorOptions";
             flavor.text = flavors[i];
             flavorSelection.appendChild(flavor);
         }
@@ -192,11 +196,9 @@ namespace Form {
             let toppingButton = toppingButtons[i];
             toppingButton.addEventListener("click", createToppingField);
         }
-        //        flavorSelection.addEventListener("change", displayFlavorInput);//eventListener an flavorSelect-Feld
+        
         flavorSelection.addEventListener("change", handleChange);//eventListener an flavorSelect-Feld
-
         numberInput.addEventListener("change", handleChange);//eventListener an scoopNumber-Feld
-//       numberInput.addEventListener("change", calculatePrice);
 
     }//createFlavorField
 
@@ -220,9 +222,8 @@ namespace Form {
             topping.value = toppings[i];
             topping.name = "toppingCheckbox";
             topping.id = "Checkbox" + i;
-
             toppingField.appendChild(topping);
-            
+
 
             //Label für checkboxen
             let toppingLabel = document.createElement("label");
@@ -230,8 +231,7 @@ namespace Form {
             toppingLabel.htmlFor = topping.id;
             toppingField.appendChild(toppingLabel);
             topping.addEventListener("change", handleChange);
-//            topping.addEventListener("change", calculatePrice);
-            
+                   
 
         }
 

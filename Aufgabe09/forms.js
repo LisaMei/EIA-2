@@ -6,7 +6,7 @@ var Form;
     let containers = ["Waffle Cone", "Cup"];
     let scoopPrice = 1;
     let toppingInputs = [];
-    let selectionBoxes = [];
+    let selectBoxes = [];
     let scoopNumber = 0;
     let numberInputs = [];
     function init(_event) {
@@ -34,23 +34,27 @@ var Form;
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
         if (this.className == "flavorSelection") {
-            for (let i = 0; i < selectionBoxes.length; i++) {
+            for (let i = 0; i < selectBoxes.length; i++) {
                 let output = document.getElementById("products");
-                if (output.innerText != selectionBoxes[i].value)
-                    output.innerText += selectionBoxes[i].value;
-                console.log(selectionBoxes[i]);
+                console.log(selectBoxes[i].value);
+                output.innerText += selectBoxes[i].value;
             }
         }
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
-            toppingInputs.push(target);
             calculatePrice();
+            toppingInputs.push(target);
+            let output = document.getElementById("products");
+            for (let i = 0; i < toppingInputs.length; i++) {
+                //               let inputValue:string=toppingInputs[i].value;
+                output.innerText += toppingInputs[i].value;
+                console.log(toppingInputs[i].value);
+            }
         }
         if (this.className == "numberInput") {
             for (let i = 0; i < numberInputs.length; i++) {
                 let valueString = numberInputs[i].value;
-                let valueNr = parseInt(valueString);
-                scoopNumber = valueNr;
+                scoopNumber = parseInt(valueString);
                 calculatePrice();
             }
         }
@@ -106,7 +110,7 @@ var Form;
         flavorSelection.name = "Select";
         flavorSelection.className = "flavorSelection";
         flavorField.appendChild(flavorSelection);
-        selectionBoxes.push(flavorSelection);
+        selectBoxes.push(flavorSelection);
         //Optionen für Array-Einträge
         for (let i = 0; i < flavors.length; i++) {
             let flavor = document.createElement("option");
@@ -139,10 +143,8 @@ var Form;
             let toppingButton = toppingButtons[i];
             toppingButton.addEventListener("click", createToppingField);
         }
-        //        flavorSelection.addEventListener("change", displayFlavorInput);//eventListener an flavorSelect-Feld
         flavorSelection.addEventListener("change", handleChange); //eventListener an flavorSelect-Feld
         numberInput.addEventListener("change", handleChange); //eventListener an scoopNumber-Feld
-        //       numberInput.addEventListener("change", calculatePrice);
     } //createFlavorField
     function createToppingField() {
         //toppingField erstellen
