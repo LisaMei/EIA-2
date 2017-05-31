@@ -50,28 +50,30 @@ namespace Form {
         //*/ note: this == _event.currentTarget in an event-handler
 
         if (this.className == "flavorSelection") {
-            for (let i: number = 0; i < selectBoxes.length; i++) {
-                let output = document.getElementById("products");
-               console.log(selectBoxes[i].value);
-                output.innerText += selectBoxes[i].value;
+            let selectOutput:string[]=[];
+            for (let i: number = 0; i < selectBoxes.length; i++) {     
+               selectOutput.push(selectBoxes[i].value);        
+                console.log(selectOutput);
                 
             }
-
-        } 
+            
+            for (let n: number = 0; n< selectOutput.length; n++) {
+                let output = document.getElementById("flavor");
+                output.innerText += selectOutput[n];
+                }
+        }
+       
 
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
-            
+
             calculatePrice();
             toppingInputs.push(target);
-            let output = document.getElementById("products");
-            
+            let toppingOutput = document.getElementById("topping");
+
             for (let i: number = 0; i < toppingInputs.length; i++) {
-//               let inputValue:string=toppingInputs[i].value;
-               
-               
-               output.innerText += toppingInputs[i].value; 
-               console.log(toppingInputs[i].value);
+                toppingOutput.innerText = toppingInputs[i].value;
+                console.log(toppingInputs[i].value);
             }
         }
 
@@ -144,7 +146,6 @@ namespace Form {
         let mainDiv = document.getElementById("main");
         mainDiv.appendChild(flavorField);
 
-
         //Legende
         let legend = document.createElement("legend");
         legend.innerText = "Choose Your Flavors";
@@ -157,8 +158,6 @@ namespace Form {
         flavorSelection.className = "flavorSelection";
         flavorField.appendChild(flavorSelection);
         selectBoxes.push(flavorSelection);
-
-
 
         //Optionen für Array-Einträge
         for (let i: number = 0; i < flavors.length; i++) {
@@ -181,7 +180,6 @@ namespace Form {
         flavorField.appendChild(numberInput);
         numberInputs.push(numberInput);
 
-
         //toppingButton erstellen
         let toppingButton = document.createElement("button");
         toppingButton.type = "button";
@@ -196,7 +194,7 @@ namespace Form {
             let toppingButton = toppingButtons[i];
             toppingButton.addEventListener("click", createToppingField);
         }
-        
+
         flavorSelection.addEventListener("change", handleChange);//eventListener an flavorSelect-Feld
         numberInput.addEventListener("change", handleChange);//eventListener an scoopNumber-Feld
 
@@ -231,7 +229,7 @@ namespace Form {
             toppingLabel.htmlFor = topping.id;
             toppingField.appendChild(toppingLabel);
             topping.addEventListener("change", handleChange);
-                   
+
 
         }
 

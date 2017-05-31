@@ -34,20 +34,23 @@ var Form;
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
         if (this.className == "flavorSelection") {
+            let selectOutput = [];
             for (let i = 0; i < selectBoxes.length; i++) {
-                let output = document.getElementById("products");
-                console.log(selectBoxes[i].value);
-                output.innerText += selectBoxes[i].value;
+                selectOutput.push(selectBoxes[i].value);
+                console.log(selectOutput);
+            }
+            for (let n = 0; n < selectOutput.length; n++) {
+                let output = document.getElementById("flavor");
+                output.innerText += selectOutput[n];
             }
         }
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
             calculatePrice();
             toppingInputs.push(target);
-            let output = document.getElementById("products");
+            let toppingOutput = document.getElementById("topping");
             for (let i = 0; i < toppingInputs.length; i++) {
-                //               let inputValue:string=toppingInputs[i].value;
-                output.innerText += toppingInputs[i].value;
+                toppingOutput.innerText = toppingInputs[i].value;
                 console.log(toppingInputs[i].value);
             }
         }
