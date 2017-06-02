@@ -117,11 +117,23 @@ button:hover{
 #check{
 	background-Color: rgba(76, 212, 142, 0.75);
     border: none;
+    display:inline;
+    margin-right: 40px;
+}
+    
     
 }
 
 #check:hover{ 
 	border:2px  solid white;
+}
+
+#checkImg {
+	display:none;
+	margin: -8px;
+
+    height: 22px;
+   
 }
 
 
@@ -144,7 +156,4 @@ select, number, checkbox, radio {
 	
 }
 
-#cart div{
-	
-}
 
