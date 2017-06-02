@@ -5,13 +5,13 @@ namespace Form {
     let toppings: string[] = ["Chocolate Chips", "Strawberries", "Maple Syrup"];
     let containers: string[] = ["Waffle Cone", "Cup"];
     let scoopPrice: number = 1;
-    let toppingInputs: HTMLInputElement[] = [];
-
-    let selectBoxes: HTMLSelectElement[] = [];
-
 
     let scoopNumber: number = 0;
+
+    let flavorInputs: string[] = [];
     let numberInputs: HTMLInputElement[] = [];
+    let toppingInputs: HTMLInputElement[] = [];
+    let selectBoxes: HTMLSelectElement[] = [];
 
 
     function init(_event: Event): void {
@@ -40,6 +40,10 @@ namespace Form {
 
     }
 
+
+
+
+
     function handleChange(_event: Event): void {
         //console.log(_event);
         //*/
@@ -49,32 +53,41 @@ namespace Form {
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
 
-        if (this.className == "flavorSelection") {
-            let selectOutput:string[]=[];
-            for (let i: number = 0; i < selectBoxes.length; i++) {     
-               selectOutput.push(selectBoxes[i].value);        
-                console.log(selectOutput);
-                
-            }
+        if (this.className == "selectBox") {
             
-            for (let n: number = 0; n< selectOutput.length; n++) {
-                let output = document.getElementById("flavor");
-                output.innerText += selectOutput[n];
-                }
+            flavorInputs.push(this.value);
+            console.log(flavorInputs); //console zeigt richtige Auswahl der Sorten an
+                
+
+            let flavorOutput: HTMLElement = document.getElementById("flavorOutput");
+            for (let i: number = 0; i < flavorInputs.length; i++) {
+                
+                flavorOutput.innerText += flavorInputs[i]; //hängt immer Array an. Wenn nur +, werden jedoch auch Eingaben aus neuen fieldsets überschrieben
+            }
+
+
         }
-       
+
+
 
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
+            let toppingOutput = document.getElementById("topping");
+            toppingInputs.push(target);
+
+
+
+
+            if (target.checked) { //nicht gefunden
+                toppingOutput.innerText += target.value;
+            }
+
 
             calculatePrice();
-            toppingInputs.push(target);
-            let toppingOutput = document.getElementById("topping");
 
-            for (let i: number = 0; i < toppingInputs.length; i++) {
-                toppingOutput.innerText = toppingInputs[i].value;
-                console.log(toppingInputs[i].value);
-            }
+
+
+
         }
 
         if (this.className == "numberInput") {
@@ -152,12 +165,12 @@ namespace Form {
         flavorField.appendChild(legend);
 
         //Select-Form
-        let flavorSelection = document.createElement("select");
-        flavorSelection.name = "Select";
+        let selectBox = document.createElement("select");
+        selectBox.name = "Select";
 
-        flavorSelection.className = "flavorSelection";
-        flavorField.appendChild(flavorSelection);
-        selectBoxes.push(flavorSelection);
+        selectBox.className = "selectBox";
+        flavorField.appendChild(selectBox);
+
 
         //Optionen für Array-Einträge
         for (let i: number = 0; i < flavors.length; i++) {
@@ -165,8 +178,9 @@ namespace Form {
             flavor.value = flavors[i];
             flavor.className = "flavorOptions";
             flavor.text = flavors[i];
-            flavorSelection.appendChild(flavor);
+            selectBox.appendChild(flavor);
         }
+        selectBoxes.push(selectBox);
 
         //Number-Feld für Eiskugel-Anzahl
         let numberInput = document.createElement("input");
@@ -195,7 +209,7 @@ namespace Form {
             toppingButton.addEventListener("click", createToppingField);
         }
 
-        flavorSelection.addEventListener("change", handleChange);//eventListener an flavorSelect-Feld
+        selectBox.addEventListener("change", handleChange);//eventListener an flavorSelect-Feld
         numberInput.addEventListener("change", handleChange);//eventListener an scoopNumber-Feld
 
     }//createFlavorField

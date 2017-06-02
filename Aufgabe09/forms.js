@@ -5,10 +5,11 @@ var Form;
     let toppings = ["Chocolate Chips", "Strawberries", "Maple Syrup"];
     let containers = ["Waffle Cone", "Cup"];
     let scoopPrice = 1;
+    let scoopNumber = 0;
+    let flavorInputs = [];
+    let numberInputs = [];
     let toppingInputs = [];
     let selectBoxes = [];
-    let scoopNumber = 0;
-    let numberInputs = [];
     function init(_event) {
         console.log("Init");
         let fieldsets = document.getElementsByTagName("fieldset");
@@ -33,26 +34,22 @@ var Form;
         console.log("Changed " + target.name + " to " + target.value);
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
-        if (this.className == "flavorSelection") {
-            let selectOutput = [];
-            for (let i = 0; i < selectBoxes.length; i++) {
-                selectOutput.push(selectBoxes[i].value);
-                console.log(selectOutput);
-            }
-            for (let n = 0; n < selectOutput.length; n++) {
-                let output = document.getElementById("flavor");
-                output.innerText += selectOutput[n];
+        if (this.className == "selectBox") {
+            flavorInputs.push(this.value);
+            console.log(flavorInputs); //console zeigt richtige Auswahl der Sorten an
+            let flavorOutput = document.getElementById("flavorOutput");
+            for (let i = 0; i < flavorInputs.length; i++) {
+                flavorOutput.innerText += flavorInputs[i]; //hängt immer Array an. Wenn nur +, werden jedoch auch Eingaben aus neuen fieldsets überschrieben
             }
         }
         if (this.name == "toppingCheckbox") {
             console.log("Changed " + target.name + " to " + target.value);
-            calculatePrice();
-            toppingInputs.push(target);
             let toppingOutput = document.getElementById("topping");
-            for (let i = 0; i < toppingInputs.length; i++) {
-                toppingOutput.innerText = toppingInputs[i].value;
-                console.log(toppingInputs[i].value);
+            toppingInputs.push(target);
+            if (target.checked) {
+                toppingOutput.innerText += target.value;
             }
+            calculatePrice();
         }
         if (this.className == "numberInput") {
             for (let i = 0; i < numberInputs.length; i++) {
@@ -109,19 +106,19 @@ var Form;
         legend.innerText = "Choose Your Flavors";
         flavorField.appendChild(legend);
         //Select-Form
-        let flavorSelection = document.createElement("select");
-        flavorSelection.name = "Select";
-        flavorSelection.className = "flavorSelection";
-        flavorField.appendChild(flavorSelection);
-        selectBoxes.push(flavorSelection);
+        let selectBox = document.createElement("select");
+        selectBox.name = "Select";
+        selectBox.className = "selectBox";
+        flavorField.appendChild(selectBox);
         //Optionen für Array-Einträge
         for (let i = 0; i < flavors.length; i++) {
             let flavor = document.createElement("option");
             flavor.value = flavors[i];
             flavor.className = "flavorOptions";
             flavor.text = flavors[i];
-            flavorSelection.appendChild(flavor);
+            selectBox.appendChild(flavor);
         }
+        selectBoxes.push(selectBox);
         //Number-Feld für Eiskugel-Anzahl
         let numberInput = document.createElement("input");
         numberInput.type = "number";
@@ -146,7 +143,7 @@ var Form;
             let toppingButton = toppingButtons[i];
             toppingButton.addEventListener("click", createToppingField);
         }
-        flavorSelection.addEventListener("change", handleChange); //eventListener an flavorSelect-Feld
+        selectBox.addEventListener("change", handleChange); //eventListener an flavorSelect-Feld
         numberInput.addEventListener("change", handleChange); //eventListener an scoopNumber-Feld
     } //createFlavorField
     function createToppingField() {
