@@ -17,7 +17,7 @@ header{
 body{
 	font-family: 'Yantramanav', sans-serif;
 	
-	width: 80%;
+	width: 70%;
     margin: 4%;
 	
 }
@@ -65,7 +65,7 @@ svg, figure, button, option {
 
 #main{
 	float:left;
-	width:45%;
+	width:30%;
 	margin-right:6%;
 }
 
