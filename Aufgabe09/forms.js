@@ -9,6 +9,7 @@ var Form;
     let numberInputs = [];
     let toppingInputs = [];
     let selectBoxes = [];
+    let toppingCheckboxes = [];
     let toppingNumber = 0;
     function init(_event) {
         console.log("Init");
@@ -83,21 +84,27 @@ var Form;
         //2.Version
         if (this.className == "flavorField") {
             scoopNumber = 0;
+            let outputField = document.getElementById("flavorOutput");
+            outputField.innerText = "";
             for (let i = 0; i < numberInputs.length; i++) {
                 let valueString = numberInputs[i].value;
                 scoopNumber += parseInt(valueString);
+                if (parseInt(numberInputs[i].value) > 0) {
+                    outputField.innerHTML += numberInputs[i].id + ": " + numberInputs[i].value + "<br>";
+                }
             }
             calculatePrice();
         }
         if (this.id == "toppings") {
             console.log("Changed " + target.name + " to " + target.value);
             let toppingOutput = document.getElementById("topping");
-            let toppingCheckboxes = target.getElementsByTagName("input");
+            toppingOutput.innerText = "";
+            let toppingCheckboxes = this.getElementsByTagName("input");
             toppingNumber = 0;
             console.log(toppingCheckboxes);
             for (let i = 0; i < toppingCheckboxes.length; i++) {
-                if (target.checked == true) {
-                    toppingOutput.innerText += toppingCheckboxes[i].value;
+                if (toppingCheckboxes[i].checked == true) {
+                    toppingOutput.innerHTML += toppingCheckboxes[i].value + "<br>";
                     toppingNumber++;
                 }
             }
@@ -257,7 +264,7 @@ var Form;
             //Number-Feld für Eiskugel-Anzahl
             let numberInput = document.createElement("input");
             numberInput.type = "number";
-            numberInput.id = i + flavors[i];
+            numberInput.id = flavors[i];
             numberInput.name = "numberInput";
             numberInput.step = "1";
             numberInput.min = "1";
@@ -345,6 +352,7 @@ var Form;
             topping.name = "toppingCheckbox";
             topping.id = "Checkbox" + i;
             toppingField.appendChild(topping);
+            toppingCheckboxes.push(topping);
             //Label für checkboxen
             let toppingLabel = document.createElement("label");
             toppingLabel.textContent = toppings[i];

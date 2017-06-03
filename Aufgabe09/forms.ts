@@ -9,6 +9,7 @@ namespace Form {
     let numberInputs: HTMLInputElement[] = [];
     let toppingInputs: HTMLInputElement[] = [];
     let selectBoxes: HTMLSelectElement[] = [];
+    let toppingCheckboxes: HTMLInputElement[]=[];
     let toppingNumber: number = 0;
 
     function init(_event: Event): void {
@@ -97,36 +98,35 @@ namespace Form {
 
         //2.Version
         if (this.className == "flavorField") {
-            scoopNumber = 0;
+            scoopNumber = 0;   
+            let outputField = document.getElementById("flavorOutput");
+            outputField.innerText ="";
             for (let i: number = 0; i < numberInputs.length; i++) {
                 let valueString: string = numberInputs[i].value;
                 scoopNumber += parseInt(valueString);
 
+                if (parseInt(numberInputs[i].value) > 0) {
+                    outputField.innerHTML += numberInputs[i].id +": " + numberInputs[i].value +"<br>";
+                }
             }
             calculatePrice();
         }
 
 
-
-
         if (this.id == "toppings") {
             console.log("Changed " + target.name + " to " + target.value);
             let toppingOutput = document.getElementById("topping");
-
-            let toppingCheckboxes:NodeListOf<HTMLInputElement> = target.getElementsByTagName("input");
+            toppingOutput.innerText ="";
+            let toppingCheckboxes = this.getElementsByTagName("input");
             toppingNumber = 0;
             console.log(toppingCheckboxes);
             for (let i: number = 0; i < toppingCheckboxes.length; i++) {
-                if (target.checked == true) {
-                    
-                    toppingOutput.innerText += toppingCheckboxes[i].value;
+                if (toppingCheckboxes[i].checked == true) {
+                    toppingOutput.innerHTML += toppingCheckboxes[i].value+"<br>";
                     toppingNumber++;
-                   
                 }
             }
-
             calculatePrice();
-
         }
 
         //        if (this.className == "numberInput") {
@@ -294,7 +294,7 @@ namespace Form {
             //Number-Feld für Eiskugel-Anzahl
             let numberInput = document.createElement("input");
             numberInput.type = "number";
-            numberInput.id = i + flavors[i];
+            numberInput.id = flavors[i];
             numberInput.name = "numberInput";
             numberInput.step = "1";
             numberInput.min = "1";
@@ -393,6 +393,7 @@ namespace Form {
             topping.name = "toppingCheckbox";
             topping.id = "Checkbox" + i;
             toppingField.appendChild(topping);
+            toppingCheckboxes.push(topping);
 
 
             //Label für checkboxen
@@ -400,7 +401,6 @@ namespace Form {
             toppingLabel.textContent = toppings[i];
             toppingLabel.htmlFor = topping.id;
             toppingField.appendChild(toppingLabel);
-            
         }
     }
 
