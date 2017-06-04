@@ -16,8 +16,6 @@ header{
 
 body{
 	font-family: 'Yantramanav', sans-serif;
-	
-	width: 70%;
     margin: 4%;
 	
 }
@@ -66,12 +64,12 @@ svg, figure, button, option {
 #main{
 	float:left;
 	width:30%;
-	margin-right:6%;
+	margin-right:2%;
 }
 
 aside{
 	float:left;
-	width:45%;
+	width:35%;
 	font-size:15px;
 	
 }
