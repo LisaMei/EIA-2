@@ -4,11 +4,10 @@ var Form;
     let flavors = ["Chocolate", "Strawberry", "Vanilla", "Cinnamon", "Lemon", "Stracciatella", "Walnut"];
     let toppings = ["Chocolate Chips", "Strawberries", "Maple Syrup", "Whipped Cream", "Grated Coconut", "Vanilla Sauce", "Rainbow Sprinkles"];
     let containers = ["Waffle Cone", "Cup"];
-    let scoopPrice = 1;
     let scoopNumber = 0;
-    let numberInputs = [];
-    let toppingInputs = [];
-    let selectBoxes = [];
+    let numberFields = [];
+    //    let toppingInputs: HTMLInputElement[] = [];
+    //    let selectBoxes: HTMLSelectElement[] = [];
     let toppingCheckboxes = [];
     let toppingNumber = 0;
     function init(_event) {
@@ -19,6 +18,7 @@ var Form;
             let fieldset = fieldsets[i];
             fieldset.addEventListener("change", handleChange);
         }
+        document.getElementById("container").innerText = containers[0];
         document.getElementById("check").addEventListener("click", handleChange);
         createContainerField();
         //2.Version
@@ -36,10 +36,11 @@ var Form;
     //    }
     //2.Version
     function calculatePrice() {
+        let scoopPrice = 1;
         let toppingPrice = toppingNumber * 0.4;
         let sum = scoopNumber * scoopPrice + toppingPrice;
         document.getElementById("total").textContent = "" + (sum.toFixed(2)) + "€";
-        console.log("Kugeln: " + scoopNumber + "|Kugelpreis: " + scoopPrice + "|toppinganzahl:" + toppingInputs.length + "|toppingPrice:" + toppingPrice);
+        console.log("Kugeln: " + scoopNumber + "|Kugelpreis: " + scoopPrice + "|toppinganzahl:" + "|toppingPrice:" + toppingPrice);
     }
     function handleChange(_event) {
         //console.log(_event);
@@ -48,6 +49,8 @@ var Form;
         console.log("Changed " + target.name + " to " + target.value);
         //*/
         //*/ note: this == _event.currentTarget in an event-handler
+        if (this.id == "radio") {
+        }
         if (this.id == "check") {
             let addressField = document.getElementById("address");
             let inputFields = addressField.getElementsByTagName("input");
@@ -86,11 +89,11 @@ var Form;
             scoopNumber = 0;
             let outputField = document.getElementById("flavorOutput");
             outputField.innerText = "";
-            for (let i = 0; i < numberInputs.length; i++) {
-                let valueString = numberInputs[i].value;
+            for (let i = 0; i < numberFields.length; i++) {
+                let valueString = numberFields[i].value;
                 scoopNumber += parseInt(valueString);
-                if (parseInt(numberInputs[i].value) > 0) {
-                    outputField.innerHTML += numberInputs[i].id + ": " + numberInputs[i].value + "<br>";
+                if (parseInt(numberFields[i].value) > 0) {
+                    outputField.innerHTML += numberFields[i].id + ": " + numberFields[i].value + "<br>";
                 }
             }
             calculatePrice();
@@ -121,8 +124,8 @@ var Form;
             calculatePrice();
         }
         //        if (this.className == "numberInput") {
-        //            for (let i: number = 0; i < numberInputs.length; i++) {
-        //                let valueString: string = numberInputs[i].value;
+        //            for (let i: number = 0; i < numberFields.length; i++) {
+        //                let valueString: string = numberFields[i].value;
         //                scoopNumber = parseInt(valueString);
         //                calculatePrice();
         //            }
@@ -180,6 +183,7 @@ var Form;
         let legend = document.createElement("legend");
         legend.innerText = "Cone or Cup?";
         containerField.appendChild(legend);
+        let containerCheckboxes = [];
         //Behälter-Optionen für Array-Einträge
         for (let i = 0; i < containers.length; i++) {
             let container = document.createElement("input");
@@ -188,6 +192,8 @@ var Form;
             container.name = "containerChoice";
             container.id = "radio" + i + 1;
             containerField.appendChild(container);
+            containerCheckboxes.push(container);
+            containerCheckboxes[0].checked = true;
             //Labels für Behälterauswahl
             let containerLabel = document.createElement("label");
             containerLabel.textContent = containers[i];
@@ -237,7 +243,7 @@ var Form;
     //        numberInput.max = "5";
     //        numberInput.value = "0";
     //        flavorField.appendChild(numberInput);
-    //        numberInputs.push(numberInput);
+    //        numberFields.push(numberInput);
     //
     //        //toppingButton erstellen
     //        let toppingButton = document.createElement("button");
@@ -282,7 +288,7 @@ var Form;
             numberInput.value = "0";
             numberInput.style.display = "inline";
             flavorField.appendChild(numberInput);
-            numberInputs.push(numberInput);
+            numberFields.push(numberInput);
             let nrLabel = document.createElement("label");
             nrLabel.textContent = flavors[i];
             nrLabel.htmlFor = numberInput.id;
