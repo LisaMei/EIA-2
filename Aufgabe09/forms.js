@@ -95,19 +95,29 @@ var Form;
             }
             calculatePrice();
         }
-        if (this.id == "toppings") {
-            console.log("Changed " + target.name + " to " + target.value);
-            let toppingOutput = document.getElementById("topping");
-            toppingOutput.innerText = "";
-            let toppingCheckboxes = this.getElementsByTagName("input");
-            toppingNumber = 0;
-            console.log(toppingCheckboxes);
-            for (let i = 0; i < toppingCheckboxes.length; i++) {
-                if (toppingCheckboxes[i].checked == true) {
-                    toppingOutput.innerHTML += toppingCheckboxes[i].value + "<br>";
-                    toppingNumber++;
+        //        if (this.id == "toppings") {
+        console.log("Changed " + target.name + " to " + target.value);
+        let toppingOutput = document.getElementById("topping");
+        let toppingField = document.getElementById("toppings");
+        toppingOutput.innerText = "";
+        let toppingCheckboxes = toppingField.getElementsByTagName("input");
+        toppingNumber = 0;
+        console.log(toppingCheckboxes);
+        for (let i = 0; i < toppingCheckboxes.length; i++) {
+            if (toppingCheckboxes[i].checked == true) {
+                toppingOutput.innerHTML += toppingCheckboxes[i].value + "<br>";
+                toppingCheckboxes[i].disabled = false;
+                toppingNumber++;
+            }
+            if (toppingCheckboxes[i].checked == false) {
+                if (toppingNumber >= scoopNumber) {
+                    toppingCheckboxes[i].disabled = true;
+                }
+                else {
+                    toppingCheckboxes[i].disabled = false;
                 }
             }
+            //            }
             calculatePrice();
         }
         //        if (this.className == "numberInput") {

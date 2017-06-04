@@ -9,13 +9,12 @@ namespace Form {
     let numberInputs: HTMLInputElement[] = [];
     let toppingInputs: HTMLInputElement[] = [];
     let selectBoxes: HTMLSelectElement[] = [];
-    let toppingCheckboxes: HTMLInputElement[]=[];
+    let toppingCheckboxes: HTMLInputElement[] = [];
     let toppingNumber: number = 0;
 
     function init(_event: Event): void {
         console.log("Init");
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
-
 
         //EventListener an fieldsets
         for (let i: number = 0; i < fieldsets.length; i++) {
@@ -98,34 +97,47 @@ namespace Form {
 
         //2.Version
         if (this.className == "flavorField") {
-            scoopNumber = 0;   
+            scoopNumber = 0;
             let outputField = document.getElementById("flavorOutput");
-            outputField.innerText ="";
+            outputField.innerText = "";
             for (let i: number = 0; i < numberInputs.length; i++) {
                 let valueString: string = numberInputs[i].value;
                 scoopNumber += parseInt(valueString);
 
                 if (parseInt(numberInputs[i].value) > 0) {
-                    outputField.innerHTML += numberInputs[i].id +": " + numberInputs[i].value +"<br>";
+                    outputField.innerHTML += numberInputs[i].id + ": " + numberInputs[i].value + "<br>";
                 }
             }
             calculatePrice();
         }
 
 
-        if (this.id == "toppings") {
+//        if (this.id == "toppings") {
             console.log("Changed " + target.name + " to " + target.value);
             let toppingOutput = document.getElementById("topping");
-            toppingOutput.innerText ="";
-            let toppingCheckboxes = this.getElementsByTagName("input");
+            let toppingField= document.getElementById("toppings");
+            toppingOutput.innerText = "";
+            let toppingCheckboxes = toppingField.getElementsByTagName("input");
             toppingNumber = 0;
+
             console.log(toppingCheckboxes);
+
             for (let i: number = 0; i < toppingCheckboxes.length; i++) {
                 if (toppingCheckboxes[i].checked == true) {
-                    toppingOutput.innerHTML += toppingCheckboxes[i].value+"<br>";
+                    toppingOutput.innerHTML += toppingCheckboxes[i].value + "<br>";
+                    toppingCheckboxes[i].disabled = false;
                     toppingNumber++;
                 }
-            }
+                
+                if (toppingCheckboxes[i].checked == false) {
+                    if (toppingNumber >= scoopNumber) {
+                        toppingCheckboxes[i].disabled = true;
+                    } else {
+                        toppingCheckboxes[i].disabled = false;
+                    }
+                }
+
+//            }
             calculatePrice();
         }
 
