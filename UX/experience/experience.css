@@ -1,0 +1,16 @@
+
+#fieldArea{
+	width:100%;
+	text-align:center;
+	
+}
+
+
+
+#fieldArea div{
+	border:1px solid black;
+	width:200px;
+	height:200px;
+	margin:10px;
+	float:left;
+}
