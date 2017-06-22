@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
+body {
+	width:824px;
+	font-family: 'Merriweather', serif;
+	
+}
+
+div {
+	border:solid black;
+	
+	width:95px;
+	height:95px;
+	float:left;
+	padding:1px;
+	text-align: center;	
+	overflow: auto;
+}
+
+#box {
+	position:absolute;
+	clear:both;
+	overflow:auto;
+	border: 1px solid black;
+	display:none;
+	width:auto;
+	height:auto;
+	padding:1px;
+	background-color:white;
+}

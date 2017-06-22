@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+
+
+
+#deck{
+	background-color: blue;
+	border: 1px solid;
+	width: 60px;
+	height: 100px;
+	float:left;
+	margin: 2px;
+	padding:1px;
+}
+
+#discard{
+	
+	border: 1px solid;
+	width: 60px;
+	height: 100px;
+	float:left;
+	margin: 2px;
+	padding:1px;
+	background-color: lightgray;
+	
+	
+}
+
+
+
+div{
+	clear:both;
+	width: 60px;
+	height: 100px;
+	margin: 2px;
+	border: 1px solid;
+	text-align: center;
+	padding:1px;
+}
