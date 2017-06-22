@@ -1,4 +1,3 @@
-
 namespace Form {
     window.addEventListener("load", init);
 
