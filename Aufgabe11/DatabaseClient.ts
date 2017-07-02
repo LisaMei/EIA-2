@@ -25,7 +25,7 @@ namespace DatabaseClient {
         let query = "command=search";
         let matrikel: HTMLInputElement = <HTMLInputElement>document.getElementById("matrikelSearch");
         query += "&matrikel=" + matrikel.value;
-        sendRequest(query, handleFindResponse);
+        sendRequest(query, handleSearchResponse);
     }
 
     function refresh(_event: Event): void {
@@ -50,6 +50,15 @@ namespace DatabaseClient {
         }
     }
 
+    function handleSearchResponse(_event: ProgressEvent):void {
+          let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
+          let outputArea: HTMLTextAreaElement = document.getElementsByTagName("textarea")[0];
+            outputArea.value = xhr.response;
+            let responseAsJson: JSON = JSON.parse(xhr.response);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            alert(xhr.response);
+        }
+    }
     
     //bei refresh
     function handleFindResponse(_event: ProgressEvent): void {

@@ -23,7 +23,7 @@ var DatabaseClient;
         let query = "command=search";
         let matrikel = document.getElementById("matrikelSearch");
         query += "&matrikel=" + matrikel.value;
-        sendRequest(query, handleFindResponse);
+        sendRequest(query, handleSearchResponse);
     }
     function refresh(_event) {
         let query = "command=find";
@@ -40,6 +40,15 @@ var DatabaseClient;
     // wird bei Veränderung aufgerufen nimmt ProgressEvent entgegen und gibt antwort aus, wenn der Prozess abgeschlossen ist
     function handleInsertResponse(_event) {
         let xhr = _event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            alert(xhr.response);
+        }
+    }
+    function handleSearchResponse(_event) {
+        let xhr = _event.target;
+        let outputArea = document.getElementsByTagName("textarea")[0];
+        outputArea.value = xhr.response;
+        let responseAsJson = JSON.parse(xhr.response);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             alert(xhr.response);
         }
