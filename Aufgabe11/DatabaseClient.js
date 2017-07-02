@@ -49,9 +49,6 @@ var DatabaseClient;
         let outputArea = document.getElementsByTagName("textarea")[0];
         outputArea.value = xhr.response;
         let responseAsJson = JSON.parse(xhr.response);
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            alert(xhr.response);
-        }
     }
     //bei refresh
     function handleFindResponse(_event) {

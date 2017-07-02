@@ -53,11 +53,8 @@ namespace DatabaseClient {
     function handleSearchResponse(_event: ProgressEvent):void {
           let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
           let outputArea: HTMLTextAreaElement = document.getElementsByTagName("textarea")[0];
-            outputArea.value = xhr.response;
-            let responseAsJson: JSON = JSON.parse(xhr.response);
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            alert(xhr.response);
-        }
+          outputArea.value = xhr.response;
+          let responseAsJson: JSON = JSON.parse(xhr.response);
     }
     
     //bei refresh
