@@ -11,7 +11,7 @@ nicht kopiert und auch nicht diktiert.
 namespace Bricks {
     window.addEventListener("load", init);
     export let crc2: CanvasRenderingContext2D;
-
+    let ball: Ball;
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
@@ -19,18 +19,12 @@ namespace Bricks {
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);   
 
+        ball = new Ball(crc2.canvas.width / 2, crc2.canvas.height - 30);
+        
+        setInterval(animate, 10);
     }//init
-
-
-
-
-    let ball = new Ball(crc2.canvas.width / 2, crc2.canvas.height - 30);
-    setInterval(function() {
+    
+    function animate(): void {
         ball.update();
-    }, 10);
-
-
-
-
-
+    }
 } //namespace
