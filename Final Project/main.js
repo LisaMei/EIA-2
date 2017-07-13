@@ -9,11 +9,11 @@ nicht kopiert und auch nicht diktiert.
 */
 var Bricks;
 (function (Bricks) {
-    let canvas;
-    canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
-    Bricks.crc2 = canvas.getContext("2d");
     window.addEventListener("load", init);
     function init(_event) {
+        let canvas;
+        canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
+        Bricks.crc2 = canvas.getContext("2d");
         Bricks.crc2.fillRect(0, 0, canvas.width, canvas.height);
     } //init
     let ball = new Bricks.Ball(Bricks.crc2.canvas.width / 2, Bricks.crc2.canvas.height - 30);

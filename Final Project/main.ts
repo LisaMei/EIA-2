@@ -9,22 +9,15 @@ nicht kopiert und auch nicht diktiert.
 */
 
 namespace Bricks {
-    
-    export let crc2: CanvasRenderingContext2D;
-    let canvas: HTMLCanvasElement;
-    canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
-    crc2 = canvas.getContext("2d");
     window.addEventListener("load", init);
-    
-
+    export let crc2: CanvasRenderingContext2D;
 
 
     function init(_event: Event): void {
-
-        
-        crc2.fillRect(0, 0, canvas.width, canvas.height);
-
-
+        let canvas: HTMLCanvasElement;
+        canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
+        crc2 = canvas.getContext("2d");
+        crc2.fillRect(0, 0, canvas.width, canvas.height);   
 
     }//init
 
