@@ -55,7 +55,7 @@ var Classes;
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
         console.log(bees);
-    }
+    } //init
     function animate() {
         Classes.crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwenden
         for (let i = 0; i < bees.length; i++) {

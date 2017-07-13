@@ -71,7 +71,7 @@ namespace Classes {
         window.setTimeout(animate, 20);
         canvas.addEventListener("click", addBee); //Canvas lauscht auf Klick -> neue Biene
         console.log(bees);
-    }
+    } //init
 
 
     function animate(): void {
