@@ -14,11 +14,12 @@ var Bricks;
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         Bricks.crc2 = canvas.getContext("2d");
-        Bricks.crc2.fillRect(0, 0, canvas.width, canvas.height);
+        //        crc2.fillRect(0, 0, canvas.width, canvas.height);
+        let ball = new Bricks.Ball();
+        ball.draw();
+        setInterval(function () {
+            ball.update();
+        }, 10);
     } //init
-    let ball = new Bricks.Ball(Bricks.crc2.canvas.width / 2, Bricks.crc2.canvas.height - 30);
-    setInterval(function () {
-        ball.update();
-    }, 10);
 })(Bricks || (Bricks = {})); //namespace
 //# sourceMappingURL=main.js.map

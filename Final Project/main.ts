@@ -17,17 +17,26 @@ namespace Bricks {
         let canvas: HTMLCanvasElement;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
-        crc2.fillRect(0, 0, canvas.width, canvas.height);   
+//        crc2.fillRect(0, 0, canvas.width, canvas.height);
 
+
+        let ball = new Ball();
+        ball.draw();
+        
+        setInterval(function() {
+            ball.update();
+        }, 10);
+        
+        
+        
+        
+        
     }//init
 
 
 
 
-    let ball = new Ball(crc2.canvas.width / 2, crc2.canvas.height - 30);
-    setInterval(function() {
-        ball.update();
-    }, 10);
+
 
 
 

@@ -1,33 +1,34 @@
 var Bricks;
 (function (Bricks) {
     class Ball {
-        constructor(_x, _y) {
+        constructor() {
             console.log("Ball");
-            this.speed = 5;
-            this.x = _x;
-            this.y = _y;
+            this.x = Bricks.crc2.canvas.width / 2;
+            ;
+            this.y = Bricks.crc2.canvas.height - 30;
+            ;
             this.xD = 2;
             this.xD = -2;
         }
         update() {
-            Bricks.crc2.clearRect(0, 0, Bricks.crc2.canvas.width, Bricks.crc2.canvas.height);
             this.move();
             this.draw();
         }
         draw() {
             Bricks.crc2.beginPath();
-            Bricks.crc2.arc(50, 50, 10, 0, Math.PI * 2);
+            Bricks.crc2.arc(this.x, this.y, 10, 0, Math.PI * 2);
             Bricks.crc2.fillStyle = "#FFFFFF";
             Bricks.crc2.fill();
             Bricks.crc2.closePath();
         }
         move() {
-            if (this.x + this.xD > Bricks.crc2.canvas.width - this.radius || this.x + this.xD < this.radius) {
-                this.xD = -this.xD;
-            }
-            if (this.y + this.yD > Bricks.crc2.canvas.height - this.radius || this.y + this.yD < this.radius) {
-                this.yD = -this.yD;
-            }
+            //            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+            //            if (this.x + this.xD > crc2.canvas.width - this.radius || this.x + this.xD < this.radius) {
+            //                this.xD = -this.xD;
+            //            }
+            //            if (this.y + this.yD > crc2.canvas.height - this.radius || this.y + this.yD < this.radius) {
+            //                this.yD = -this.yD;
+            //            }
             this.x += this.xD;
             this.y += this.yD;
         }
