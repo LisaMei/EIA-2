@@ -18,6 +18,7 @@ var Bricks;
         let ball = new Bricks.Ball();
         ball.draw();
         setInterval(function () {
+            //            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
             ball.update();
         }, 10);
     } //init

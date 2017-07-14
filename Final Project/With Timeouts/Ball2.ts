@@ -1,4 +1,4 @@
-namespace Bricks {
+namespace Bricks2 {
 
  
     export class Ball {
@@ -21,7 +21,7 @@ namespace Bricks {
 
 
         update(): void {
-
+            
             this.move();
             this.draw();
         }

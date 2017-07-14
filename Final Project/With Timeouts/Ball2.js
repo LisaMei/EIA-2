@@ -1,11 +1,11 @@
-var Bricks;
-(function (Bricks) {
+var Bricks2;
+(function (Bricks2) {
     class Ball {
         constructor() {
             console.log("Ball");
-            this.x = Bricks.crc2.canvas.width / 2;
+            this.x = Bricks2.crc2.canvas.width / 2;
             ;
-            this.y = Bricks.crc2.canvas.height - 30;
+            this.y = Bricks2.crc2.canvas.height - 30;
             ;
             this.xD = 2;
             this.xD = -2;
@@ -15,11 +15,11 @@ var Bricks;
             this.draw();
         }
         draw() {
-            Bricks.crc2.beginPath();
-            Bricks.crc2.arc(this.x, this.y, 10, 0, Math.PI * 2);
-            Bricks.crc2.fillStyle = "#FFFFFF";
-            Bricks.crc2.fill();
-            Bricks.crc2.closePath();
+            Bricks2.crc2.beginPath();
+            Bricks2.crc2.arc(this.x, this.y, 10, 0, Math.PI * 2);
+            Bricks2.crc2.fillStyle = "#FFFFFF";
+            Bricks2.crc2.fill();
+            Bricks2.crc2.closePath();
         }
         move() {
             //            if (this.x + this.xD > crc2.canvas.width - this.radius || this.x + this.xD < this.radius) {
@@ -32,6 +32,6 @@ var Bricks;
             this.y += this.yD;
         }
     }
-    Bricks.Ball = Ball; //class
-})(Bricks || (Bricks = {})); //namespace
-//# sourceMappingURL=Ball.js.map
+    Bricks2.Ball = Ball; //class
+})(Bricks2 || (Bricks2 = {})); //namespace
+//# sourceMappingURL=Ball2.js.map
