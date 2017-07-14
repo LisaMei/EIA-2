@@ -10,11 +10,12 @@ nicht kopiert und auch nicht diktiert.
 var Bricks;
 (function (Bricks) {
     window.addEventListener("load", init);
+    let imgData;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         Bricks.crc2 = canvas.getContext("2d");
-        //        crc2.fillRect(0, 0, canvas.width, canvas.height);
+        Bricks.crc2.fillRect(0, 0, canvas.width, canvas.height);
         let ball = new Bricks.Ball();
         ball.draw();
         setInterval(function () {

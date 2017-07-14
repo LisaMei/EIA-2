@@ -4,9 +4,7 @@ var Bricks;
         constructor() {
             console.log("Ball");
             this.x = Bricks.crc2.canvas.width / 2;
-            ;
             this.y = Bricks.crc2.canvas.height - 30;
-            ;
             this.xD = 2;
             this.xD = -2;
         }
@@ -28,8 +26,8 @@ var Bricks;
             //            if (this.y + this.yD > crc2.canvas.height - this.radius || this.y + this.yD < this.radius) {
             //                this.yD = -this.yD;
             //            }
-            this.x += this.xD;
-            this.y += this.yD;
+            this.x += 2;
+            this.y += -2;
         }
     }
     Bricks.Ball = Ball; //class
