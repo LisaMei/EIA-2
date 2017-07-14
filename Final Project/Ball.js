@@ -11,6 +11,7 @@ var Bricks;
             this.xD = -2;
         }
         update() {
+            Bricks.crc2.clearRect(0, 0, Bricks.crc2.canvas.width, Bricks.crc2.canvas.height);
             this.move();
             this.draw();
         }
@@ -22,7 +23,6 @@ var Bricks;
             Bricks.crc2.closePath();
         }
         move() {
-            //            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
             //            if (this.x + this.xD > crc2.canvas.width - this.radius || this.x + this.xD < this.radius) {
             //                this.xD = -this.xD;
             //            }

@@ -21,6 +21,7 @@ namespace Bricks {
 
 
         update(): void {
+            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
             this.move();
             this.draw();
         }
@@ -38,7 +39,7 @@ namespace Bricks {
 
 
         move(): void {
-//            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+
             
             
 //            if (this.x + this.xD > crc2.canvas.width - this.radius || this.x + this.xD < this.radius) {
