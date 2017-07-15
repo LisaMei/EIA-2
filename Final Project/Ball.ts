@@ -32,6 +32,7 @@ namespace Bricks {
         }
 
         move(): void {
+            
             let newX=this.x+this.xd;
 
             //linker oder rechter Rand erreicht
@@ -57,6 +58,7 @@ namespace Bricks {
                 crc2.font = "50px Arial";
                 crc2.fillStyle = "#000000";
                 crc2.fillText("GAME OVER", 100, 100);
+                error=true;
 //                crc2.canvas.addEventListener("keydown", handleReturnKey);
                 }
             

@@ -14,6 +14,7 @@ var Bricks;
     Bricks.rightKey = false;
     Bricks.leftKey = false;
     let enterKey = false;
+    Bricks.error = false;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
@@ -35,9 +36,9 @@ var Bricks;
             Bricks.bar.draw();
             document.addEventListener("keydown", handleKeyPress, false);
             document.addEventListener("keyup", handleKeyRelease, false);
-            if (Bricks.crc2.fillStyle = "#FF0000") {
+            if (Bricks.error = true) {
                 document.addEventListener("keydown", handleEnterKey, false);
-                console.log("help im burning");
+                console.log("error");
             }
         }, 10);
         //Key is pressed

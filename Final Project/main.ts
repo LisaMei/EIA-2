@@ -17,6 +17,7 @@ namespace Bricks {
     export let leftKey: boolean = false;
     let enterKey:boolean=false;
     export let bar:Bar;
+    export let error:boolean=false;
     
 
     function init(_event: Event): void {
@@ -48,9 +49,9 @@ namespace Bricks {
             document.addEventListener("keydown", handleKeyPress, false);
             document.addEventListener("keyup", handleKeyRelease, false);
             
-            if(crc2.fillStyle = "#FF0000"){
+            if(error=true){
                 document.addEventListener("keydown", handleEnterKey, false);
-                console.log("help im burning");
+                console.log("error");
             }
         }, 10);
 
