@@ -25,13 +25,31 @@ var Bricks;
             if (this.x + this.xd > Bricks.crc2.canvas.width - this.radius || this.x + this.xd < this.radius) {
                 this.xd = -this.xd;
             }
-            if (this.y + this.yd > Bricks.crc2.canvas.height - this.radius || this.y + this.yd < this.radius) {
-                this.yd = -this.yd;
+            //obere Begrenzung und game over
+            if (this.y + this.yd < this.radius) {
+                this.yd = -this.yd; //nach oben bewegen
+            }
+            else if (this.y + this.yd > Bricks.crc2.canvas.height - this.radius) {
+                if (this.x > Bricks.barX && this.x < Bricks.barX + Bricks.barWidth) {
+                    this.yd = -this.yd; //wieder nach oben
+                }
+                else {
+                    Bricks.crc2.fillStyle = "#FFFFFF";
+                    Bricks.crc2.fillRect(0, 0, Bricks.crc2.canvas.width, Bricks.crc2.canvas.height);
+                    Bricks.crc2.closePath();
+                    Bricks.crc2.font = "50px Arial";
+                    Bricks.crc2.fillStyle = "#000000";
+                    Bricks.crc2.fillText("GAME OVER", 100, 100);
+                    //restart game after 3 seconds
+                    setTimeout(function () {
+                        document.location.reload();
+                    }, 3000);
+                }
             }
             //neue Position
             this.x += this.xd;
             this.y += this.yd;
-        }
+        } //move
     }
     Bricks.Ball = Ball; //class
 })(Bricks || (Bricks = {})); //namespace

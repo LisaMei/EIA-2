@@ -39,18 +39,39 @@ namespace Bricks {
         move(): void {
 
             //vom Rand abprallen
-            if (this.x + this.xd > crc2.canvas.width-this.radius || this.x + this.xd < this.radius) {
+            if (this.x + this.xd > crc2.canvas.width - this.radius || this.x + this.xd < this.radius) {
                 this.xd = -this.xd;
             }
-            if (this.y + this.yd > crc2.canvas.height - this.radius || this.y + this.yd < this.radius) {
-                this.yd = -this.yd;
+
+            //obere Begrenzung und game over
+            if (this.y + this.yd < this.radius) {
+                this.yd = -this.yd; //nach oben bewegen
+
+            } else if (this.y + this.yd > crc2.canvas.height - this.radius) {
+                if (this.x > barX && this.x < barX + barWidth) { //wenn xPos vom Ball größer als die xPos vom Balken && wenn die xPos vom Ball kleiner als 
+                    this.yd = -this.yd; //wieder nach oben
+                    
+             //wenn der untere Rand überschritten wird GAME OVER
+                } else { 
+                    crc2.fillStyle = "#FFFFFF";
+                    crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+                    crc2.closePath();
+
+                    crc2.font = "50px Arial";
+                    crc2.fillStyle = "#000000";
+                    crc2.fillText("GAME OVER", 100, 100);
+
+                    //restart game after 3 seconds
+                    setTimeout(function() {
+                        document.location.reload();
+                    }, 3000);
+                }
             }
 
-            
             //neue Position
             this.x += this.xd;
             this.y += this.yd;
-        }
+        }//move
     }//class
 
 } //namespace
