@@ -47,7 +47,7 @@ namespace Bricks {
 
             document.addEventListener("keydown", handleKeyPress, false);
             document.addEventListener("keyup", handleKeyRelease, false);
-
+            
         }, 10);
 
         //Key is pressed

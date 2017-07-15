@@ -21,15 +21,16 @@ var Bricks;
             Bricks.crc2.closePath();
         }
         move() {
-            //vom Rand abprallen
+            //linker oder rechter Rand erreicht
             if (this.x + this.xd > Bricks.crc2.canvas.width - this.radius || this.x + this.xd < this.radius) {
                 this.xd = -this.xd;
             }
-            //obere Begrenzung und game over
+            //oberer Rand erreicht
             if (this.y + this.yd < this.radius) {
-                this.yd = -this.yd; //nach oben bewegen
+                this.yd = -this.yd; //nach unten bewegen --> Vorzeichen von yd zu +
             }
             else if (this.y + this.yd > Bricks.crc2.canvas.height - this.radius) {
+                //Balken getroffen
                 if (this.x > Bricks.barX && this.x < Bricks.barX + Bricks.barWidth) {
                     this.yd = -this.yd; //wieder nach oben
                 }

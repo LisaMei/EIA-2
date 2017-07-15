@@ -13,13 +13,14 @@ namespace Bricks {
             this.y = _y;
             this.height = 20;
             this.width = 100;
+            this.color="#FFFFFF"
         }
 
 
         draw(): void {
             crc2.beginPath();
             crc2.rect(this.x, this.y, this.width, this.height);
-            crc2.fillStyle = "#FFFFFF";
+            crc2.fillStyle = this.color;
             crc2.fill();
             crc2.closePath();
         }

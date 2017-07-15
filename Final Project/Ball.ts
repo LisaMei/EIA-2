@@ -38,20 +38,24 @@ namespace Bricks {
 
         move(): void {
 
-            //vom Rand abprallen
+            
+            //linker oder rechter Rand erreicht
             if (this.x + this.xd > crc2.canvas.width - this.radius || this.x + this.xd < this.radius) {
                 this.xd = -this.xd;
             }
 
-            //obere Begrenzung und game over
-            if (this.y + this.yd < this.radius) {
-                this.yd = -this.yd; //nach oben bewegen
+            //oberer Rand erreicht
+            if (this.y + this.yd < this.radius) { 
+                this.yd = -this.yd; //nach unten bewegen --> Vorzeichen von yd zu +
 
-            } else if (this.y + this.yd > crc2.canvas.height - this.radius) {
-                if (this.x > barX && this.x < barX + barWidth) { //wenn xPos vom Ball größer als die xPos vom Balken && wenn die xPos vom Ball kleiner als 
+            //unterer Rand erreicht
+            } else if (this.y + this.yd > crc2.canvas.height - this.radius) { 
+            
+                //Balken getroffen
+                if (this.x > barX && this.x < barX + barWidth) { 
                     this.yd = -this.yd; //wieder nach oben
                     
-             //wenn der untere Rand überschritten wird GAME OVER
+             //Überschreitung unterer Rand GAME OVER
                 } else { 
                     crc2.fillStyle = "#FFFFFF";
                     crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
