@@ -21,8 +21,9 @@ var Bricks;
             Bricks.crc2.closePath();
         }
         move() {
+            let newX = this.x + this.xd;
             //linker oder rechter Rand erreicht
-            if (this.x + this.xd > Bricks.crc2.canvas.width - this.radius || this.x + this.xd < this.radius) {
+            if (newX > Bricks.crc2.canvas.width - this.radius || newX < this.radius) {
                 this.xd = -this.xd;
             }
             //oberer Rand erreicht
@@ -31,7 +32,7 @@ var Bricks;
             }
             else if (this.y + this.yd > Bricks.crc2.canvas.height - this.radius) {
                 //Balken getroffen
-                if (this.x > Bricks.barX && this.x < Bricks.barX + Bricks.barWidth) {
+                if (this.x > Bricks.bar.x && this.x < Bricks.bar.x + Bricks.bar.width) {
                     this.yd = -this.yd; //wieder nach oben
                 }
                 else {

@@ -15,19 +15,16 @@ namespace Bricks {
     let imgData: ImageData;
     export let rightKey: boolean = false;
     export let leftKey: boolean = false;
-    export let barX: number;
-    export let barY: number;
-    export let barWidth:number=100;
+    export let bar:Bar;
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
-
-        barX = canvas.width / 2;
-        barY = canvas.height - 40;
-        let bar: Bar = new Bar(barX, barY); // (canvas.width-this.width)/2 !?
+       
+        bar= new Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
+        
         console.log(bar.x, bar.y);
         bar.draw();
         let ball: Ball = new Ball();
@@ -42,6 +39,7 @@ namespace Bricks {
 
         setInterval(function() {
             crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path
+            
             ball.update();
             bar.draw();
 
@@ -52,6 +50,7 @@ namespace Bricks {
 
         //Key is pressed
         function handleKeyPress(_event: KeyboardEvent) {
+            
             if (_event.keyCode == 39) {//right
                 rightKey = true;
                 console.log("rightKey: " + rightKey);
@@ -77,18 +76,5 @@ namespace Bricks {
             }
         }//handleKeyRelease
 
-
-
-
     }//init
-
-
-
-
-
-
-
-
-
-
 } //namespace
