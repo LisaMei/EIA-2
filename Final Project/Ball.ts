@@ -55,8 +55,9 @@ namespace Bricks {
                 crc2.fillStyle = "#FF0000";
                 crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
                 crc2.font = "50px Arial";
-                    crc2.fillStyle = "#000000";
-                    crc2.fillText("GAME OVER", 100, 100);
+                crc2.fillStyle = "#000000";
+                crc2.fillText("GAME OVER", 100, 100);
+//                crc2.canvas.addEventListener("keydown", handleReturnKey);
                 }
             
             

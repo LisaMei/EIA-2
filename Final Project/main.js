@@ -13,6 +13,7 @@ var Bricks;
     let imgData;
     Bricks.rightKey = false;
     Bricks.leftKey = false;
+    let enterKey = false;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
@@ -34,6 +35,10 @@ var Bricks;
             Bricks.bar.draw();
             document.addEventListener("keydown", handleKeyPress, false);
             document.addEventListener("keyup", handleKeyRelease, false);
+            if (Bricks.crc2.fillStyle = "#FF0000") {
+                document.addEventListener("keydown", handleEnterKey, false);
+                console.log("help im burning");
+            }
         }, 10);
         //Key is pressed
         function handleKeyPress(_event) {
@@ -52,13 +57,26 @@ var Bricks;
         function handleKeyRelease(_event) {
             if (_event.keyCode == 39) {
                 Bricks.rightKey = false;
-                Bricks.bar.move();
             }
             else if (_event.keyCode == 37) {
                 Bricks.leftKey = false;
-                Bricks.bar.move();
             }
         } //handleKeyRelease
+        //return key
+        function handleEnterKey(_event) {
+            if (_event.keyCode == 13) {
+                enterKey = true;
+                reloadGame();
+            }
+            if (_event.keyCode == 13) {
+                enterKey = false;
+            }
+        }
+        function reloadGame() {
+            //            setTimeout(function() {
+            document.location.reload();
+            //                    }, 3000);    
+        }
     } //init
 })(Bricks || (Bricks = {})); //namespace
 //# sourceMappingURL=main.js.map

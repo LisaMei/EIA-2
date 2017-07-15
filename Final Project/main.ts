@@ -15,7 +15,9 @@ namespace Bricks {
     let imgData: ImageData;
     export let rightKey: boolean = false;
     export let leftKey: boolean = false;
+    let enterKey:boolean=false;
     export let bar:Bar;
+    
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
@@ -46,6 +48,10 @@ namespace Bricks {
             document.addEventListener("keydown", handleKeyPress, false);
             document.addEventListener("keyup", handleKeyRelease, false);
             
+            if(crc2.fillStyle = "#FF0000"){
+                document.addEventListener("keydown", handleEnterKey, false);
+                console.log("help im burning");
+            }
         }, 10);
 
         //Key is pressed
@@ -68,13 +74,30 @@ namespace Bricks {
         function handleKeyRelease(_event: KeyboardEvent) {
             if (_event.keyCode == 39) {//right
                 rightKey = false;
-                bar.move();
             }
             else if (_event.keyCode == 37) {//left
                 leftKey = false;
-                bar.move();
             }
         }//handleKeyRelease
+        
+        
+        
+         //return key
+        function handleEnterKey(_event: KeyboardEvent) {
+            if (_event.keyCode == 13) {//right
+                enterKey = true;
+                reloadGame();
+            }
+            if (_event.keyCode == 13) {//left
+                enterKey = false;
+            }
+        }
+        
+        function reloadGame():void {
+//            setTimeout(function() {
+                        document.location.reload();
+//                    }, 3000);    
+        }
 
     }//init
 } //namespace
