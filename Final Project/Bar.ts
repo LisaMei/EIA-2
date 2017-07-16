@@ -13,7 +13,7 @@ namespace Bricks {
             this.y = _y;
             this.height = 20;
             this.width = 100;
-            this.color="#FFFFFF"
+            this.color = "#FFFFFF";
         }
 
 

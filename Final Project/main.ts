@@ -15,9 +15,9 @@ namespace Bricks {
     let imgData: ImageData;
     export let rightKey: boolean = false;
     export let leftKey: boolean = false;
-    let enterKey:boolean=false;
-    export let bar:Bar;
-    export let error:boolean=false;
+    let enterKey: boolean = false;
+    export let bar: Bar;
+    export let gameOver: boolean = false;
     
 
     function init(_event: Event): void {
@@ -25,11 +25,12 @@ namespace Bricks {
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
-       
-        bar= new Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
         
-        console.log(bar.x, bar.y);
+        bar = new Bar(0, canvas.height - 40); // (canvas.width-this.width)/2 !?
+        
+        
         bar.draw();
+        console.log(bar.x, bar.y);
         let ball: Ball = new Ball();
         ball.draw();
 
@@ -40,7 +41,7 @@ namespace Bricks {
         
         */
 
-        setInterval(function() {
+        setInterval (function () {
             crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path
             
             ball.update();
@@ -49,11 +50,12 @@ namespace Bricks {
             document.addEventListener("keydown", handleKeyPress, false);
             document.addEventListener("keyup", handleKeyRelease, false);
             
-            if(error=true){
-                document.addEventListener("keydown", handleEnterKey, false);
-                console.log("error");
+            if (gameOver == true) {
+                document.addEventListener("keydown", handleEnterPress, false);
+                document.addEventListener("keyup", handleEnterRelease, false);
+                
             }
-        }, 10);
+        },10);
 
         //Key is pressed
         function handleKeyPress(_event: KeyboardEvent) {
@@ -84,17 +86,20 @@ namespace Bricks {
         
         
          //return key
-        function handleEnterKey(_event: KeyboardEvent) {
-            if (_event.keyCode == 13) {//right
+        function handleEnterPress(_event: KeyboardEvent) {
+            if (_event.keyCode == 13) {
                 enterKey = true;
                 reloadGame();
             }
-            if (_event.keyCode == 13) {//left
+           
+        }
+        function handleEnterRelease (_event: KeyboardEvent) {
+            if (_event.keyCode == 13) {
                 enterKey = false;
             }
         }
         
-        function reloadGame():void {
+        function reloadGame(): void {
 //            setTimeout(function() {
                         document.location.reload();
 //                    }, 3000);    
