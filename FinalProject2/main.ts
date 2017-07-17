@@ -55,11 +55,11 @@ namespace Bricks2 {
     function animate(): void {
         crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path
         //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
-
+        spliceDeadBricks();
         drawActiveBricks();
         ball.update();
         bar.draw();
-        
+        //        checkSta          
 
         if (gameOver == true) {
             document.addEventListener("keydown", handleEnterKey, false);
@@ -91,19 +91,28 @@ namespace Bricks2 {
 
     function drawActiveBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
-            bricks[i].checkStatus();
-
-            //            if (bricks[i].active == false) {
-            //                bricks.splice(i);
-            //            } else {
-            //                bricks[i].draw();
-            //            }
-            
-            
             bricks[i].draw();
         }
     }
 
+
+
+    //    function checkStatus():void{
+    //            for (let i: number = 0; i < bricks.length; i++) {
+    //             bricks[i].checkStatus();    
+    //           
+    //        }
+    //    }
+    
+    function spliceDeadBricks(): void {
+
+        for (let i: number = 0; i < bricks.length; i++) {
+            bricks[i].checkStatus();
+            if (bricks[i].active == false) {
+                bricks.splice(i);
+            }
+        }
+    }
 
     //Key is pressed
     function handleKeyPress(_event: KeyboardEvent) {
