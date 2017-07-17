@@ -24,8 +24,8 @@ var Bricks2;
         Bricks2.crc2.fillRect(0, 0, canvas.width, canvas.height);
         Bricks2.bar = new Bricks2.Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
         Bricks2.ball = new Bricks2.Ball();
+        let brick = new Bricks2.Brick(50, 20);
         for (let i = 0; i < brickNumber; i++) {
-            let brick = new Bricks2.Brick(50, 20);
             if (i % 5 == 0 && i != 0) {
                 brick.x = 50;
                 brick.y += brick.ySpacer;
@@ -34,7 +34,7 @@ var Bricks2;
                 brick.x += brick.xSpacer;
             }
             Bricks2.bricks[i] = brick; //brick in Array legen
-            //            bricks[i].draw();
+            Bricks2.bricks[i].draw();
             console.log(Bricks2.bricks);
         }
         imgData = Bricks2.crc2.getImageData(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height);
@@ -52,7 +52,12 @@ var Bricks2;
         Bricks2.crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwenden
         for (let i = 0; i < Bricks2.bricks.length; i++) {
             Bricks2.bricks[i].checkStatus();
-            Bricks2.bricks[i].draw();
+            if (Bricks2.bricks[i].active == false) {
+                Bricks2.bricks.splice(i);
+            }
+            else {
+                Bricks2.bricks[i].draw();
+            }
         }
         Bricks2.ball.update();
         Bricks2.bar.draw();

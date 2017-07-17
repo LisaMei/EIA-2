@@ -7,7 +7,7 @@ Hiermit versichere ich, dass ich diesen
 Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert. 
 */
- 
+
 namespace Bricks2 {
 
     window.addEventListener("load", init);
@@ -31,10 +31,10 @@ namespace Bricks2 {
 
         bar = new Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
-              
 
+        let brick = new Brick(50, 20);
         for (let i: number = 0; i < brickNumber; i++) {
-            let brick = new Brick(50, 20);
+
             if (i % 5 == 0 && i != 0) {
                 brick.x = 50;
                 brick.y += brick.ySpacer;
@@ -42,7 +42,7 @@ namespace Bricks2 {
                 brick.x += brick.xSpacer;
             }
             bricks[i] = brick; //brick in Array legen
-            //            bricks[i].draw();
+            bricks[i].draw();
             console.log(bricks);
         }
 
@@ -53,8 +53,6 @@ namespace Bricks2 {
 
     document.addEventListener("keydown", handleKeyPress, false);
     document.addEventListener("keyup", handleKeyRelease, false);
-
-
 
 
     /*
@@ -69,13 +67,15 @@ namespace Bricks2 {
 
         for (let i: number = 0; i < bricks.length; i++) {
             bricks[i].checkStatus();
-            bricks[i].draw();
+            if (bricks[i].active == false) {
+                bricks.splice(i);
+            } else {
+                bricks[i].draw();
+            }
         }
 
         ball.update();
         bar.draw();
-
-
 
 
         if (gameOver == true) {
@@ -86,7 +86,7 @@ namespace Bricks2 {
     }
 
 
-    
+
 
 
     //Key is pressed
