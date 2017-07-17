@@ -24,19 +24,16 @@ namespace Bricks2 {
     let imgData: ImageData;
     let brickNumber: number = 20;
 
-
-
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
 
-        bar = new Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
+        bar = new Bar(canvas.width/2-50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
         createBrickField();
-
-        //        imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
+        
         window.setTimeout(animate, 10);
     }//init
 
@@ -45,21 +42,12 @@ namespace Bricks2 {
     document.addEventListener("keyup", handleKeyRelease, false);
 
 
-
-    /*
-        
-        ANIMATION
-        
-        */
-
     function animate(): void {
-        crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path
-        //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
+        crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path       
         spliceDeadBricks();
         drawActiveBricks();
         ball.update();
-        bar.draw();
-        //        checkSta          
+        bar.draw();    
 
         if (gameOver == true) {
             document.addEventListener("keydown", handleEnterKey, false);
@@ -81,13 +69,9 @@ namespace Bricks2 {
             } else if (i != 0) {
                 brickPosx += brick.xSpacer;
             }
-
             bricks[i] = brick; //brick in Array legen
-            //                        bricks[i].draw();
-//            console.log(bricks);
         }
-
-    }
+    }//createBrickField
 
     function drawActiveBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
@@ -102,7 +86,7 @@ namespace Bricks2 {
             let hit:boolean= ball.detectCollision(bricks[i].x,bricks[i].y,bricks[i].width,bricks[i].height);
            
             if (hit == true) {
-                bricks.splice(i);
+                bricks.splice(i,1);
                 console.log("brick spliced");
             }
             /*
@@ -112,11 +96,10 @@ namespace Bricks2 {
             }
             */
         }
-    }
+    }//spliceBricks
 
     //Key is pressed
     function handleKeyPress(_event: KeyboardEvent) {
-
         if (_event.keyCode == 39) {//right
             rightKey = true;
 //            console.log("rightKey: " + rightKey);
@@ -159,6 +142,8 @@ namespace Bricks2 {
         document.location.reload();
     }
 
+    
+    
     /*
 function detectCollision(_rx:number, _ry:number, _rwidth:number, _rheight:number ) {
     let testX:number = ball.x;

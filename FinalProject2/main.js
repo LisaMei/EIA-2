@@ -22,27 +22,19 @@ var Bricks2;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         Bricks2.crc2 = canvas.getContext("2d");
         Bricks2.crc2.fillRect(0, 0, canvas.width, canvas.height);
-        Bricks2.bar = new Bricks2.Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
+        Bricks2.bar = new Bricks2.Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         Bricks2.ball = new Bricks2.Ball();
         createBrickField();
-        //        imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         window.setTimeout(animate, 10);
     } //init
     document.addEventListener("keydown", handleKeyPress, false);
     document.addEventListener("keyup", handleKeyRelease, false);
-    /*
-        
-        ANIMATION
-        
-        */
     function animate() {
-        Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path
-        //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
+        Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path       
         spliceDeadBricks();
         drawActiveBricks();
         Bricks2.ball.update();
         Bricks2.bar.draw();
-        //        checkSta          
         if (Bricks2.gameOver == true) {
             document.addEventListener("keydown", handleEnterKey, false);
             document.addEventListener("keyup", handleEnterRelease, false);
@@ -63,7 +55,7 @@ var Bricks2;
             }
             Bricks2.bricks[i] = brick; //brick in Array legen
         }
-    }
+    } //createBrickField
     function drawActiveBricks() {
         for (let i = 0; i < Bricks2.bricks.length; i++) {
             Bricks2.bricks[i].draw();
@@ -74,11 +66,11 @@ var Bricks2;
             //bricks[i].checkStatus();
             let hit = Bricks2.ball.detectCollision(Bricks2.bricks[i].x, Bricks2.bricks[i].y, Bricks2.bricks[i].width, Bricks2.bricks[i].height);
             if (hit == true) {
-                Bricks2.bricks.splice(i);
+                Bricks2.bricks.splice(i, 1);
                 console.log("brick spliced");
             }
         }
-    }
+    } //spliceBricks
     //Key is pressed
     function handleKeyPress(_event) {
         if (_event.keyCode == 39) {

@@ -8,7 +8,6 @@ namespace Bricks2 {
         color: string;
         radius: number;
 
-
         constructor() {
             console.log("Ball");
             this.x = crc2.canvas.width / 2;
@@ -19,14 +18,11 @@ namespace Bricks2 {
         }
 
         update(): void {
-
             this.move();
             this.draw();
-
         }
 
-        draw(): void {
-            //            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        draw(): void {           
             crc2.beginPath();
             crc2.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             crc2.fillStyle = "#FFFFFF";
@@ -35,7 +31,6 @@ namespace Bricks2 {
         }
 
         move(): void {
-
             let newX = this.x + this.xd;
 
             //linker oder rechter Rand erreicht
@@ -46,46 +41,22 @@ namespace Bricks2 {
             //oberer Rand erreicht
             if (this.y + this.yd < this.radius) {
                 this.yd = -this.yd; //nach unten bewegen --> Vorzeichen von yd zu +
-            }
+            }  
 
-            //vom Balken abprallen
-            //            let distX: number = Math.abs(this.x - bar.x);
-            //            let distY: number = Math.abs(this.y - bar.y);
-            //            let barColl: boolean = false;
-            //            let distSq: number = Math.pow(distX - bar.width / 2, 2) + Math.pow(distY - bar.height / 2, 2);
-            //
-            //
-            //
-            //            if (distX > (bar.width / 2 + this.radius) || distY > (bar.height / 2 + this.radius)) {
-            //                barColl = false;
-            //            }
-            //
-            //
-            //            if (distX <= (bar.width / 2) || distY <= (bar.height / 2)) {
-            //                barColl = true;
-            //            }
-            //            if (distSq <= Math.pow(this.radius, 2)) {
-            //                barColl = true;
-            //            }
-
-
-            //vom Balken abprallen - nur obere Seite
+            //vom Balken abprallen - bis jetzt nur obere Seite
             if (this.y > bar.y - this.radius && this.x > bar.x && this.x < bar.x + bar.width) {
                 this.yd = -this.yd;
             }
 
             //unterer Rand erreicht
-            if (this.y + this.yd > crc2.canvas.height - this.radius) {
-
+            if (this.y + this.yd >= crc2.canvas.height - this.radius) {
                 crc2.fillStyle = "#FF0000";
                 crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
                 crc2.font = "50px Arial";
                 crc2.fillStyle = "#000000";
                 crc2.fillText("GAME OVER", 100, 100);
-                gameOver = true;
-                //                crc2.canvas.addEventListener("keydown", handleReturnKey);
+                gameOver = true;              
             }
-
 
             //neue Position
             this.x += this.xd; //+2
@@ -125,67 +96,5 @@ namespace Bricks2 {
             return false;
 
         }
-
-
-
-
-        //        checkCollision(obj) {
-        //
-        //            if (this.y + this.radius < obj.y)
-        //                return false; //Above
-        //            if (this.y > obj.position.y + obj.size.height)
-        //                return false; //Below
-        //            if (this.x > obj.position.x + obj.size.width)
-        //                return false; //Left
-        //            if (this.x + obj.size.width < obj.position.x)
-        //                return false; //Right
-        //
-        //            // We have a hit! Update direction based on where we hit the oject
-        // 
-        //            //Moving towards lower right
-        //            if (this.xd == 1
-        //                && this.yd == 1) {
-        //                if (this.y > obj.y)
-        //                    this.xd = -1;
-        //                else
-        //                    this.yd = -1;
-        //            }
-        //
-        //            //Moving towards lower left
-        //            else if (this.xd == -1
-        //                && this.yd == 1) {
-        //                if (this.y > obj.y)
-        //                    this.xd = 1;
-        //                else
-        //                    this.yd = -1;
-        //            }
-        //
-        //            //Moving towards upper right
-        //            else if (this.xd == 1
-        //                && this.yd == -1) {
-        //                if (this.y > obj.y)
-        //                    this.xd = -1;
-        //                else
-        //                    this.yd = -1;
-        //            }
-        //
-        //            //Moving towards upper-left
-        //            else if (this.xd == -1
-        //                && this.yd == -1) {
-        //                if (this.y > obj.y)
-        //                    this.xd = 1;
-        //                else
-        //                    this.yd = -1;
-        //
-        //            }
-        //
-        //            return true;
-        //
-        //        }
-
-
-
-
     }//class
-
 } //namespace

@@ -6,6 +6,7 @@ namespace Bricks2 {
         color: string;
         width: number;
         height: number;
+        
 
         constructor(_x: number, _y: number) {
             console.log("Bar");
@@ -14,8 +15,8 @@ namespace Bricks2 {
             this.height = 20;
             this.width = 100;
             this.color = "#FFFFFF";
+            
         }
-
 
         draw(): void {
             crc2.beginPath();
