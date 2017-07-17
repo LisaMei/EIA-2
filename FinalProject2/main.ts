@@ -18,10 +18,13 @@ namespace Bricks2 {
     let enterKey: boolean = false;
     export let bar: Bar;
     export let ball: Ball;
+
     export let gameOver: boolean = false;
     export let bricks: Brick[] = [];
     let imgData: ImageData;
     let brickNumber: number = 20;
+
+
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
@@ -31,28 +34,16 @@ namespace Bricks2 {
 
         bar = new Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
+        createBrickField();
 
-        let brick = new Brick(50, 20);
-        for (let i: number = 0; i < brickNumber; i++) {
-
-            if (i % 5 == 0 && i != 0) {
-                brick.x = 50;
-                brick.y += brick.ySpacer;
-            } else if (i != 0) {
-                brick.x += brick.xSpacer;
-            }
-            bricks[i] = brick; //brick in Array legen
-            bricks[i].draw();
-            console.log(bricks);
-        }
-
-
-        imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
+        //        imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         window.setTimeout(animate, 10);
     }//init
 
+
     document.addEventListener("keydown", handleKeyPress, false);
     document.addEventListener("keyup", handleKeyRelease, false);
+
 
 
     /*
@@ -63,30 +54,55 @@ namespace Bricks2 {
 
     function animate(): void {
         crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path
-        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwenden
+        //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
 
-        for (let i: number = 0; i < bricks.length; i++) {
-            bricks[i].checkStatus();
-            if (bricks[i].active == false) {
-                bricks.splice(i);
-            } else {
-                bricks[i].draw();
-            }
-        }
-
+        drawActiveBricks();
         ball.update();
         bar.draw();
-
+        
 
         if (gameOver == true) {
             document.addEventListener("keydown", handleEnterKey, false);
             document.addEventListener("keyup", handleEnterRelease, false);
         }
         window.setTimeout(animate, 10);
+    } //animate
+
+
+    function createBrickField(): void {
+        let brickPosx: number = 50;
+        let brickPosy: number = 20;
+        for (let i: number = 0; i < brickNumber; i++) {
+
+            let brick: Brick = new Brick(brickPosx, brickPosy);
+            if (i % 5 == 0 && i != 0) {
+                brickPosx = 50;
+                brickPosy += brick.ySpacer;
+            } else if (i != 0) {
+                brickPosx += brick.xSpacer;
+            }
+
+            bricks[i] = brick; //brick in Array legen
+            //                        bricks[i].draw();
+            console.log(bricks);
+        }
+
     }
 
+    function drawActiveBricks(): void {
+        for (let i: number = 0; i < bricks.length; i++) {
+            bricks[i].checkStatus();
 
-
+            //            if (bricks[i].active == false) {
+            //                bricks.splice(i);
+            //            } else {
+            //                bricks[i].draw();
+            //            }
+            
+            
+            bricks[i].draw();
+        }
+    }
 
 
     //Key is pressed
