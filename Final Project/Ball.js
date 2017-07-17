@@ -42,7 +42,7 @@ var Bricks;
                 Bricks.crc2.font = "50px Arial";
                 Bricks.crc2.fillStyle = "#000000";
                 Bricks.crc2.fillText("GAME OVER", 100, 100);
-                Bricks.error = true;
+                Bricks.gameOver = true;
             }
             //                //unterer Rand erreicht
             //            } else if (this.y + this.yd > crc2.canvas.height - this.radius) {

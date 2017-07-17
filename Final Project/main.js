@@ -14,15 +14,15 @@ var Bricks;
     Bricks.rightKey = false;
     Bricks.leftKey = false;
     let enterKey = false;
-    Bricks.error = false;
+    Bricks.gameOver = false;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         Bricks.crc2 = canvas.getContext("2d");
         Bricks.crc2.fillRect(0, 0, canvas.width, canvas.height);
-        Bricks.bar = new Bricks.Bar(canvas.width / 2, canvas.height - 40); // (canvas.width-this.width)/2 !?
-        console.log(Bricks.bar.x, Bricks.bar.y);
+        Bricks.bar = new Bricks.Bar(0, canvas.height - 40); // (canvas.width-this.width)/2 !?
         Bricks.bar.draw();
+        console.log(Bricks.bar.x, Bricks.bar.y);
         let ball = new Bricks.Ball();
         ball.draw();
         /*
@@ -36,9 +36,9 @@ var Bricks;
             Bricks.bar.draw();
             document.addEventListener("keydown", handleKeyPress, false);
             document.addEventListener("keyup", handleKeyRelease, false);
-            if (Bricks.error = true) {
-                document.addEventListener("keydown", handleEnterKey, false);
-                console.log("error");
+            if (Bricks.gameOver == true) {
+                document.addEventListener("keydown", handleEnterPress, false);
+                document.addEventListener("keyup", handleEnterRelease, false);
             }
         }, 10);
         //Key is pressed
@@ -64,11 +64,13 @@ var Bricks;
             }
         } //handleKeyRelease
         //return key
-        function handleEnterKey(_event) {
+        function handleEnterPress(_event) {
             if (_event.keyCode == 13) {
                 enterKey = true;
                 reloadGame();
             }
+        }
+        function handleEnterRelease(_event) {
             if (_event.keyCode == 13) {
                 enterKey = false;
             }
