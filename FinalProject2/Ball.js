@@ -67,6 +67,34 @@ var Bricks2;
             this.x += this.xd; //+2
             this.y += this.yd; //-2
         } //move
+        //        detectBrickCollision(): void {
+        //            if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
+        //       //            }
+        detectCollision(_rx, _ry, _rwidth, _rheight) {
+            let testX = this.x;
+            let testY = this.y;
+            if (this.x < _rx) {
+                testX = _rx;
+            }
+            else if (this.x > _rx + _rwidth) {
+                testX = _rx + _rwidth;
+            }
+            if (this.y < _ry) {
+                testY = _ry;
+            }
+            else if (this.y > _ry + _rheight) {
+                testY = _ry + _rheight;
+            }
+            //Abstand von n�chsten Ecken
+            let distX = this.x - testX;
+            let distY = this.y - testY;
+            let dist = Math.sqrt((distX * distX) + (distY * distY));
+            //collision
+            if (dist <= this.radius) {
+                return true;
+            }
+            return false;
+        }
     }
     Bricks2.Ball = Ball; //class
 })(Bricks2 || (Bricks2 = {})); //namespace

@@ -55,7 +55,7 @@ namespace Bricks2 {
     function animate(): void {
         crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path
         //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
-//        spliceDeadBricks();
+        spliceDeadBricks();
         drawActiveBricks();
         ball.update();
         bar.draw();
@@ -98,12 +98,19 @@ namespace Bricks2 {
     
     function spliceDeadBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
-            bricks[i].checkStatus();
-            
+            //bricks[i].checkStatus();
+            let hit:boolean= ball.detectCollision(bricks[i].x,bricks[i].y,bricks[i].width,bricks[i].height);
+           
+            if (hit == true) {
+                bricks.splice(i);
+                console.log("brick spliced");
+            }
+            /*
             if (bricks[i].active == false) {
                 bricks.splice(i);
                 console.log("brick spliced");
             }
+            */
         }
     }
 
@@ -152,6 +159,34 @@ namespace Bricks2 {
         document.location.reload();
     }
 
-
-
+    /*
+function detectCollision(_rx:number, _ry:number, _rwidth:number, _rheight:number ) {
+    let testX:number = ball.x;
+    let testY:number = ball.y;
+    
+    if(ball.x<_rx){ //left border
+        testX=_rx;    
+    }else if(ball.x>_rx+_rwidth) {//right border
+           testX = _rx+_rwidth;  
+    }
+    
+    if(ball.y<_ry){// top border
+        testY=_ry;    
+    }else if(ball.y>_ry+_rheight) {//bottom border
+           testY = _ry+_rheight;  
+    }
+              
+    //Abstand von nächsten Ecken
+    let distX:number = ball.x-testX;
+    let distY:number = ball.y-testY;
+    let dist:number = Math.sqrt((distX*distX) + (distY*distY));
+    
+    //collision
+    if(dist<=ball.radius){
+        return true;    
+    }
+     return false;
+         
+            }
+*/
 } //namespace

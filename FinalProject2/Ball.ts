@@ -93,60 +93,95 @@ namespace Bricks2 {
         }//move
 
 
+        //        detectBrickCollision(): void {
+        //            if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
+        //       //            }
+            
+        detectCollision(_rx: number, _ry: number, _rwidth: number, _rheight: number) {
+            let testX: number = this.x;
+            let testY: number = this.y;
 
-//        checkCollision(obj) {
-//
-//            if (this.y + this.radius < obj.y)
-//                return false; //Above
-//            if (this.y > obj.position.y + obj.size.height)
-//                return false; //Below
-//            if (this.x > obj.position.x + obj.size.width)
-//                return false; //Left
-//            if (this.x + obj.size.width < obj.position.x)
-//                return false; //Right
-//
-//            // We have a hit! Update direction based on where we hit the oject
-// 
-//            //Moving towards lower right
-//            if (this.xd == 1
-//                && this.yd == 1) {
-//                if (this.y > obj.y)
-//                    this.xd = -1;
-//                else
-//                    this.yd = -1;
-//            }
-//
-//            //Moving towards lower left
-//            else if (this.xd == -1
-//                && this.yd == 1) {
-//                if (this.y > obj.y)
-//                    this.xd = 1;
-//                else
-//                    this.yd = -1;
-//            }
-//
-//            //Moving towards upper right
-//            else if (this.xd == 1
-//                && this.yd == -1) {
-//                if (this.y > obj.y)
-//                    this.xd = -1;
-//                else
-//                    this.yd = -1;
-//            }
-//
-//            //Moving towards upper-left
-//            else if (this.xd == -1
-//                && this.yd == -1) {
-//                if (this.y > obj.y)
-//                    this.xd = 1;
-//                else
-//                    this.yd = -1;
-//
-//            }
-//
-//            return true;
-//
-//        }
+            if (this.x < _rx) { //left border
+                testX = _rx;
+            } else if (this.x > _rx + _rwidth) {//right border
+                testX = _rx + _rwidth;
+            }
+
+            if (this.y < _ry) {// top border
+                testY = _ry;
+            } else if (this.y > _ry + _rheight) {//bottom border
+                testY = _ry + _rheight;
+            }
+
+            //Abstand von nächsten Ecken
+            let distX: number = this.x - testX;
+            let distY: number = this.y - testY;
+            let dist: number = Math.sqrt((distX * distX) + (distY * distY));
+
+            //collision
+            if (dist <= this.radius) {
+                return true;
+            }
+            return false;
+
+        }
+
+
+
+
+        //        checkCollision(obj) {
+        //
+        //            if (this.y + this.radius < obj.y)
+        //                return false; //Above
+        //            if (this.y > obj.position.y + obj.size.height)
+        //                return false; //Below
+        //            if (this.x > obj.position.x + obj.size.width)
+        //                return false; //Left
+        //            if (this.x + obj.size.width < obj.position.x)
+        //                return false; //Right
+        //
+        //            // We have a hit! Update direction based on where we hit the oject
+        // 
+        //            //Moving towards lower right
+        //            if (this.xd == 1
+        //                && this.yd == 1) {
+        //                if (this.y > obj.y)
+        //                    this.xd = -1;
+        //                else
+        //                    this.yd = -1;
+        //            }
+        //
+        //            //Moving towards lower left
+        //            else if (this.xd == -1
+        //                && this.yd == 1) {
+        //                if (this.y > obj.y)
+        //                    this.xd = 1;
+        //                else
+        //                    this.yd = -1;
+        //            }
+        //
+        //            //Moving towards upper right
+        //            else if (this.xd == 1
+        //                && this.yd == -1) {
+        //                if (this.y > obj.y)
+        //                    this.xd = -1;
+        //                else
+        //                    this.yd = -1;
+        //            }
+        //
+        //            //Moving towards upper-left
+        //            else if (this.xd == -1
+        //                && this.yd == -1) {
+        //                if (this.y > obj.y)
+        //                    this.xd = 1;
+        //                else
+        //                    this.yd = -1;
+        //
+        //            }
+        //
+        //            return true;
+        //
+        //        }
 
 
 

@@ -38,7 +38,7 @@ var Bricks2;
     function animate() {
         Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path
         //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
-        //        spliceDeadBricks();
+        spliceDeadBricks();
         drawActiveBricks();
         Bricks2.ball.update();
         Bricks2.bar.draw();
@@ -71,8 +71,9 @@ var Bricks2;
     }
     function spliceDeadBricks() {
         for (let i = 0; i < Bricks2.bricks.length; i++) {
-            Bricks2.bricks[i].checkStatus();
-            if (Bricks2.bricks[i].active == false) {
+            //bricks[i].checkStatus();
+            let hit = Bricks2.ball.detectCollision(Bricks2.bricks[i].x, Bricks2.bricks[i].y, Bricks2.bricks[i].width, Bricks2.bricks[i].height);
+            if (hit == true) {
                 Bricks2.bricks.splice(i);
                 console.log("brick spliced");
             }
