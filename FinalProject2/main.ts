@@ -7,7 +7,7 @@ Hiermit versichere ich, dass ich diesen
 Code selbst geschrieben habe. Er wurde
 nicht kopiert und auch nicht diktiert. 
 */
-
+ 
 namespace Bricks2 {
 
     window.addEventListener("load", init);
