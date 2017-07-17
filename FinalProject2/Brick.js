@@ -23,7 +23,7 @@ var Bricks2;
         }
         checkStatus() {
             if (this.active == true) {
-                if (Bricks2.ball.x >= this.x && Bricks2.ball.x < this.rightBorder && Bricks2.ball.y == this.bottomBorder) {
+                if (Bricks2.ball.x >= this.x && Bricks2.ball.x < this.rightBorder && Bricks2.ball.y < this.bottomBorder) {
                     //                    ball.yd = -ball.yd;
                     this.active = false;
                 }

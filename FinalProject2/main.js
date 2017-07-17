@@ -38,7 +38,7 @@ var Bricks2;
     function animate() {
         Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path
         //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
-        spliceDeadBricks();
+        //        spliceDeadBricks();
         drawActiveBricks();
         Bricks2.ball.update();
         Bricks2.bar.draw();
@@ -62,8 +62,6 @@ var Bricks2;
                 brickPosx += brick.xSpacer;
             }
             Bricks2.bricks[i] = brick; //brick in Array legen
-            //                        bricks[i].draw();
-            console.log(Bricks2.bricks);
         }
     }
     function drawActiveBricks() {
@@ -71,17 +69,12 @@ var Bricks2;
             Bricks2.bricks[i].draw();
         }
     }
-    //    function checkStatus():void{
-    //            for (let i: number = 0; i < bricks.length; i++) {
-    //             bricks[i].checkStatus();    
-    //           
-    //        }
-    //    }
     function spliceDeadBricks() {
         for (let i = 0; i < Bricks2.bricks.length; i++) {
             Bricks2.bricks[i].checkStatus();
             if (Bricks2.bricks[i].active == false) {
                 Bricks2.bricks.splice(i);
+                console.log("brick spliced");
             }
         }
     }
@@ -89,12 +82,12 @@ var Bricks2;
     function handleKeyPress(_event) {
         if (_event.keyCode == 39) {
             Bricks2.rightKey = true;
-            console.log("rightKey: " + Bricks2.rightKey);
+            //            console.log("rightKey: " + rightKey);
             Bricks2.bar.move();
         }
         else if (_event.keyCode == 37) {
             Bricks2.leftKey = true;
-            console.log("leftKey: " + Bricks2.leftKey);
+            //            console.log("leftKey: " + leftKey);
             Bricks2.bar.move();
         }
     } //handleDownkey

@@ -55,7 +55,7 @@ namespace Bricks2 {
     function animate(): void {
         crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path
         //        crc2.putImageData(imgData, 0, 0); //gespeichertes Bild verwe        
-        spliceDeadBricks();
+//        spliceDeadBricks();
         drawActiveBricks();
         ball.update();
         bar.draw();
@@ -84,7 +84,7 @@ namespace Bricks2 {
 
             bricks[i] = brick; //brick in Array legen
             //                        bricks[i].draw();
-            console.log(bricks);
+//            console.log(bricks);
         }
 
     }
@@ -95,21 +95,14 @@ namespace Bricks2 {
         }
     }
 
-
-
-    //    function checkStatus():void{
-    //            for (let i: number = 0; i < bricks.length; i++) {
-    //             bricks[i].checkStatus();    
-    //           
-    //        }
-    //    }
     
     function spliceDeadBricks(): void {
-
         for (let i: number = 0; i < bricks.length; i++) {
             bricks[i].checkStatus();
+            
             if (bricks[i].active == false) {
                 bricks.splice(i);
+                console.log("brick spliced");
             }
         }
     }
@@ -119,12 +112,12 @@ namespace Bricks2 {
 
         if (_event.keyCode == 39) {//right
             rightKey = true;
-            console.log("rightKey: " + rightKey);
+//            console.log("rightKey: " + rightKey);
             bar.move();
         }
         else if (_event.keyCode == 37) {//left
             leftKey = true;
-            console.log("leftKey: " + leftKey);
+//            console.log("leftKey: " + leftKey);
             bar.move();
         }
     }//handleDownkey

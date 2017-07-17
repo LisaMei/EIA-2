@@ -5,10 +5,10 @@ namespace Bricks2 {
         y: number;
         xd: number;
         yd: number;
-        color: string; 
+        color: string;
         radius: number;
 
-  
+
         constructor() {
             console.log("Ball");
             this.x = crc2.canvas.width / 2;
@@ -91,6 +91,66 @@ namespace Bricks2 {
             this.x += this.xd; //+2
             this.y += this.yd; //-2
         }//move
+
+
+
+//        checkCollision(obj) {
+//
+//            if (this.y + this.radius < obj.y)
+//                return false; //Above
+//            if (this.y > obj.position.y + obj.size.height)
+//                return false; //Below
+//            if (this.x > obj.position.x + obj.size.width)
+//                return false; //Left
+//            if (this.x + obj.size.width < obj.position.x)
+//                return false; //Right
+//
+//            // We have a hit! Update direction based on where we hit the oject
+// 
+//            //Moving towards lower right
+//            if (this.xd == 1
+//                && this.yd == 1) {
+//                if (this.y > obj.y)
+//                    this.xd = -1;
+//                else
+//                    this.yd = -1;
+//            }
+//
+//            //Moving towards lower left
+//            else if (this.xd == -1
+//                && this.yd == 1) {
+//                if (this.y > obj.y)
+//                    this.xd = 1;
+//                else
+//                    this.yd = -1;
+//            }
+//
+//            //Moving towards upper right
+//            else if (this.xd == 1
+//                && this.yd == -1) {
+//                if (this.y > obj.y)
+//                    this.xd = -1;
+//                else
+//                    this.yd = -1;
+//            }
+//
+//            //Moving towards upper-left
+//            else if (this.xd == -1
+//                && this.yd == -1) {
+//                if (this.y > obj.y)
+//                    this.xd = 1;
+//                else
+//                    this.yd = -1;
+//
+//            }
+//
+//            return true;
+//
+//        }
+
+
+
+
     }//class
 
 } //namespace

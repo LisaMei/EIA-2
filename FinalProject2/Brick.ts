@@ -37,7 +37,7 @@ namespace Bricks2 {
 
         checkStatus(): void {
             if (this.active == true) {
-                if (ball.x >= this.x && ball.x < this.rightBorder && ball.y == this.bottomBorder) {
+                if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
 //                    ball.yd = -ball.yd;
                     this.active = false;
                     
