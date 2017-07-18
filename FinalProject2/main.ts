@@ -19,7 +19,7 @@ namespace Bricks2 {
     export let bar: Bar;
     export let ball: Ball;
 
-    export let gameOver: boolean = false;
+    export let gameOver: boolean=false;
     export let bricks: Brick[] = [];
     let imgData: ImageData;
     let brickNumber: number = 20;
@@ -33,7 +33,7 @@ namespace Bricks2 {
         bar = new Bar(canvas.width/2-50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
         createBrickField();
-        
+               
         window.setTimeout(animate, 10);
     }//init
 
@@ -46,7 +46,8 @@ namespace Bricks2 {
         crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path       
         spliceDeadBricks();
         drawActiveBricks();
-        ball.update();
+        
+        ball.update();      
         bar.draw();    
 
         if (gameOver == true) {
@@ -59,7 +60,7 @@ namespace Bricks2 {
 
     function createBrickField(): void {
         let brickPosx: number = 50;
-        let brickPosy: number = 20;
+        let brickPosy: number = 50;
         for (let i: number = 0; i < brickNumber; i++) {
 
             let brick: Brick = new Brick(brickPosx, brickPosy);
@@ -84,17 +85,11 @@ namespace Bricks2 {
         for (let i: number = 0; i < bricks.length; i++) {
             //bricks[i].checkStatus();
             let hit:boolean= ball.detectCollision(bricks[i].x,bricks[i].y,bricks[i].width,bricks[i].height);
-           
+                    
             if (hit == true) {
                 bricks.splice(i,1);
                 console.log("brick spliced");
-            }
-            /*
-            if (bricks[i].active == false) {
-                bricks.splice(i);
-                console.log("brick spliced");
-            }
-            */
+            }           
         }
     }//spliceBricks
 
@@ -124,7 +119,7 @@ namespace Bricks2 {
     }//handleKeyRelease
 
 
-    //return key
+    //enter key
     function handleEnterKey(_event: KeyboardEvent) {
         if (_event.keyCode == 13) {
             enterKey = true;
@@ -143,35 +138,4 @@ namespace Bricks2 {
     }
 
     
-    
-    /*
-function detectCollision(_rx:number, _ry:number, _rwidth:number, _rheight:number ) {
-    let testX:number = ball.x;
-    let testY:number = ball.y;
-    
-    if(ball.x<_rx){ //left border
-        testX=_rx;    
-    }else if(ball.x>_rx+_rwidth) {//right border
-           testX = _rx+_rwidth;  
-    }
-    
-    if(ball.y<_ry){// top border
-        testY=_ry;    
-    }else if(ball.y>_ry+_rheight) {//bottom border
-           testY = _ry+_rheight;  
-    }
-              
-    //Abstand von nächsten Ecken
-    let distX:number = ball.x-testX;
-    let distY:number = ball.y-testY;
-    let dist:number = Math.sqrt((distX*distX) + (distY*distY));
-    
-    //collision
-    if(dist<=ball.radius){
-        return true;    
-    }
-     return false;
-         
-            }
-*/
 } //namespace

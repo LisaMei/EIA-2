@@ -43,7 +43,7 @@ var Bricks2;
     } //animate
     function createBrickField() {
         let brickPosx = 50;
-        let brickPosy = 20;
+        let brickPosy = 50;
         for (let i = 0; i < brickNumber; i++) {
             let brick = new Bricks2.Brick(brickPosx, brickPosy);
             if (i % 5 == 0 && i != 0) {
@@ -93,7 +93,7 @@ var Bricks2;
             Bricks2.leftKey = false;
         }
     } //handleKeyRelease
-    //return key
+    //enter key
     function handleEnterKey(_event) {
         if (_event.keyCode == 13) {
             enterKey = true;

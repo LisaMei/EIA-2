@@ -22,7 +22,7 @@ namespace Bricks2 {
             this.draw();
         }
 
-        draw(): void {           
+        draw(): void {
             crc2.beginPath();
             crc2.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             crc2.fillStyle = "#FFFFFF";
@@ -33,6 +33,7 @@ namespace Bricks2 {
         move(): void {
             let newX = this.x + this.xd;
 
+
             //linker oder rechter Rand erreicht
             if (newX > crc2.canvas.width - this.radius || newX < this.radius) {
                 this.xd = -this.xd;
@@ -41,12 +42,20 @@ namespace Bricks2 {
             //oberer Rand erreicht
             if (this.y + this.yd < this.radius) {
                 this.yd = -this.yd; //nach unten bewegen --> Vorzeichen von yd zu +
-            }  
+            }
 
             //vom Balken abprallen - bis jetzt nur obere Seite
-            if (this.y > bar.y - this.radius && this.x > bar.x && this.x < bar.x + bar.width) {
+            if (this.y > bar.topBorder - this.radius && this.x > bar.x && this.x < bar.rightBorder) {
                 this.yd = -this.yd;
             }
+            if (this.x < bar.leftBorder && this.y < bar.bottomBorder && this.y > bar.topBorder) {
+                this.xd = -this.xd;
+            }
+//             let barColl:boolean=this.detectCollision(bar.x,bar.y,bar.width,bar.height);
+             
+
+
+
 
             //unterer Rand erreicht
             if (this.y + this.yd >= crc2.canvas.height - this.radius) {
@@ -55,7 +64,7 @@ namespace Bricks2 {
                 crc2.font = "50px Arial";
                 crc2.fillStyle = "#000000";
                 crc2.fillText("GAME OVER", 100, 100);
-                gameOver = true;              
+                gameOver = true;
             }
 
             //neue Position
@@ -64,10 +73,18 @@ namespace Bricks2 {
         }//move
 
 
-        //        detectBrickCollision(): void {
-        //            if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
-        //       //            }
-            
+//        handleColl(_rx: number, _ry: number, _rwidth: number, _rheight: number): void {
+//            let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
+//            if (barColl = true) {
+//                if (distX < this.radius) {
+//                    this.xd = -this.xd;
+//                }
+//                if (distY < this.radius) {
+//                    this.yd = -this.yd;
+//                }
+//            }
+//        }
+
         detectCollision(_rx: number, _ry: number, _rwidth: number, _rheight: number) {
             let testX: number = this.x;
             let testY: number = this.y;
@@ -89,12 +106,24 @@ namespace Bricks2 {
             let distY: number = this.y - testY;
             let dist: number = Math.sqrt((distX * distX) + (distY * distY));
 
-            //collision
+            //collision handling
             if (dist <= this.radius) {
+                if (distX < this.radius) {
+                    this.xd = -this.xd;
+                }
+                if (distY < this.radius) {
+                    this.yd = -this.yd;
+                }
                 return true;
+                
             }
             return false;
-
         }
+
+
+
+
+
+
     }//class
 } //namespace

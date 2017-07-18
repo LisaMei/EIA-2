@@ -8,6 +8,10 @@ var Bricks2;
             this.height = 20;
             this.width = 100;
             this.color = "#FFFFFF";
+            this.topBorder = this.y;
+            this.leftBorder = this.x;
+            this.rightBorder = this.x + this.width;
+            this.bottomBorder = this.y + this.height;
         }
         draw() {
             Bricks2.crc2.beginPath();

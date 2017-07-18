@@ -31,9 +31,13 @@ var Bricks2;
                 this.yd = -this.yd; //nach unten bewegen --> Vorzeichen von yd zu +
             }
             //vom Balken abprallen - bis jetzt nur obere Seite
-            if (this.y > Bricks2.bar.y - this.radius && this.x > Bricks2.bar.x && this.x < Bricks2.bar.x + Bricks2.bar.width) {
+            if (this.y > Bricks2.bar.topBorder - this.radius && this.x > Bricks2.bar.x && this.x < Bricks2.bar.rightBorder) {
                 this.yd = -this.yd;
             }
+            if (this.x < Bricks2.bar.leftBorder && this.y < Bricks2.bar.bottomBorder && this.y > Bricks2.bar.topBorder) {
+                this.xd = -this.xd;
+            }
+            //             let barColl:boolean=this.detectCollision(bar.x,bar.y,bar.width,bar.height);
             //unterer Rand erreicht
             if (this.y + this.yd >= Bricks2.crc2.canvas.height - this.radius) {
                 Bricks2.crc2.fillStyle = "#FF0000";
@@ -47,9 +51,17 @@ var Bricks2;
             this.x += this.xd; //+2
             this.y += this.yd; //-2
         } //move
-        //        detectBrickCollision(): void {
-        //            if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
-        //       //            }
+        //        handleColl(_rx: number, _ry: number, _rwidth: number, _rheight: number): void {
+        //            let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
+        //            if (barColl = true) {
+        //                if (distX < this.radius) {
+        //                    this.xd = -this.xd;
+        //                }
+        //                if (distY < this.radius) {
+        //                    this.yd = -this.yd;
+        //                }
+        //            }
+        //        }
         detectCollision(_rx, _ry, _rwidth, _rheight) {
             let testX = this.x;
             let testY = this.y;
@@ -69,8 +81,14 @@ var Bricks2;
             let distX = this.x - testX;
             let distY = this.y - testY;
             let dist = Math.sqrt((distX * distX) + (distY * distY));
-            //collision
+            //collision handling
             if (dist <= this.radius) {
+                if (distX < this.radius) {
+                    this.xd = -this.xd;
+                }
+                if (distY < this.radius) {
+                    this.yd = -this.yd;
+                }
                 return true;
             }
             return false;
