@@ -45,13 +45,14 @@ namespace Bricks2 {
             }
 
             //vom Balken abprallen - bis jetzt nur obere Seite
-            if (this.y > bar.topBorder - this.radius && this.x > bar.x && this.x < bar.rightBorder) {
-                this.yd = -this.yd;
-            }
-            if (this.x < bar.leftBorder && this.y < bar.bottomBorder && this.y > bar.topBorder) {
-                this.xd = -this.xd;
-            }
-//             let barColl:boolean=this.detectCollision(bar.x,bar.y,bar.width,bar.height);
+//            if (this.y > bar.y - this.radius && this.x > bar.x && this.x < bar.x+bar.width) {
+//                this.yd = -this.yd;
+//            }
+//            //left
+//            if (this.x > bar.x && this.y < bar.y+bar.height && this.y > bar.y) {
+//                this.xd = -this.xd;
+//            }
+             let barColl:boolean=this.detectCollision(bar.x,bar.y,bar.width,bar.height);
              
 
 
@@ -102,17 +103,18 @@ namespace Bricks2 {
             }
 
             //Abstand von nächsten Ecken
-            let distX: number = this.x - testX;
-            let distY: number = this.y - testY;
+            let distX: number = this.x - testX; //left and right border
+            let distY: number = this.y - testY; //top and bottom
             let dist: number = Math.sqrt((distX * distX) + (distY * distY));
 
             //collision handling
             if (dist <= this.radius) {
-                if (distX < this.radius) {
-                    this.xd = -this.xd;
+                
+                if (distX <this.radius) {
+                    this.yd = -this.yd;
                 }
                 if (distY < this.radius) {
-                    this.yd = -this.yd;
+                    this.xd = -this.xd;
                 }
                 return true;
                 

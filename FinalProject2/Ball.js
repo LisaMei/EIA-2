@@ -31,13 +31,14 @@ var Bricks2;
                 this.yd = -this.yd; //nach unten bewegen --> Vorzeichen von yd zu +
             }
             //vom Balken abprallen - bis jetzt nur obere Seite
-            if (this.y > Bricks2.bar.topBorder - this.radius && this.x > Bricks2.bar.x && this.x < Bricks2.bar.rightBorder) {
-                this.yd = -this.yd;
-            }
-            if (this.x < Bricks2.bar.leftBorder && this.y < Bricks2.bar.bottomBorder && this.y > Bricks2.bar.topBorder) {
-                this.xd = -this.xd;
-            }
-            //             let barColl:boolean=this.detectCollision(bar.x,bar.y,bar.width,bar.height);
+            //            if (this.y > bar.y - this.radius && this.x > bar.x && this.x < bar.x+bar.width) {
+            //                this.yd = -this.yd;
+            //            }
+            //            //left
+            //            if (this.x > bar.x && this.y < bar.y+bar.height && this.y > bar.y) {
+            //                this.xd = -this.xd;
+            //            }
+            let barColl = this.detectCollision(Bricks2.bar.x, Bricks2.bar.y, Bricks2.bar.width, Bricks2.bar.height);
             //unterer Rand erreicht
             if (this.y + this.yd >= Bricks2.crc2.canvas.height - this.radius) {
                 Bricks2.crc2.fillStyle = "#FF0000";
@@ -78,16 +79,16 @@ var Bricks2;
                 testY = _ry + _rheight;
             }
             //Abstand von n�chsten Ecken
-            let distX = this.x - testX;
-            let distY = this.y - testY;
+            let distX = this.x - testX; //left and right border
+            let distY = this.y - testY; //top and bottom
             let dist = Math.sqrt((distX * distX) + (distY * distY));
             //collision handling
             if (dist <= this.radius) {
                 if (distX < this.radius) {
-                    this.xd = -this.xd;
+                    this.yd = -this.yd;
                 }
                 if (distY < this.radius) {
-                    this.yd = -this.yd;
+                    this.xd = -this.xd;
                 }
                 return true;
             }

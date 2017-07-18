@@ -42,7 +42,7 @@ namespace Bricks2 {
             else if (leftKey == true && this.x > 0) {
                 this.x -= 10;
             }
-            console.log("move called");
+            
         }
     }//class
 } //namespace

@@ -33,8 +33,8 @@ var Bricks2;
         Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path       
         spliceDeadBricks();
         drawActiveBricks();
-        Bricks2.ball.update();
         Bricks2.bar.draw();
+        Bricks2.ball.update();
         if (Bricks2.gameOver == true) {
             document.addEventListener("keydown", handleEnterKey, false);
             document.addEventListener("keyup", handleEnterRelease, false);

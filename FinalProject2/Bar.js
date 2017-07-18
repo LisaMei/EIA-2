@@ -27,7 +27,6 @@ var Bricks2;
             else if (Bricks2.leftKey == true && this.x > 0) {
                 this.x -= 10;
             }
-            console.log("move called");
         }
     }
     Bricks2.Bar = Bar; //class
