@@ -12,16 +12,13 @@ namespace Bricks2 {
 
     window.addEventListener("load", init);
     export let crc2: CanvasRenderingContext2D;
-
     export let rightKey: boolean = false;
     export let leftKey: boolean = false;
     let enterKey: boolean = false;
     export let bar: Bar;
     export let ball: Ball;
-
     export let gameOver: boolean=false;
     export let bricks: Brick[] = [];
-    let imgData: ImageData;
     let brickNumber: number = 20;
 
     function init(_event: Event): void {
@@ -29,26 +26,29 @@ namespace Bricks2 {
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
-
-        bar = new Bar(canvas.width/2-50, canvas.height - 40); // (canvas.width-this.width)/2 !?
+        drawStartScreen();
+ 
+        bar = new Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
         createBrickField();
-               
-        window.setTimeout(animate, 10);
+
+        document.addEventListener("keydown", handleKeyPress, false);
+        document.addEventListener("keyup", handleKeyRelease, false);
+        //window.setTimeout(animate, 10);           
     }//init
 
 
-    document.addEventListener("keydown", handleKeyPress, false);
-    document.addEventListener("keyup", handleKeyRelease, false);
-
+    function startGame(): void {
+        window.setTimeout(animate, 10);
+    }
 
     function animate(): void {
         crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path       
         spliceDeadBricks();
         drawActiveBricks();
-                    
+
         bar.draw();
-        ball.update();          
+        ball.update();
 
         if (gameOver == true) {
             document.addEventListener("keydown", handleEnterKey, false);
@@ -61,8 +61,8 @@ namespace Bricks2 {
     function createBrickField(): void {
         let brickPosx: number = 50;
         let brickPosy: number = 50;
-        for (let i: number = 0; i < brickNumber; i++) {
 
+        for (let i: number = 0; i < 21; i++) {
             let brick: Brick = new Brick(brickPosx, brickPosy);
             if (i % 5 == 0 && i != 0) {
                 brickPosx = 50;
@@ -77,19 +77,20 @@ namespace Bricks2 {
     function drawActiveBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
             bricks[i].draw();
+
         }
     }
 
-    
+
     function spliceDeadBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
             //bricks[i].checkStatus();
-            let hit:boolean= ball.detectCollision(bricks[i].x,bricks[i].y,bricks[i].width,bricks[i].height);
-                    
+            let hit: boolean = ball.detectCollision(bricks[i].x, bricks[i].y, bricks[i].width, bricks[i].height);
+
             if (hit == true) {
-                bricks.splice(i,1);
+                bricks.splice(i, 1);
                 console.log("brick spliced");
-            }           
+            }
         }
     }//spliceBricks
 
@@ -97,13 +98,16 @@ namespace Bricks2 {
     function handleKeyPress(_event: KeyboardEvent) {
         if (_event.keyCode == 39) {//right
             rightKey = true;
-//            console.log("rightKey: " + rightKey);
+            //            console.log("rightKey: " + rightKey);
             bar.move();
         }
         else if (_event.keyCode == 37) {//left
             leftKey = true;
-//            console.log("leftKey: " + leftKey);
+            //            console.log("leftKey: " + leftKey);
             bar.move();
+        }
+        if (_event.keyCode == 32) {
+            startGame();
         }
     }//handleDownkey
 
@@ -137,5 +141,18 @@ namespace Bricks2 {
         document.location.reload();
     }
 
-    
+    function drawStartScreen(): void {
+        let centerX: number = crc2.canvas.width / 2;
+        crc2.strokeStyle = 'red';
+        crc2.moveTo(centerX, 20);
+        crc2.lineTo(centerX, 100);
+        //crc2.stroke();
+        let startImg: HTMLImageElement;
+        startImg = <HTMLImageElement>document.getElementById("startImg");
+        crc2.drawImage(startImg, 30, 10);
+        crc2.textAlign = 'center';
+        crc2.font = "20px Courier New";
+        crc2.fillStyle = "#FFFFFF";
+        crc2.fillText("Hit spacbar to start game", centerX, 400);
+      }  
 } //namespace

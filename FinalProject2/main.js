@@ -15,20 +15,23 @@ var Bricks2;
     let enterKey = false;
     Bricks2.gameOver = false;
     Bricks2.bricks = [];
-    let imgData;
     let brickNumber = 20;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         Bricks2.crc2 = canvas.getContext("2d");
         Bricks2.crc2.fillRect(0, 0, canvas.width, canvas.height);
+        drawStartScreen();
         Bricks2.bar = new Bricks2.Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         Bricks2.ball = new Bricks2.Ball();
         createBrickField();
-        window.setTimeout(animate, 10);
+        document.addEventListener("keydown", handleKeyPress, false);
+        document.addEventListener("keyup", handleKeyRelease, false);
+        //window.setTimeout(animate, 10);           
     } //init
-    document.addEventListener("keydown", handleKeyPress, false);
-    document.addEventListener("keyup", handleKeyRelease, false);
+    function startGame() {
+        window.setTimeout(animate, 10);
+    }
     function animate() {
         Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path       
         spliceDeadBricks();
@@ -44,7 +47,7 @@ var Bricks2;
     function createBrickField() {
         let brickPosx = 50;
         let brickPosy = 50;
-        for (let i = 0; i < brickNumber; i++) {
+        for (let i = 0; i < 21; i++) {
             let brick = new Bricks2.Brick(brickPosx, brickPosy);
             if (i % 5 == 0 && i != 0) {
                 brickPosx = 50;
@@ -83,6 +86,9 @@ var Bricks2;
             //            console.log("leftKey: " + leftKey);
             Bricks2.bar.move();
         }
+        if (_event.keyCode == 32) {
+            startGame();
+        }
     } //handleDownkey
     //Key is released
     function handleKeyRelease(_event) {
@@ -107,6 +113,20 @@ var Bricks2;
     }
     function reloadGame() {
         document.location.reload();
+    }
+    function drawStartScreen() {
+        let centerX = Bricks2.crc2.canvas.width / 2;
+        Bricks2.crc2.strokeStyle = 'red';
+        Bricks2.crc2.moveTo(centerX, 20);
+        Bricks2.crc2.lineTo(centerX, 100);
+        //crc2.stroke();
+        let startImg;
+        startImg = document.getElementById("startImg");
+        Bricks2.crc2.drawImage(startImg, 30, 10);
+        Bricks2.crc2.textAlign = 'center';
+        Bricks2.crc2.font = "20px Courier New";
+        Bricks2.crc2.fillStyle = "#FFFFFF";
+        Bricks2.crc2.fillText("Hit spacbar to start game", centerX, 400);
     }
 })(Bricks2 || (Bricks2 = {})); //namespace
 //# sourceMappingURL=main.js.map

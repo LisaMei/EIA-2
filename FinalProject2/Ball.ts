@@ -45,15 +45,15 @@ namespace Bricks2 {
             }
 
             //vom Balken abprallen - bis jetzt nur obere Seite
-//            if (this.y > bar.y - this.radius && this.x > bar.x && this.x < bar.x+bar.width) {
-//                this.yd = -this.yd;
-//            }
-//            //left
-//            if (this.x > bar.x && this.y < bar.y+bar.height && this.y > bar.y) {
-//                this.xd = -this.xd;
-//            }
-             let barColl:boolean=this.detectCollision(bar.x,bar.y,bar.width,bar.height);
-             
+            //            if (this.y > bar.y - this.radius && this.x > bar.x && this.x < bar.x+bar.width) {
+            //                this.yd = -this.yd;
+            //            }
+            //            //left
+            //            if (this.x > bar.x && this.y < bar.y+bar.height && this.y > bar.y) {
+            //                this.xd = -this.xd;
+            //            }
+            let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
+
 
 
 
@@ -62,9 +62,21 @@ namespace Bricks2 {
             if (this.y + this.yd >= crc2.canvas.height - this.radius) {
                 crc2.fillStyle = "#FF0000";
                 crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-                crc2.font = "50px Arial";
+
+                let centerX:number=crc2.canvas.width/2;
+                crc2.beginPath();
+                crc2.strokeStyle='black';
+                crc2.moveTo(centerX, 20);
+                crc2.lineTo(centerX, 100);
+             //   crc2.stroke();
+                crc2.closePath();
+                crc2.textAlign = 'center';
+
+                crc2.font = "50px Courier New";
                 crc2.fillStyle = "#000000";
-                crc2.fillText("GAME OVER", 100, 100);
+                crc2.fillText("GAME OVER", centerX, 100);
+                crc2.font = "20px Courier New";
+                crc2.fillText("hit enter to restart", centerX, 400);
                 gameOver = true;
             }
 
@@ -74,17 +86,17 @@ namespace Bricks2 {
         }//move
 
 
-//        handleColl(_rx: number, _ry: number, _rwidth: number, _rheight: number): void {
-//            let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
-//            if (barColl = true) {
-//                if (distX < this.radius) {
-//                    this.xd = -this.xd;
-//                }
-//                if (distY < this.radius) {
-//                    this.yd = -this.yd;
-//                }
-//            }
-//        }
+        //        handleColl(_rx: number, _ry: number, _rwidth: number, _rheight: number): void {
+        //            let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
+        //            if (barColl = true) {
+        //                if (distX < this.radius) {
+        //                    this.xd = -this.xd;
+        //                }
+        //                if (distY < this.radius) {
+        //                    this.yd = -this.yd;
+        //                }
+        //            }
+        //        }
 
         detectCollision(_rx: number, _ry: number, _rwidth: number, _rheight: number) {
             let testX: number = this.x;
@@ -109,15 +121,15 @@ namespace Bricks2 {
 
             //collision handling
             if (dist <= this.radius) {
-                
-                if (distX <this.radius) {
+
+                if (distX < this.radius) {
                     this.yd = -this.yd;
                 }
                 if (distY < this.radius) {
                     this.xd = -this.xd;
                 }
                 return true;
-                
+
             }
             return false;
         }
