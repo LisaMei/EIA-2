@@ -15,10 +15,16 @@ namespace Bricks2 {
     export let rightKey: boolean = false;
     export let leftKey: boolean = false;
     let enterKey: boolean = false;
+
     export let bar: Bar;
     export let ball: Ball;
-    export let gameOver: boolean=false;
+    export let gameOver: boolean = false;
     export let bricks: Brick[] = [];
+    //    let bricks: Brick[][] = [];
+    let columnNr: number = 5;
+    let rowNr: number = 4;
+    //    let bricks= [    
+
     let brickNumber: number = 20;
 
     function init(_event: Event): void {
@@ -27,13 +33,15 @@ namespace Bricks2 {
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
         drawStartScreen();
- 
+
         bar = new Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
+        //        createBrickField();
         createBrickField();
 
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
+        window.addEventListener("resize", resizeCanvas, false);
         //window.setTimeout(animate, 10);           
     }//init
 
@@ -47,6 +55,10 @@ namespace Bricks2 {
         spliceDeadBricks();
         drawActiveBricks();
 
+
+        //        spliceBricks();
+        //        draeld();
+        
         bar.draw();
         ball.update();
 
@@ -70,9 +82,54 @@ namespace Bricks2 {
             } else if (i != 0) {
                 brickPosx += brick.xSpacer;
             }
-            bricks[i] = brick; //brick in Array legen
+            bricks[i] = brick; //brick in Arregen
         }
     }//createBrickField
+
+
+
+
+    //    function createBrickField(): void {
+    //        
+    //        let brickPosx: number;
+    //        let brickPosy: number;
+    //
+    //        for (let c: number = 0; c < columnNr; c++) {
+    //            bricks[c] = []; //in den Spaltenarray einen Array legen
+    //            for (let r: number = 0; r < rowNr; r++) {
+    //                let brick: Brick = new Brick(brickPosx, brickPosy);
+    //                bricks[c][r] = brick;
+    //                brickPosx = (c * (brick.width + brick.xSpacer));
+    //                brickPosy = (r * (brick.height + brick.ySpacer));
+    //
+    //                //                bricks[c][r].x = 0;
+    //                //                bricks[c][r].y = 0;
+    //                bricks[c][r].x = brickPosx;
+    //                bricks[c][r].y = brickPosy;
+    //                con.log(bricks[c][r]);
+    //
+    //            }
+    //        }
+    //
+    //    }
+    
+    //    function drawBrickField(): void {
+    //        let columnNr: number = 5;
+    //        let rowNr: number = 4;
+    //
+    //
+    //        for (let c: number = 0; c < columnNr; c++) {            
+    //            for (let r: number = 0; r < rowNr; r++) {
+    //                var b = bricks[c][r];
+    //                b.draw();
+    //
+    //            }
+    //        }
+    //
+    //    }
+
+
+
 
     function drawActiveBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
@@ -80,6 +137,21 @@ namespace Bricks2 {
 
         }
     }
+
+
+    //    function spliceBricks(): void {
+    //       
+    //        for (let c = 0; c < columnNr; c++) {
+    //            for (let r = 0; r < rowNr; r++) {
+    //                let b = bricks[c][r];
+    //                let hit: boolean = ball.detectCollision(b.x, b.y, b.width, b.height);
+    //                if (hit == true) {
+    //                    bricks.splice([c][r], 1);
+    //                    console.log("brick spliced");
+    //                }
+    //            }
+    //            }
+    //        }
 
 
     function spliceDeadBricks(): void {
@@ -154,5 +226,26 @@ namespace Bricks2 {
         crc2.font = "20px Courier New";
         crc2.fillStyle = "#FFFFFF";
         crc2.fillText("Hit spacbar to start game", centerX, 400);
-      }  
+    }
+
+
+    function resizeCanvas(): void {
+        let windowWidth:number=window.innerWidth;
+        let windowHeight:number=window.innerHeight
+        let scaleX:number = windowWidth/crc2.canvas.width;
+        let scaleY:number = windowHeight/crc2.canvas.height;
+        let screenRatio:number = windowWidth/windowHeight;
+        let optimalRatio:number=Math.min(scaleX, scaleY);
+        
+        if(screenRatio>=1.77&&screenRatio<=1.79){
+            crc2.canvas.style.width = windowWidth+"px";
+            crc2.canvas.style.height = windowHeight+"px";               
+        }else{
+            crc2.canvas.style.width = crc2.canvas.width*optimalRatio+"px";
+            crc2.canvas.style.height = crc2.canvas.height*optimalRatio+"px";      
+        }
+        
+
+    }
+
 } //namespace

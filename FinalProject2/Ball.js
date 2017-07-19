@@ -30,14 +30,6 @@ var Bricks2;
             if (this.y + this.yd < this.radius) {
                 this.yd = -this.yd; //nach unten bewegen --> Vorzeichen von yd zu +
             }
-            //vom Balken abprallen - bis jetzt nur obere Seite
-            //            if (this.y > bar.y - this.radius && this.x > bar.x && this.x < bar.x+bar.width) {
-            //                this.yd = -this.yd;
-            //            }
-            //            //left
-            //            if (this.x > bar.x && this.y < bar.y+bar.height && this.y > bar.y) {
-            //                this.xd = -this.xd;
-            //            }
             let barColl = this.detectCollision(Bricks2.bar.x, Bricks2.bar.y, Bricks2.bar.width, Bricks2.bar.height);
             //unterer Rand erreicht
             if (this.y + this.yd >= Bricks2.crc2.canvas.height - this.radius) {
@@ -62,17 +54,6 @@ var Bricks2;
             this.x += this.xd; //+2
             this.y += this.yd; //-2
         } //move
-        //        handleColl(_rx: number, _ry: number, _rwidth: number, _rheight: number): void {
-        //            let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
-        //            if (barColl = true) {
-        //                if (distX < this.radius) {
-        //                    this.xd = -this.xd;
-        //                }
-        //                if (distY < this.radius) {
-        //                    this.yd = -this.yd;
-        //                }
-        //            }
-        //        }
         detectCollision(_rx, _ry, _rwidth, _rheight) {
             let testX = this.x;
             let testY = this.y;
@@ -94,11 +75,19 @@ var Bricks2;
             let dist = Math.sqrt((distX * distX) + (distY * distY));
             //collision handling
             if (dist <= this.radius) {
-                if (distX < this.radius) {
-                    this.yd = -this.yd;
-                }
-                if (distY < this.radius) {
-                    this.xd = -this.xd;
+                //                if (distX==0 ) { //< this.radius
+                //                    this.yd = -this.yd;
+                //                }
+                //                if (distY ==0) { //< this.radius
+                //                    this.xd = -this.xd;
+                //                }
+                if (distX == 0)
+                    this.yd *= -1;
+                else if (distY == 0)
+                    this.xd *= -1;
+                else {
+                    this.xd *= -1;
+                    this.yd *= -1;
                 }
                 return true;
             }

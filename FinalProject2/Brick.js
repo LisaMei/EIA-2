@@ -8,8 +8,6 @@ var Bricks2;
             this.height = 20;
             this.width = 60;
             this.color = "#7f7f7f";
-            this.rightBorder = Bricks2.bar.x + Bricks2.bar.width;
-            this.bottomBorder = Bricks2.bar.y + Bricks2.bar.height;
             this.active = true;
             this.xSpacer = this.width + 20;
             this.ySpacer = this.height + 20;
@@ -20,14 +18,6 @@ var Bricks2;
             Bricks2.crc2.fillStyle = this.color;
             Bricks2.crc2.fill();
             Bricks2.crc2.closePath();
-        }
-        checkStatus() {
-            if (this.active == true) {
-                if (Bricks2.ball.x >= this.x && Bricks2.ball.x < this.rightBorder && Bricks2.ball.y < this.bottomBorder) {
-                    //                    ball.yd = -ball.yd;
-                    this.active = false;
-                }
-            }
         }
     }
     Bricks2.Brick = Brick; //class

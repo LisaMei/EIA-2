@@ -6,10 +6,10 @@ namespace Bricks2 {
         color: string;
         width: number;
         height: number;
-        topBorder:number;
-        leftBorder:number;
-        rightBorder:number;
-        bottomBorder:number;
+//        topBorder:number;
+//        leftBorder:number;
+//        rightBorder:number;
+//        bottomBorder:number;
         
 
         constructor(_x: number, _y: number) {
@@ -19,10 +19,10 @@ namespace Bricks2 {
             this.height = 20;
             this.width = 100;
             this.color = "#FFFFFF";
-            this.topBorder=this.y;
-            this.leftBorder=this.x;
-            this.rightBorder=this.x+this.width;
-            this.bottomBorder=this.y+this.height;
+//            this.topBorder=this.y;
+//            this.leftBorder=this.x;
+//            this.rightBorder=this.x+this.width;
+//            this.bottomBorder=this.y+this.height;
             
         }
 

@@ -1,6 +1,10 @@
 var Bricks2;
 (function (Bricks2) {
     class Bar {
+        //        topBorder:number;
+        //        leftBorder:number;
+        //        rightBorder:number;
+        //        bottomBorder:number;
         constructor(_x, _y) {
             console.log("Bar");
             this.x = _x;
@@ -8,10 +12,10 @@ var Bricks2;
             this.height = 20;
             this.width = 100;
             this.color = "#FFFFFF";
-            this.topBorder = this.y;
-            this.leftBorder = this.x;
-            this.rightBorder = this.x + this.width;
-            this.bottomBorder = this.y + this.height;
+            //            this.topBorder=this.y;
+            //            this.leftBorder=this.x;
+            //            this.rightBorder=this.x+this.width;
+            //            this.bottomBorder=this.y+this.height;
         }
         draw() {
             Bricks2.crc2.beginPath();

@@ -6,8 +6,6 @@ namespace Bricks2 {
         color: string;
         width: number;
         height: number;
-        rightBorder: number;
-        bottomBorder: number;
         active: boolean;
         xSpacer: number;
         ySpacer: number;
@@ -19,8 +17,6 @@ namespace Bricks2 {
             this.height = 20;
             this.width = 60;
             this.color = "#7f7f7f";
-            this.rightBorder = bar.x + bar.width;
-            this.bottomBorder = bar.y + bar.height;
             this.active = true;
             this.xSpacer = this.width + 20;
             this.ySpacer = this.height + 20;
@@ -35,16 +31,16 @@ namespace Bricks2 {
             crc2.closePath();
         }
 
-        checkStatus(): void {
-            if (this.active == true) {
-                if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
-//                    ball.yd = -ball.yd;
-                    this.active = false;
-                    
-                }
+//        checkStatus(): void {
+//            if (this.active == true) {
+//                if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
+////                    ball.yd = -ball.yd;
+//                    this.active = false;
+//                    
+//                }
                 
-            }
-        }
+//            }
+//        }
 
         
 
