@@ -33,7 +33,7 @@ var Bricks2;
         document.addEventListener("keyup", handleKeyRelease, false);
         document.addEventListener("mousemove", handleMouseMove, false);
         document.addEventListener("touchstart", handleTouchStart, false);
-        document.addEventListener("touchmove", handleTouchMove, false);
+        canvas.addEventListener("touchmove", handleTouchMove, false);
         //        window.addEventListener("resize", resizeCanvas, false);
         drawStartScreen();
     } //init
