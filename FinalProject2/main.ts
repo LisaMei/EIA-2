@@ -65,6 +65,7 @@ namespace Bricks2 {
 
         if (gameOver == true) {
             drawGameOverScreen();
+            document.addEventListener("touchstart", handleTouchStart, false);
         }
 
         window.setTimeout(animate, 10);

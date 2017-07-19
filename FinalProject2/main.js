@@ -49,6 +49,7 @@ var Bricks2;
         Bricks2.ball.update();
         if (Bricks2.gameOver == true) {
             drawGameOverScreen();
+            document.addEventListener("touchstart", handleTouchStart, false);
         }
         window.setTimeout(animate, 10);
     } //animate
