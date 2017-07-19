@@ -20,7 +20,7 @@ namespace Bricks2 {
     export let ball: Ball;
     export let gameOver: boolean = false;
     let win: boolean = false;
-    export let playing:boolean;
+    export let playing:boolean=false;
     export let bricks: Brick[] = [];
     //    let bricks: Brick[][] = [];
     let columnNr: number = 5;

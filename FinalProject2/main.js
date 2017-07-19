@@ -15,6 +15,7 @@ var Bricks2;
     let enterKey = false;
     Bricks2.gameOver = false;
     let win = false;
+    Bricks2.playing = false;
     Bricks2.bricks = [];
     //    let bricks: Brick[][] = [];
     let columnNr = 5;
