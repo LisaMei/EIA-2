@@ -227,8 +227,12 @@ namespace Bricks2 {
     }
 
     function handleTouchStart(_event: TouchEvent){
+        if (gameOver==true){
+            reloadGame();    
+        }else{
         startGame();  
-        crc2.canvas.removeEventListener("touchmove", handleTouchMove, false);  
+        crc2.canvas.removeEventListener("touchmove", handleTouchMove, false);
+            }  
     }
     
     function reloadGame(): void {

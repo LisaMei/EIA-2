@@ -182,8 +182,13 @@ var Bricks2;
         }
     }
     function handleTouchStart(_event) {
-        startGame();
-        Bricks2.crc2.canvas.removeEventListener("touchmove", handleTouchMove, false);
+        if (Bricks2.gameOver == true) {
+            reloadGame();
+        }
+        else {
+            startGame();
+            Bricks2.crc2.canvas.removeEventListener("touchmove", handleTouchMove, false);
+        }
     }
     function reloadGame() {
         document.location.reload();
