@@ -41,6 +41,7 @@ namespace Bricks2 {
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
         document.addEventListener("mousemove", handleMouseMove, false);
+        document.addEventListener("touchstart", handleTouchStart, false);
         document.addEventListener("touchmove", handleTouchMove, false);
         
         //        window.addEventListener("resize", resizeCanvas, false);
@@ -224,6 +225,10 @@ namespace Bricks2 {
         }
     }
 
+    function handleTouchStart(_event: TouchEvent){
+        startGame();    
+    }
+    
     function reloadGame(): void {
         document.location.reload();
     }

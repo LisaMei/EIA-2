@@ -32,6 +32,7 @@ var Bricks2;
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
         document.addEventListener("mousemove", handleMouseMove, false);
+        document.addEventListener("touchstart", handleTouchStart, false);
         document.addEventListener("touchmove", handleTouchMove, false);
         //        window.addEventListener("resize", resizeCanvas, false);
         drawStartScreen();
@@ -178,6 +179,9 @@ var Bricks2;
         if (touchX > 0 && touchX < Bricks2.crc2.canvas.width) {
             Bricks2.bar.x = touchX - Bricks2.bar.width / 2;
         }
+    }
+    function handleTouchStart(_event) {
+        startGame();
     }
     function reloadGame() {
         document.location.reload();
