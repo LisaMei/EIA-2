@@ -49,23 +49,6 @@ namespace Bricks2 {
 
             //unterer Rand erreicht
             if (this.y + this.yd >= crc2.canvas.height - this.radius) {
-                crc2.fillStyle = "#FF0000";
-                crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-
-                let centerX:number=crc2.canvas.width/2;
-                crc2.beginPath();
-                crc2.strokeStyle='black';
-                crc2.moveTo(centerX, 20);
-                crc2.lineTo(centerX, 100);
-             //   crc2.stroke();
-                crc2.closePath();
-                crc2.textAlign = 'center';
-
-                crc2.font = "50px Courier New";
-                crc2.fillStyle = "#000000";
-                crc2.fillText("GAME OVER", centerX, 100);
-                crc2.font = "20px Courier New";
-                crc2.fillText("hit enter to restart", centerX, 400);
                 gameOver = true;
             }
 
@@ -98,14 +81,6 @@ namespace Bricks2 {
 
             //collision handling
             if (dist <= this.radius) {
-
-//                if (distX==0 ) { //< this.radius
-//                    this.yd = -this.yd;
-//                }
-//                if (distY ==0) { //< this.radius
-//                    this.xd = -this.xd;
-//                }
-                
                  if (distX == 0)
                     this.yd *= -1;
                 else if (distY == 0)

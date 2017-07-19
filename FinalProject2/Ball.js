@@ -33,21 +33,6 @@ var Bricks2;
             let barColl = this.detectCollision(Bricks2.bar.x, Bricks2.bar.y, Bricks2.bar.width, Bricks2.bar.height);
             //unterer Rand erreicht
             if (this.y + this.yd >= Bricks2.crc2.canvas.height - this.radius) {
-                Bricks2.crc2.fillStyle = "#FF0000";
-                Bricks2.crc2.fillRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height);
-                let centerX = Bricks2.crc2.canvas.width / 2;
-                Bricks2.crc2.beginPath();
-                Bricks2.crc2.strokeStyle = 'black';
-                Bricks2.crc2.moveTo(centerX, 20);
-                Bricks2.crc2.lineTo(centerX, 100);
-                //   crc2.stroke();
-                Bricks2.crc2.closePath();
-                Bricks2.crc2.textAlign = 'center';
-                Bricks2.crc2.font = "50px Courier New";
-                Bricks2.crc2.fillStyle = "#000000";
-                Bricks2.crc2.fillText("GAME OVER", centerX, 100);
-                Bricks2.crc2.font = "20px Courier New";
-                Bricks2.crc2.fillText("hit enter to restart", centerX, 400);
                 Bricks2.gameOver = true;
             }
             //neue Position
@@ -75,12 +60,6 @@ var Bricks2;
             let dist = Math.sqrt((distX * distX) + (distY * distY));
             //collision handling
             if (dist <= this.radius) {
-                //                if (distX==0 ) { //< this.radius
-                //                    this.yd = -this.yd;
-                //                }
-                //                if (distY ==0) { //< this.radius
-                //                    this.xd = -this.xd;
-                //                }
                 if (distX == 0)
                     this.yd *= -1;
                 else if (distY == 0)

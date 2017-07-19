@@ -19,6 +19,12 @@ var Bricks2;
             Bricks2.crc2.fill();
             Bricks2.crc2.closePath();
         }
+        setRandomColor() {
+            let colors = ["#FFC60A", "#F15A4F", "#956CAE", "#0096D5", "#6AC17C"];
+            let randomColor;
+            randomColor = colors[Math.floor(Math.random() * colors.length)];
+            this.color = randomColor;
+        }
     }
     Bricks2.Brick = Brick; //class
 })(Bricks2 || (Bricks2 = {})); //namespace

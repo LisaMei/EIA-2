@@ -1,1 +1,4 @@
-canvas { background: #000000; display: block; margin: 0 auto; }
+canvas { 
+	background: #000000; display: block; margin: 0 auto;
+	cursor: none; 
+ }

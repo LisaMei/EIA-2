@@ -14,26 +14,27 @@ var Bricks2;
     Bricks2.leftKey = false;
     let enterKey = false;
     Bricks2.gameOver = false;
+    let win = false;
     Bricks2.bricks = [];
     //    let bricks: Brick[][] = [];
     let columnNr = 5;
     let rowNr = 4;
-    //    let bricks= [    
     let brickNumber = 20;
+    let score = 0;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         Bricks2.crc2 = canvas.getContext("2d");
         Bricks2.crc2.fillRect(0, 0, canvas.width, canvas.height);
-        drawStartScreen();
         Bricks2.bar = new Bricks2.Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         Bricks2.ball = new Bricks2.Ball();
-        //        createBrickField();
         createBrickField();
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
-        window.addEventListener("resize", resizeCanvas, false);
-        //window.setTimeout(animate, 10);           
+        document.addEventListener("mousemove", handleMouseMove, false);
+        document.addEventListener("touchmove", handleTouchMove, false);
+        //        window.addEventListener("resize", resizeCanvas, false);
+        drawStartScreen();
     } //init
     function startGame() {
         window.setTimeout(animate, 10);
@@ -42,13 +43,11 @@ var Bricks2;
         Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path       
         spliceDeadBricks();
         drawActiveBricks();
-        //        spliceBricks();
-        //        draeld();
         Bricks2.bar.draw();
+        drawScore();
         Bricks2.ball.update();
         if (Bricks2.gameOver == true) {
-            document.addEventListener("keydown", handleEnterKey, false);
-            document.addEventListener("keyup", handleEnterRelease, false);
+            drawGameOverScreen();
         }
         window.setTimeout(animate, 10);
     } //animate
@@ -64,6 +63,7 @@ var Bricks2;
             else if (i != 0) {
                 brickPosx += brick.xSpacer;
             }
+            brick.setRandomColor();
             Bricks2.bricks[i] = brick; //brick in Arregen
         }
     } //createBrickField
@@ -124,11 +124,14 @@ var Bricks2;
     //        }
     function spliceDeadBricks() {
         for (let i = 0; i < Bricks2.bricks.length; i++) {
-            //bricks[i].checkStatus();
             let hit = Bricks2.ball.detectCollision(Bricks2.bricks[i].x, Bricks2.bricks[i].y, Bricks2.bricks[i].width, Bricks2.bricks[i].height);
             if (hit == true) {
                 Bricks2.bricks.splice(i, 1);
                 console.log("brick spliced");
+                score++;
+            }
+            if (Bricks2.bricks.length == 0) {
+                drawWinScreen();
             }
         }
     } //spliceBricks
@@ -147,6 +150,10 @@ var Bricks2;
         if (_event.keyCode == 32) {
             startGame();
         }
+        if (_event.keyCode == 13) {
+            enterKey = true;
+            reloadGame();
+        }
     } //handleDownkey
     //Key is released
     function handleKeyRelease(_event) {
@@ -156,21 +163,31 @@ var Bricks2;
         else if (_event.keyCode == 37) {
             Bricks2.leftKey = false;
         }
-    } //handleKeyRelease
-    //enter key
-    function handleEnterKey(_event) {
-        if (_event.keyCode == 13) {
-            enterKey = true;
-            reloadGame();
-        }
-    }
-    function handleEnterRelease(_event) {
         if (_event.keyCode == 13) {
             enterKey = false;
+        }
+    } //handleKeyRelease
+    function handleMouseMove(_event) {
+        let mouseX = _event.clientX - Bricks2.crc2.canvas.offsetLeft;
+        if (mouseX > 0 && mouseX < Bricks2.crc2.canvas.width) {
+            Bricks2.bar.x = mouseX - Bricks2.bar.width / 2;
+        }
+    }
+    function handleTouchMove(_event) {
+        let touchX = _event.touches[0].screenX;
+        if (touchX > 0 && touchX < Bricks2.crc2.canvas.width) {
+            Bricks2.bar.x = touchX - Bricks2.bar.width / 2;
         }
     }
     function reloadGame() {
         document.location.reload();
+    }
+    function drawScore() {
+        Bricks2.crc2.beginPath();
+        Bricks2.crc2.font = "16px Courier New";
+        Bricks2.crc2.fillStyle = "#FFFFFF";
+        Bricks2.crc2.fillText("Score: " + score, 60, 30);
+        Bricks2.crc2.closePath();
     }
     function drawStartScreen() {
         let centerX = Bricks2.crc2.canvas.width / 2;
@@ -186,21 +203,39 @@ var Bricks2;
         Bricks2.crc2.fillStyle = "#FFFFFF";
         Bricks2.crc2.fillText("Hit spacbar to start game", centerX, 400);
     }
-    function resizeCanvas() {
-        let windowWidth = window.innerWidth;
-        let windowHeight = window.innerHeight;
-        let scaleX = windowWidth / Bricks2.crc2.canvas.width;
-        let scaleY = windowHeight / Bricks2.crc2.canvas.height;
-        let screenRatio = windowWidth / windowHeight;
-        let optimalRatio = Math.min(scaleX, scaleY);
-        if (screenRatio >= 1.77 && screenRatio <= 1.79) {
-            Bricks2.crc2.canvas.style.width = windowWidth + "px";
-            Bricks2.crc2.canvas.style.height = windowHeight + "px";
-        }
-        else {
-            Bricks2.crc2.canvas.style.width = Bricks2.crc2.canvas.width * optimalRatio + "px";
-            Bricks2.crc2.canvas.style.height = Bricks2.crc2.canvas.height * optimalRatio + "px";
-        }
+    function drawGameOverScreen() {
+        Bricks2.crc2.fillStyle = "#FF0000";
+        Bricks2.crc2.fillRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height);
+        let centerX = Bricks2.crc2.canvas.width / 2;
+        Bricks2.crc2.beginPath();
+        Bricks2.crc2.strokeStyle = 'black';
+        Bricks2.crc2.moveTo(centerX, 20);
+        Bricks2.crc2.lineTo(centerX, 100);
+        //   crc2.stroke();
+        Bricks2.crc2.closePath();
+        Bricks2.crc2.textAlign = 'center';
+        Bricks2.crc2.font = "50px Courier New";
+        Bricks2.crc2.fillStyle = "#000000";
+        Bricks2.crc2.fillText("GAME OVER", centerX, 100);
+        Bricks2.crc2.font = "20px Courier New";
+        Bricks2.crc2.fillText("hit enter to restart", centerX, 400);
+    }
+    function drawWinScreen() {
+        Bricks2.crc2.fillStyle = "#00FF00";
+        Bricks2.crc2.fillRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height);
+        let centerX = Bricks2.crc2.canvas.width / 2;
+        Bricks2.crc2.beginPath();
+        Bricks2.crc2.strokeStyle = 'black';
+        Bricks2.crc2.moveTo(centerX, 20);
+        Bricks2.crc2.lineTo(centerX, 100);
+        //   crc2.stroke();
+        Bricks2.crc2.closePath();
+        Bricks2.crc2.textAlign = 'center';
+        Bricks2.crc2.font = "50px Courier New";
+        Bricks2.crc2.fillStyle = "#000000";
+        Bricks2.crc2.fillText("YOU WIN !", centerX, 100);
+        Bricks2.crc2.font = "20px Courier New";
+        Bricks2.crc2.fillText("hit enter to restart", centerX, 400);
     }
 })(Bricks2 || (Bricks2 = {})); //namespace
 //# sourceMappingURL=main.js.map

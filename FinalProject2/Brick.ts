@@ -9,6 +9,7 @@ namespace Bricks2 {
         active: boolean;
         xSpacer: number;
         ySpacer: number;
+        
 
         constructor(_x: number, _y: number) {
             console.log("Brick");
@@ -31,16 +32,12 @@ namespace Bricks2 {
             crc2.closePath();
         }
 
-//        checkStatus(): void {
-//            if (this.active == true) {
-//                if (ball.x >= this.x && ball.x < this.rightBorder && ball.y < this.bottomBorder) {
-////                    ball.yd = -ball.yd;
-//                    this.active = false;
-//                    
-//                }
-                
-//            }
-//        }
+        setRandomColor():void{
+            let colors:string[]=["#FFC60A", "#F15A4F","#956CAE","#0096D5","#6AC17C"];    
+            let randomColor:string;
+            randomColor=colors[Math.floor(Math.random()*colors.length)];
+            this.color=randomColor;
+        }
 
         
 

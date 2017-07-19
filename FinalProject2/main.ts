@@ -19,31 +19,34 @@ namespace Bricks2 {
     export let bar: Bar;
     export let ball: Ball;
     export let gameOver: boolean = false;
+    let win: boolean = false;
     export let bricks: Brick[] = [];
     //    let bricks: Brick[][] = [];
     let columnNr: number = 5;
     let rowNr: number = 4;
-    //    let bricks= [    
-
     let brickNumber: number = 20;
+
+    let score: number = 0;
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
         crc2 = canvas.getContext("2d");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
-        drawStartScreen();
 
         bar = new Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
-        //        createBrickField();
         createBrickField();
 
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
-        window.addEventListener("resize", resizeCanvas, false);
-        //window.setTimeout(animate, 10);           
+        document.addEventListener("mousemove", handleMouseMove, false);
+        document.addEventListener("touchmove", handleTouchMove, false);
+        
+        //        window.addEventListener("resize", resizeCanvas, false);
+        drawStartScreen();
     }//init
+
 
 
     function startGame(): void {
@@ -55,17 +58,14 @@ namespace Bricks2 {
         spliceDeadBricks();
         drawActiveBricks();
 
-
-        //        spliceBricks();
-        //        draeld();
-        
         bar.draw();
+        drawScore();
         ball.update();
 
         if (gameOver == true) {
-            document.addEventListener("keydown", handleEnterKey, false);
-            document.addEventListener("keyup", handleEnterRelease, false);
+            drawGameOverScreen();
         }
+
         window.setTimeout(animate, 10);
     } //animate
 
@@ -76,12 +76,14 @@ namespace Bricks2 {
 
         for (let i: number = 0; i < 21; i++) {
             let brick: Brick = new Brick(brickPosx, brickPosy);
-            if (i % 5 == 0 && i != 0) {
+            if (i % 5 == 0 && i != 0) { //neue Reihe
                 brickPosx = 50;
                 brickPosy += brick.ySpacer;
+
             } else if (i != 0) {
                 brickPosx += brick.xSpacer;
             }
+            brick.setRandomColor();
             bricks[i] = brick; //brick in Arregen
         }
     }//createBrickField
@@ -112,7 +114,7 @@ namespace Bricks2 {
     //        }
     //
     //    }
-    
+
     //    function drawBrickField(): void {
     //        let columnNr: number = 5;
     //        let rowNr: number = 4;
@@ -156,15 +158,19 @@ namespace Bricks2 {
 
     function spliceDeadBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
-            //bricks[i].checkStatus();
             let hit: boolean = ball.detectCollision(bricks[i].x, bricks[i].y, bricks[i].width, bricks[i].height);
 
             if (hit == true) {
                 bricks.splice(i, 1);
                 console.log("brick spliced");
+                score++;
+            }
+            if (bricks.length == 0) {
+                drawWinScreen();
             }
         }
     }//spliceBricks
+
 
     //Key is pressed
     function handleKeyPress(_event: KeyboardEvent) {
@@ -181,6 +187,12 @@ namespace Bricks2 {
         if (_event.keyCode == 32) {
             startGame();
         }
+
+        if (_event.keyCode == 13) {
+            enterKey = true;
+            reloadGame();
+
+        }
     }//handleDownkey
 
 
@@ -192,25 +204,37 @@ namespace Bricks2 {
         else if (_event.keyCode == 37) {//left
             leftKey = false;
         }
+        if (_event.keyCode == 13) {
+            enterKey = false;
+        }
     }//handleKeyRelease
 
 
-    //enter key
-    function handleEnterKey(_event: KeyboardEvent) {
-        if (_event.keyCode == 13) {
-            enterKey = true;
-            reloadGame();
+    function handleMouseMove(_event: MouseEvent) {        
+        let mouseX = _event.clientX - crc2.canvas.offsetLeft;
+        if (mouseX > 0 && mouseX < crc2.canvas.width) {
+            bar.x = mouseX - bar.width / 2;
         }
     }
-
-    function handleEnterRelease(_event: KeyboardEvent) {
-        if (_event.keyCode == 13) {
-            enterKey = false;
+    
+    function handleTouchMove(_event: TouchEvent){
+        let touchX= _event.touches[0].screenX;
+        if (touchX > 0 && touchX < crc2.canvas.width) {
+            bar.x = touchX - bar.width / 2;
         }
     }
 
     function reloadGame(): void {
         document.location.reload();
+    }
+
+    function drawScore() {
+        crc2.beginPath();
+        crc2.font = "16px Courier New";
+        crc2.fillStyle = "#FFFFFF";
+        crc2.fillText("Score: " + score, 60, 30);
+        crc2.closePath();
+
     }
 
     function drawStartScreen(): void {
@@ -229,23 +253,65 @@ namespace Bricks2 {
     }
 
 
-    function resizeCanvas(): void {
-        let windowWidth:number=window.innerWidth;
-        let windowHeight:number=window.innerHeight
-        let scaleX:number = windowWidth/crc2.canvas.width;
-        let scaleY:number = windowHeight/crc2.canvas.height;
-        let screenRatio:number = windowWidth/windowHeight;
-        let optimalRatio:number=Math.min(scaleX, scaleY);
-        
-        if(screenRatio>=1.77&&screenRatio<=1.79){
-            crc2.canvas.style.width = windowWidth+"px";
-            crc2.canvas.style.height = windowHeight+"px";               
-        }else{
-            crc2.canvas.style.width = crc2.canvas.width*optimalRatio+"px";
-            crc2.canvas.style.height = crc2.canvas.height*optimalRatio+"px";      
-        }
-        
+    function drawGameOverScreen(): void {
+        crc2.fillStyle = "#FF0000";
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
+        let centerX: number = crc2.canvas.width / 2;
+        crc2.beginPath();
+        crc2.strokeStyle = 'black';
+        crc2.moveTo(centerX, 20);
+        crc2.lineTo(centerX, 100);
+        //   crc2.stroke();
+        crc2.closePath();
+        crc2.textAlign = 'center';
+
+        crc2.font = "50px Courier New";
+        crc2.fillStyle = "#000000";
+        crc2.fillText("GAME OVER", centerX, 100);
+        crc2.font = "20px Courier New";
+        crc2.fillText("hit enter to restart", centerX, 400);
     }
+
+    function drawWinScreen(): void {
+        crc2.fillStyle = "#00FF00";
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+
+        let centerX: number = crc2.canvas.width / 2;
+        crc2.beginPath();
+        crc2.strokeStyle = 'black';
+        crc2.moveTo(centerX, 20);
+        crc2.lineTo(centerX, 100);
+        //   crc2.stroke();
+        crc2.closePath();
+        crc2.textAlign = 'center';
+
+        crc2.font = "50px Courier New";
+        crc2.fillStyle = "#000000";
+        crc2.fillText("YOU WIN !", centerX, 100);
+        crc2.font = "20px Courier New";
+        crc2.fillText("hit enter to restart", centerX, 400);
+    }
+
+
+
+
+
+    //    function resizeCanvas(): void {
+    //        let windowWidth:number=window.innerWidth;
+    //        let windowHeight:number=window.innerHeight
+    //        let scaleX:number = windowWidth/crc2.canvas.width;
+    //        let scaleY:number = windowHeight/crc2.canvas.height;
+    //        let screenRatio:number = windowWidth/windowHeight;
+    //        let optimalRatio:number=Math.min(scaleX, scaleY);
+    //        
+    //        if(screenRatio>=1.77&&screenRatio<=1.79){
+    //            crc2.canvas.style.width = windowWidth+"px";
+    //            crc2.canvas.style.height = windowHeight+"px";               
+    //        }else{
+    //            crc2.canvas.style.width = crc2.canvas.width*optimalRatio+"px";
+    //            crc2.canvas.style.height = crc2.canvas.height*optimalRatio+"px";      
+    //        }
+    //    }
 
 } //namespace
