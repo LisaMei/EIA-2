@@ -187,7 +187,7 @@ var Bricks2;
         }
         else {
             startGame();
-            Bricks2.crc2.canvas.removeEventListener("touchmove", handleTouchMove, false);
+            Bricks2.crc2.canvas.removeEventListener("touchstart", handleTouchMove, false);
         }
     }
     function reloadGame() {
