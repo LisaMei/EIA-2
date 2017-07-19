@@ -34,6 +34,7 @@ var Bricks2;
             //unterer Rand erreicht
             if (this.y + this.yd >= Bricks2.crc2.canvas.height - this.radius) {
                 Bricks2.gameOver = true;
+                Bricks2.playing = false;
             }
             //neue Position
             this.x += this.xd; //+2

@@ -20,6 +20,7 @@ namespace Bricks2 {
     export let ball: Ball;
     export let gameOver: boolean = false;
     let win: boolean = false;
+    export let playing:boolean;
     export let bricks: Brick[] = [];
     //    let bricks: Brick[][] = [];
     let columnNr: number = 5;
@@ -43,7 +44,7 @@ namespace Bricks2 {
         document.addEventListener("mousemove", handleMouseMove, false);
         document.addEventListener("touchstart", handleTouchStart, false);
         canvas.addEventListener("touchmove", handleTouchMove, false);
-        
+
         //        window.addEventListener("resize", resizeCanvas, false);
         drawStartScreen();
     }//init
@@ -52,6 +53,7 @@ namespace Bricks2 {
 
     function startGame(): void {
         window.setTimeout(animate, 10);
+        playing=true;
     }
 
     function animate(): void {
@@ -212,29 +214,30 @@ namespace Bricks2 {
     }//handleKeyRelease
 
 
-    function handleMouseMove(_event: MouseEvent) {        
+    function handleMouseMove(_event: MouseEvent) {
         let mouseX = _event.clientX - crc2.canvas.offsetLeft;
         if (mouseX > 0 && mouseX < crc2.canvas.width) {
             bar.x = mouseX - bar.width / 2;
         }
     }
-    
-    function handleTouchMove(_event: TouchEvent){
-        let touchX= _event.touches[0].screenX;
+
+    function handleTouchMove(_event: TouchEvent) {
+        let touchX = _event.touches[0].screenX;
         if (touchX > 0 && touchX < crc2.canvas.width) {
             bar.x = touchX - bar.width / 2;
         }
     }
 
-    function handleTouchStart(_event: TouchEvent){
-        if (gameOver==true){
-            reloadGame();    
-        }else{
-        startGame();  
-        crc2.canvas.removeEventListener("touchstart", handleTouchMove, false);
-            }  
+    function handleTouchStart(_event: TouchEvent) {
+        if (gameOver == true) {
+            reloadGame();
+        } else if(playing==false){
+            startGame();
+            playing=true;
+            crc2.canvas.removeEventListener("touchstart", handleTouchMove, false);
+        }
     }
-    
+
     function reloadGame(): void {
         document.location.reload();
     }

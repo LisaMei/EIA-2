@@ -39,6 +39,7 @@ var Bricks2;
     } //init
     function startGame() {
         window.setTimeout(animate, 10);
+        Bricks2.playing = true;
     }
     function animate() {
         Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path       
@@ -185,8 +186,9 @@ var Bricks2;
         if (Bricks2.gameOver == true) {
             reloadGame();
         }
-        else {
+        else if (Bricks2.playing == false) {
             startGame();
+            Bricks2.playing = true;
             Bricks2.crc2.canvas.removeEventListener("touchstart", handleTouchMove, false);
         }
     }

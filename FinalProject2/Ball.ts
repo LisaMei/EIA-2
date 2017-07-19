@@ -50,6 +50,7 @@ namespace Bricks2 {
             //unterer Rand erreicht
             if (this.y + this.yd >= crc2.canvas.height - this.radius) {
                 gameOver = true;
+                playing=false;
             }
 
             //neue Position
