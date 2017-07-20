@@ -12,28 +12,26 @@ namespace Bricks2 {
 
     window.addEventListener("load", init);
     export let crc2: CanvasRenderingContext2D;
-    
+
+    export let playing: boolean = false;
     export let gameOver: boolean = false;
     let win: boolean = false;
     let score: number = 0;
     
+
     export let rightKey: boolean = false;
     export let leftKey: boolean = false;
-    
 
     export let bar: Bar;
     export let ball: Ball;
-    
-    
-    
-    export let playing:boolean=false;
-    export let bricks: Brick[] = [];
-    //    let bricks: Brick[][] = [];
-    let columnNr: number = 5;
-    let rowNr: number = 4;
+    export let bricks: Brick[] = []; //array for brickfield
     let brickNumber: number = 20;
+    //    let bricks: Brick[][] = [];   
+    //    let columnNr: number = 5;
+    //    let rowNr: numbe4;
 
-   
+
+
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
@@ -44,62 +42,68 @@ namespace Bricks2 {
         bar = new Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         ball = new Ball();
         createBrickField();
+        drawStartScreen();
 
+        //Eventlisteners
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
         canvas.addEventListener("click", handleMouseClick, false);
         canvas.addEventListener("mousemove", handleMouseMove, false);
         canvas.addEventListener("touchstart", handleTouchStart, false);
         canvas.addEventListener("touchmove", handleTouchMove, false);
-        //        window.addEventListener("resize", resizeCanvas, false);
-        drawStartScreen();
+        //        window.addEventListener("resize", resizeCanvas, false);      
     }//init
 
+    //start actual game
     function startGame(): void {
         window.setTimeout(animate, 10);
-        playing=true;
+        playing = true;
     }
 
     function animate(): void {
-        crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old path       
-        spliceDeadBricks();
+        crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height); //clear old paths       
+
         drawActiveBricks();
-
+        spliceDeadBricks();
         bar.draw();
-        drawScore();
-        if(win==false){
+        
+        if (win == false) {
             ball.update();
-            }
-
+        }
+        drawScore();
         if (gameOver == true) {
             drawGameOverScreen();
-//            document.addEventListener("touchstart", handleTouchStart, false);
+            //            document.addEventListener("touchstart", handleTouchStart, false);
         }
-        if(gameOver==false&&score==2){  
-            win=true;       
-            drawWinScreen();       
+        if (gameOver == false && score == 2) { //YOU WIN
+            win = true;
+            drawWinScreen();
         }
-
         window.setTimeout(animate, 10);
     } //animate
 
 
     function createBrickField(): void {
-        let brickPosx: number = 50;
+        let brickPosx: number = 50; //starting pos
         let brickPosy: number = 50;
 
         for (let i: number = 0; i < brickNumber; i++) {
             let brick: Brick = new Brick(brickPosx, brickPosy);
+            let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
             if (i % 5 == 0 && i != 0) { //neue Reihe
                 brickPosx = 50;
                 brickPosy += brick.ySpacer;
 
-            } else if (i != 0) {
+            } else if (i != 0) {// x spacing zum nächsten brick
                 brickPosx += brick.xSpacer;
             }
             brick.setRandomColor();
-            bricks[i] = brick; //brick in Arregen
-            console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
+            if (i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20) {
+                bricks[i] = brick2;
+            } else {
+                bricks[i] = brick; //brick in Array legen
+                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
+            }
         }
     }//createBrickField
 
@@ -149,6 +153,7 @@ namespace Bricks2 {
     function drawActiveBricks(): void {
         for (let i: number = 0; i < bricks.length; i++) {
             bricks[i].draw();
+
         }
     }
 
@@ -173,11 +178,16 @@ namespace Bricks2 {
             let hit: boolean = ball.detectCollision(bricks[i].x, bricks[i].y, bricks[i].width, bricks[i].height);
 
             if (hit == true) {
-                bricks.splice(i, 1);
-                console.log("brick spliced");
-                score++;
+                bricks[i].lives -= 1;
+                if (bricks[i].lives == 0) {
+                    bricks.splice(i, 1);
+                    score++;
+
+                } else if (bricks[i].lives == 1) {
+                    bricks[i].color = "#4d4d4d";
+                }
             }
-            
+
         }
     }//spliceBricks
 
@@ -197,11 +207,11 @@ namespace Bricks2 {
         if (_event.keyCode == 32) {
             startGame();
         }
-//        if (_event.keyCode == 13) {
-//            
-//            reloadGame();
-//
-//        }
+        //        if (_event.keyCode == 13) {
+        //            
+        //            reloadGame();
+        //
+        //        }
     }//handleDownkey
 
 
@@ -213,7 +223,7 @@ namespace Bricks2 {
         else if (_event.keyCode == 37) {//left
             leftKey = false;
         }
-        
+
     }//handleKeyRelease
 
 
@@ -224,14 +234,14 @@ namespace Bricks2 {
         }
     }
 
-    function handleMouseClick(_event:MouseEvent){
-        if (gameOver == true||win==true) {
+    function handleMouseClick(_event: MouseEvent) {
+        if (gameOver == true || win == true) {
             reloadGame();
-        } else if(playing==false){
-            startGame();             
-        }   
+        } else if (playing == false) {
+            startGame();
+        }
     }
-    
+
     function handleTouchMove(_event: TouchEvent) {
         let touchX = _event.touches[0].screenX;
         if (touchX > 0 && touchX < crc2.canvas.width) {
@@ -242,13 +252,14 @@ namespace Bricks2 {
     function handleTouchStart(_event: TouchEvent) {
         if (gameOver == true) {
             reloadGame();
-            
-        } 
+
+        }
     }
 
     function reloadGame(): void {
         document.location.reload();
     }
+    
 
     function drawScore() {
         crc2.beginPath();
@@ -293,7 +304,7 @@ namespace Bricks2 {
     }
 
     function drawWinScreen(): void {
-        gameOver=false;
+        gameOver = false;
         crc2.fillStyle = "#6AC17C";
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         let centerX: number = crc2.canvas.width / 2;

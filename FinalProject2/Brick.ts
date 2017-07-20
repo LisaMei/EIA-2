@@ -9,7 +9,8 @@ namespace Bricks2 {
         active: boolean;
         xSpacer: number;
         ySpacer: number;
-        
+        lives: number;
+
 
         constructor(_x: number, _y: number) {
             console.log("Brick");
@@ -21,6 +22,7 @@ namespace Bricks2 {
             this.active = true;
             this.xSpacer = this.width + 20;
             this.ySpacer = this.height + 20;
+            this.lives = 1;
         }
 
 
@@ -32,16 +34,15 @@ namespace Bricks2 {
             crc2.closePath();
         }
 
-        setRandomColor():void{
-            let colors:string[]=["#FFC60A", "#F15A4F","#956CAE","#0096D5","#6AC17C"];    
-            let randomColor:string;
-            randomColor=colors[Math.floor(Math.random()*colors.length)];
-            this.color=randomColor;
+        setRandomColor(): void {
+            let colors: string[] = ["#FFC60A", "#F15A4F", "#956CAE", "#0096D5", "#6AC17C"];
+            let randomColor: string;
+            randomColor = colors[Math.floor(Math.random() * colors.length)];
+            this.color = randomColor;
         }
 
+
         
-
-
 
     }//class
 } //namespace

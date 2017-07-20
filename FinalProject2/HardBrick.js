@@ -5,8 +5,7 @@ var Bricks2;
             console.log("Brick2");
             super(_x, _y);
             this.color = "#808080";
-        }
-        draw() {
+            this.lives = 2;
         }
     }
     Bricks2.Brick2 = Brick2; //class

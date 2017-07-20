@@ -10,17 +10,17 @@ nicht kopiert und auch nicht diktiert.
 var Bricks2;
 (function (Bricks2) {
     window.addEventListener("load", init);
+    Bricks2.playing = false;
     Bricks2.gameOver = false;
     let win = false;
     let score = 0;
     Bricks2.rightKey = false;
     Bricks2.leftKey = false;
-    Bricks2.playing = false;
-    Bricks2.bricks = [];
-    //    let bricks: Brick[][] = [];
-    let columnNr = 5;
-    let rowNr = 4;
+    Bricks2.bricks = []; //array for brickfield
     let brickNumber = 20;
+    //    let bricks: Brick[][] = [];   
+    //    let columnNr: number = 5;
+    //    let rowNr: numbe4;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
@@ -29,28 +29,30 @@ var Bricks2;
         Bricks2.bar = new Bricks2.Bar(canvas.width / 2 - 50, canvas.height - 40); // (canvas.width-this.width)/2 !?
         Bricks2.ball = new Bricks2.Ball();
         createBrickField();
+        drawStartScreen();
+        //Eventlisteners
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
         canvas.addEventListener("click", handleMouseClick, false);
         canvas.addEventListener("mousemove", handleMouseMove, false);
         canvas.addEventListener("touchstart", handleTouchStart, false);
         canvas.addEventListener("touchmove", handleTouchMove, false);
-        //        window.addEventListener("resize", resizeCanvas, false);
-        drawStartScreen();
+        //        window.addEventListener("resize", resizeCanvas, false);      
     } //init
+    //start actual game
     function startGame() {
         window.setTimeout(animate, 10);
         Bricks2.playing = true;
     }
     function animate() {
-        Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old path       
-        spliceDeadBricks();
+        Bricks2.crc2.clearRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height); //clear old paths       
         drawActiveBricks();
+        spliceDeadBricks();
         Bricks2.bar.draw();
-        drawScore();
         if (win == false) {
             Bricks2.ball.update();
         }
+        drawScore();
         if (Bricks2.gameOver == true) {
             drawGameOverScreen();
         }
@@ -61,10 +63,11 @@ var Bricks2;
         window.setTimeout(animate, 10);
     } //animate
     function createBrickField() {
-        let brickPosx = 50;
+        let brickPosx = 50; //starting pos
         let brickPosy = 50;
         for (let i = 0; i < brickNumber; i++) {
             let brick = new Bricks2.Brick(brickPosx, brickPosy);
+            let brick2 = new Bricks2.Brick2(brickPosx, brickPosy);
             if (i % 5 == 0 && i != 0) {
                 brickPosx = 50;
                 brickPosy += brick.ySpacer;
@@ -73,8 +76,13 @@ var Bricks2;
                 brickPosx += brick.xSpacer;
             }
             brick.setRandomColor();
-            Bricks2.bricks[i] = brick; //brick in Arregen
-            console.log(i + " " + Bricks2.bricks[i].x + " Spacer: " + Bricks2.bricks[i].xSpacer);
+            if (i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20) {
+                Bricks2.bricks[i] = brick2;
+            }
+            else {
+                Bricks2.bricks[i] = brick; //brick in Array legen
+                console.log(i + " " + Bricks2.bricks[i].x + " Spacer: " + Bricks2.bricks[i].xSpacer);
+            }
         }
     } //createBrickField
     //    function createBrickField(): void {
@@ -136,9 +144,14 @@ var Bricks2;
         for (let i = 0; i < Bricks2.bricks.length; i++) {
             let hit = Bricks2.ball.detectCollision(Bricks2.bricks[i].x, Bricks2.bricks[i].y, Bricks2.bricks[i].width, Bricks2.bricks[i].height);
             if (hit == true) {
-                Bricks2.bricks.splice(i, 1);
-                console.log("brick spliced");
-                score++;
+                Bricks2.bricks[i].lives -= 1;
+                if (Bricks2.bricks[i].lives == 0) {
+                    Bricks2.bricks.splice(i, 1);
+                    score++;
+                }
+                else if (Bricks2.bricks[i].lives == 1) {
+                    Bricks2.bricks[i].color = "#4d4d4d";
+                }
             }
         }
     } //spliceBricks
