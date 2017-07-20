@@ -56,7 +56,7 @@ var Bricks2;
         if (Bricks2.gameOver == true) {
             drawGameOverScreen();
         }
-        if (Bricks2.gameOver == false && score == 2) {
+        if (Bricks2.gameOver == false && score > 5) {
             win = true;
             drawWinScreen();
         }
@@ -165,6 +165,9 @@ var Bricks2;
                 if (Bricks2.bricks[i].lives == 0) {
                     Bricks2.bricks.splice(i, 1);
                     score++;
+                    if (i >= 15) {
+                        score++;
+                    }
                 }
                 else if (Bricks2.bricks[i].lives == 1) {
                     Bricks2.bricks[i].color = "#4d4d4d";

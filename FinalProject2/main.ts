@@ -73,7 +73,7 @@ namespace Bricks2 {
             drawGameOverScreen();
             //            document.addEventListener("touchstart", handleTouchStart, false);
         }
-        if (gameOver == false && score == 2) { //YOU WIN
+        if (gameOver == false && score > 5) { //YOU WIN
             win = true;
             drawWinScreen();
         }
@@ -104,7 +104,7 @@ namespace Bricks2 {
 //            }
 //        }
         
-        for (let i: number = 1; i <= brickNumber; i++) {
+        for (let i: number = 1; i <= brickNumber; i++) {  //bei 1 starten, um Proeblem mit 0 zu umgehen
             let brick: Brick = new Brick(brickPosx, brickPosy);
             let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
             if (i % 5 == 0) { //neue Reihe
@@ -198,6 +198,10 @@ namespace Bricks2 {
                 if (bricks[i].lives == 0) {
                     bricks.splice(i, 1);
                     score++;
+                    if(i>=15){
+                        score++;    
+                    }
+                    
                 } else if (bricks[i].lives == 1) {
                     bricks[i].color = "#4d4d4d";
                 }

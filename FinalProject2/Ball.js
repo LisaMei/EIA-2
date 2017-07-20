@@ -40,8 +40,6 @@ var Bricks2;
             this.x += this.xd; //+2
             this.y += this.yd; //-2
         } //move
-        handleBarCollision() {
-        }
         detectCollision(_rx, _ry, _rwidth, _rheight) {
             let testX = this.x;
             let testY = this.y;

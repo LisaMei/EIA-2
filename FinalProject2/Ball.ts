@@ -60,11 +60,7 @@ namespace Bricks2 {
         }//move
 
 
-        handleBarCollision():void{
-            
-             
         
-        }
         
         detectCollision(_rx: number, _ry: number, _rwidth: number, _rheight: number) {
             let testX: number = this.x;
