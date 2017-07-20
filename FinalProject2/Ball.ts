@@ -45,12 +45,13 @@ namespace Bricks2 {
             }
          
             let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
-
+           
 
             //unterer Rand erreicht
             if (this.y + this.yd >= crc2.canvas.height - this.radius) {
                 gameOver = true;
                 playing=false;
+                
             }
 
             //neue Position
@@ -59,6 +60,12 @@ namespace Bricks2 {
         }//move
 
 
+        handleBarCollision():void{
+            
+             
+        
+        }
+        
         detectCollision(_rx: number, _ry: number, _rwidth: number, _rheight: number) {
             let testX: number = this.x;
             let testY: number = this.y;
@@ -89,8 +96,8 @@ namespace Bricks2 {
                 else {
                     this.xd *= -1;
                     this.yd *= -1;
-                }                
-                return true;
+                }            
+                return true;            
             }
             return false;
         }

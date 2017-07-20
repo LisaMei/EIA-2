@@ -6,11 +6,7 @@ namespace Bricks2 {
         color: string;
         width: number;
         height: number;
-//        topBorder:number;
-//        leftBorder:number;
-//        rightBorder:number;
-//        bottomBorder:number;
-        
+        centerX:number;      
 
         constructor(_x: number, _y: number) {
             console.log("Bar");
@@ -19,10 +15,7 @@ namespace Bricks2 {
             this.height = 20;
             this.width = 100;
             this.color = "#FFFFFF";
-//            this.topBorder=this.y;
-//            this.leftBorder=this.x;
-//            this.rightBorder=this.x+this.width;
-//            this.bottomBorder=this.y+this.height;
+            this.centerX=this.x+this.width/2;
             
         }
 

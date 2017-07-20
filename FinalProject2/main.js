@@ -10,18 +10,17 @@ nicht kopiert und auch nicht diktiert.
 var Bricks2;
 (function (Bricks2) {
     window.addEventListener("load", init);
-    Bricks2.rightKey = false;
-    Bricks2.leftKey = false;
-    let enterKey = false;
     Bricks2.gameOver = false;
     let win = false;
+    let score = 0;
+    Bricks2.rightKey = false;
+    Bricks2.leftKey = false;
     Bricks2.playing = false;
     Bricks2.bricks = [];
     //    let bricks: Brick[][] = [];
     let columnNr = 5;
     let rowNr = 4;
     let brickNumber = 20;
-    let score = 0;
     function init(_event) {
         let canvas;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
@@ -32,8 +31,9 @@ var Bricks2;
         createBrickField();
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
-        document.addEventListener("mousemove", handleMouseMove, false);
-        document.addEventListener("touchstart", handleTouchStart, false);
+        canvas.addEventListener("click", handleMouseClick, false);
+        canvas.addEventListener("mousemove", handleMouseMove, false);
+        canvas.addEventListener("touchstart", handleTouchStart, false);
         canvas.addEventListener("touchmove", handleTouchMove, false);
         //        window.addEventListener("resize", resizeCanvas, false);
         drawStartScreen();
@@ -48,17 +48,22 @@ var Bricks2;
         drawActiveBricks();
         Bricks2.bar.draw();
         drawScore();
-        Bricks2.ball.update();
+        if (win == false) {
+            Bricks2.ball.update();
+        }
         if (Bricks2.gameOver == true) {
             drawGameOverScreen();
-            document.addEventListener("touchstart", handleTouchStart, false);
+        }
+        if (Bricks2.gameOver == false && score == 2) {
+            win = true;
+            drawWinScreen();
         }
         window.setTimeout(animate, 10);
     } //animate
     function createBrickField() {
         let brickPosx = 50;
         let brickPosy = 50;
-        for (let i = 0; i < 21; i++) {
+        for (let i = 0; i < brickNumber; i++) {
             let brick = new Bricks2.Brick(brickPosx, brickPosy);
             if (i % 5 == 0 && i != 0) {
                 brickPosx = 50;
@@ -69,6 +74,7 @@ var Bricks2;
             }
             brick.setRandomColor();
             Bricks2.bricks[i] = brick; //brick in Arregen
+            console.log(i + " " + Bricks2.bricks[i].x + " Spacer: " + Bricks2.bricks[i].xSpacer);
         }
     } //createBrickField
     //    function createBrickField(): void {
@@ -134,9 +140,6 @@ var Bricks2;
                 console.log("brick spliced");
                 score++;
             }
-            if (Bricks2.bricks.length == 0) {
-                drawWinScreen();
-            }
         }
     } //spliceBricks
     //Key is pressed
@@ -154,10 +157,11 @@ var Bricks2;
         if (_event.keyCode == 32) {
             startGame();
         }
-        if (_event.keyCode == 13) {
-            enterKey = true;
-            reloadGame();
-        }
+        //        if (_event.keyCode == 13) {
+        //            
+        //            reloadGame();
+        //
+        //        }
     } //handleDownkey
     //Key is released
     function handleKeyRelease(_event) {
@@ -167,14 +171,19 @@ var Bricks2;
         else if (_event.keyCode == 37) {
             Bricks2.leftKey = false;
         }
-        if (_event.keyCode == 13) {
-            enterKey = false;
-        }
     } //handleKeyRelease
     function handleMouseMove(_event) {
         let mouseX = _event.clientX - Bricks2.crc2.canvas.offsetLeft;
         if (mouseX > 0 && mouseX < Bricks2.crc2.canvas.width) {
             Bricks2.bar.x = mouseX - Bricks2.bar.width / 2;
+        }
+    }
+    function handleMouseClick(_event) {
+        if (Bricks2.gameOver == true || win == true) {
+            reloadGame();
+        }
+        else if (Bricks2.playing == false) {
+            startGame();
         }
     }
     function handleTouchMove(_event) {
@@ -186,9 +195,6 @@ var Bricks2;
     function handleTouchStart(_event) {
         if (Bricks2.gameOver == true) {
             reloadGame();
-        }
-        else if (Bricks2.playing == false) {
-            startGame();
         }
     }
     function reloadGame() {
@@ -209,14 +215,14 @@ var Bricks2;
         //crc2.stroke();
         let startImg;
         startImg = document.getElementById("startImg");
-        Bricks2.crc2.drawImage(startImg, 30, 10);
+        Bricks2.crc2.drawImage(startImg, 90, 10);
         Bricks2.crc2.textAlign = 'center';
         Bricks2.crc2.font = "20px Courier New";
         Bricks2.crc2.fillStyle = "#FFFFFF";
-        Bricks2.crc2.fillText("Hit spacbar to start game", centerX, 400);
+        Bricks2.crc2.fillText("Hit spacebar or click to start", centerX, 400);
     }
     function drawGameOverScreen() {
-        Bricks2.crc2.fillStyle = "#FF0000";
+        Bricks2.crc2.fillStyle = "#F15A4F";
         Bricks2.crc2.fillRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height);
         let centerX = Bricks2.crc2.canvas.width / 2;
         Bricks2.crc2.beginPath();
@@ -229,11 +235,12 @@ var Bricks2;
         Bricks2.crc2.font = "50px Courier New";
         Bricks2.crc2.fillStyle = "#000000";
         Bricks2.crc2.fillText("GAME OVER", centerX, 100);
-        Bricks2.crc2.font = "20px Courier New";
-        Bricks2.crc2.fillText("hit enter to restart", centerX, 400);
+        Bricks2.crc2.font = "16px Courier New";
+        Bricks2.crc2.fillText("Hit spacebar or click to restart", centerX, 400);
     }
     function drawWinScreen() {
-        Bricks2.crc2.fillStyle = "#00FF00";
+        Bricks2.gameOver = false;
+        Bricks2.crc2.fillStyle = "#6AC17C";
         Bricks2.crc2.fillRect(0, 0, Bricks2.crc2.canvas.width, Bricks2.crc2.canvas.height);
         let centerX = Bricks2.crc2.canvas.width / 2;
         Bricks2.crc2.beginPath();
@@ -245,9 +252,9 @@ var Bricks2;
         Bricks2.crc2.textAlign = 'center';
         Bricks2.crc2.font = "50px Courier New";
         Bricks2.crc2.fillStyle = "#000000";
-        Bricks2.crc2.fillText("YOU WIN !", centerX, 100);
-        Bricks2.crc2.font = "20px Courier New";
-        Bricks2.crc2.fillText("hit enter to restart", centerX, 400);
+        Bricks2.crc2.fillText("YOU WIN !", centerX, 200);
+        Bricks2.crc2.font = "16px Courier New";
+        Bricks2.crc2.fillText("Hit spacebar or click to restart", centerX, 400);
     }
 })(Bricks2 || (Bricks2 = {})); //namespace
 //# sourceMappingURL=main.js.map
