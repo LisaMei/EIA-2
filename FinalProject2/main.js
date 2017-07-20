@@ -34,7 +34,7 @@ var Bricks2;
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
         canvas.addEventListener("click", handleMouseClick, false);
-        canvas.addEventListener("mousemove", handleMouseMove, false);
+        document.addEventListener("mousemove", handleMouseMove, false);
         canvas.addEventListener("touchstart", handleTouchStart, false);
         canvas.addEventListener("touchmove", handleTouchMove, false);
         //        window.addEventListener("resize", resizeCanvas, false);      
@@ -189,6 +189,9 @@ var Bricks2;
         }
         if (_event.keyCode == 32) {
             startGame();
+            if (win == true) {
+                reloadGame();
+            }
         }
     } //handleDownkey
     //Key is released
@@ -202,7 +205,7 @@ var Bricks2;
     } //handleKeyRelease
     function handleMouseMove(_event) {
         let mouseX = _event.clientX - Bricks2.crc2.canvas.offsetLeft;
-        if (mouseX > 0 && mouseX < Bricks2.crc2.canvas.width) {
+        if (mouseX >= Bricks2.bar.width / 2 && mouseX <= Bricks2.crc2.canvas.width - Bricks2.bar.width / 2) {
             Bricks2.bar.x = mouseX - Bricks2.bar.width / 2;
         }
     }

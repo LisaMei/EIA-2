@@ -46,7 +46,7 @@ namespace Bricks2 {
         document.addEventListener("keydown", handleKeyPress, false);
         document.addEventListener("keyup", handleKeyRelease, false);
         canvas.addEventListener("click", handleMouseClick, false);
-        canvas.addEventListener("mousemove", handleMouseMove, false);
+        document.addEventListener("mousemove", handleMouseMove, false);
         canvas.addEventListener("touchstart", handleTouchStart, false);
         canvas.addEventListener("touchmove", handleTouchMove, false);
         //        window.addEventListener("resize", resizeCanvas, false);      
@@ -224,6 +224,9 @@ namespace Bricks2 {
         }
         if (_event.keyCode == 32) {
             startGame();
+            if(win==true){
+              reloadGame();  
+            }
         }
     }//handleDownkey
 
@@ -242,7 +245,7 @@ namespace Bricks2 {
 
     function handleMouseMove(_event: MouseEvent) {
         let mouseX = _event.clientX - crc2.canvas.offsetLeft;
-        if (mouseX > 0 && mouseX < crc2.canvas.width) {
+        if (mouseX >= bar.width/2 && mouseX <= crc2.canvas.width-bar.width/2) {
             bar.x = mouseX - bar.width / 2;
         }
     }
