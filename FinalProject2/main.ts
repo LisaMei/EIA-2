@@ -31,8 +31,6 @@ namespace Bricks2 {
     //    let rowNr: numbe4;
 
 
-
-
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
         canvas = document.getElementsByTagName("canvas")[0]; //das erste von der Liste von elements        
@@ -87,27 +85,45 @@ namespace Bricks2 {
         let brickPosx: number = 50; //starting pos
         let brickPosy: number = 50;
 
-        for (let i: number = 0; i < brickNumber; i++) {
+//        for (let i: number = 0; i < brickNumber; i++) {
+//            let brick: Brick = new Brick(brickPosx, brickPosy);
+//            let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
+//            if (i % 5 == 0 && i != 0) { //neue Reihe
+//                brickPosx = 50;
+//                brickPosy += brick.ySpacer;
+//
+//            } else if (i != 0) {// x spacing zum nächsten brick
+//                brickPosx += brick.xSpacer;
+//            }
+//            brick.setRandomColor();
+//            if (i == 15 || i == 16 || i == 17 || i == 18 || i == 19) {
+//                bricks[i] = brick2;
+//            } else {
+//                bricks[i] = brick; //brick in Array legen
+//                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
+//            }
+//        }
+        
+        for (let i: number = 1; i <= brickNumber; i++) {
             let brick: Brick = new Brick(brickPosx, brickPosy);
             let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
-            if (i % 5 == 0 && i != 0) { //neue Reihe
+            if (i % 5 == 0) { //neue Reihe
                 brickPosx = 50;
                 brickPosy += brick.ySpacer;
 
-            } else if (i != 0) {// x spacing zum nächsten brick
+            } else {// x spacing zum nächsten brick
                 brickPosx += brick.xSpacer;
             }
             brick.setRandomColor();
-            if (i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20) {
-                bricks[i] = brick2;
+            if (i>15) {
+                bricks[i-1] = brick2;
             } else {
-                bricks[i] = brick; //brick in Array legen
-                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
+                bricks[i-1] = brick; //brick in Array legen
+//                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
             }
         }
+        
     }//createBrickField
-
-
 
 
     //    function createBrickField(): void {
@@ -182,12 +198,10 @@ namespace Bricks2 {
                 if (bricks[i].lives == 0) {
                     bricks.splice(i, 1);
                     score++;
-
                 } else if (bricks[i].lives == 1) {
                     bricks[i].color = "#4d4d4d";
                 }
             }
-
         }
     }//spliceBricks
 
@@ -207,11 +221,6 @@ namespace Bricks2 {
         if (_event.keyCode == 32) {
             startGame();
         }
-        //        if (_event.keyCode == 13) {
-        //            
-        //            reloadGame();
-        //
-        //        }
     }//handleDownkey
 
 

@@ -65,23 +65,40 @@ var Bricks2;
     function createBrickField() {
         let brickPosx = 50; //starting pos
         let brickPosy = 50;
-        for (let i = 0; i < brickNumber; i++) {
+        //        for (let i: number = 0; i < brickNumber; i++) {
+        //            let brick: Brick = new Brick(brickPosx, brickPosy);
+        //            let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
+        //            if (i % 5 == 0 && i != 0) { //neue Reihe
+        //                brickPosx = 50;
+        //                brickPosy += brick.ySpacer;
+        //
+        //            } else if (i != 0) {// x spacing zum n�chsten brick
+        //                brickPosx += brick.xSpacer;
+        //            }
+        //            brick.setRandomColor();
+        //            if (i == 15 || i == 16 || i == 17 || i == 18 || i == 19) {
+        //                bricks[i] = brick2;
+        //            } else {
+        //                bricks[i] = brick; //brick in Array legen
+        //                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
+        //            }
+        //        }
+        for (let i = 1; i <= brickNumber; i++) {
             let brick = new Bricks2.Brick(brickPosx, brickPosy);
             let brick2 = new Bricks2.Brick2(brickPosx, brickPosy);
-            if (i % 5 == 0 && i != 0) {
+            if (i % 5 == 0) {
                 brickPosx = 50;
                 brickPosy += brick.ySpacer;
             }
-            else if (i != 0) {
+            else {
                 brickPosx += brick.xSpacer;
             }
             brick.setRandomColor();
-            if (i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20) {
-                Bricks2.bricks[i] = brick2;
+            if (i > 15) {
+                Bricks2.bricks[i - 1] = brick2;
             }
             else {
-                Bricks2.bricks[i] = brick; //brick in Array legen
-                console.log(i + " " + Bricks2.bricks[i].x + " Spacer: " + Bricks2.bricks[i].xSpacer);
+                Bricks2.bricks[i - 1] = brick; //brick in Array legen
             }
         }
     } //createBrickField
@@ -170,11 +187,6 @@ var Bricks2;
         if (_event.keyCode == 32) {
             startGame();
         }
-        //        if (_event.keyCode == 13) {
-        //            
-        //            reloadGame();
-        //
-        //        }
     } //handleDownkey
     //Key is released
     function handleKeyRelease(_event) {
