@@ -3,8 +3,8 @@ namespace Bricks2 {
     export class Ball {
         x: number;
         y: number;
-        xd: number;
-        yd: number;
+        xd: number; //x direction
+        yd: number; 
         color: string;
         radius: number;
 
@@ -12,7 +12,7 @@ namespace Bricks2 {
             console.log("Ball");
             this.x = crc2.canvas.width / 2;
             this.y = crc2.canvas.height - 60;
-            this.xd = 2;
+            this.xd = 2; 
             this.yd = -2;
             this.radius = 10;
         }
@@ -48,7 +48,7 @@ namespace Bricks2 {
             //unterer Rand erreicht
             if (this.y + this.yd >= crc2.canvas.height - this.radius) {
                 gameOver = true;
-                playing=false;   
+                playing=false;  //for starting the game from the start screen -->no reload
             }
 
             //neue Position
@@ -57,42 +57,40 @@ namespace Bricks2 {
         }//move     
         
         detectCollision(_rx: number, _ry: number, _rwidth: number, _rheight: number) {
-            let testX: number = this.x;
+            let testX: number = this.x; //test variables to check closest edge
             let testY: number = this.y;
 
-            if (this.x < _rx) { //left border
+            if (this.x < _rx) { //left edge
                 testX = _rx;
-            } else if (this.x > _rx + _rwidth) {//right border
+            } else if (this.x > _rx + _rwidth) {//right edge
                 testX = _rx + _rwidth;
             }
 
             if (this.y < _ry) {// top border
                 testY = _ry;
-            } else if (this.y > _ry + _rheight) {//bottom border
+            } else if (this.y > _ry + _rheight) {//bottom edge
                 testY = _ry + _rheight;
             }
 
             //Abstand von nächsten Ecken
-            let distX: number = this.x - testX; //left and right border
-            let distY: number = this.y - testY; //top and bottom
-            let dist: number = Math.sqrt((distX * distX) + (distY * distY));
+            let distX: number = this.x - testX; //distance to closest xPoint
+            let distY: number = this.y - testY; //dist to closest yPoint
+            let dist: number = Math.sqrt((distX * distX) + (distY * distY)); //Pythagoras calcluates direct distance to closest border
 
             //collision handling
             if (dist <= this.radius) {
-                 if (distX == 0)
+                 if (distX == 0) 
                     this.yd *= -1;
                 else if (distY == 0)
                     this.xd *= -1;
                 else {
-                    this.xd *= -1;
+                    this.xd *= -1; //if ball hits an edge
                     this.yd *= -1;
                 }            
                 return true;            
             }
             return false;
-        }
-        
-        
+        }        
 
     }//class
 } //namespace

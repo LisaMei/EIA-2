@@ -34,14 +34,14 @@ var Bricks2;
             //unterer Rand erreicht
             if (this.y + this.yd >= Bricks2.crc2.canvas.height - this.radius) {
                 Bricks2.gameOver = true;
-                Bricks2.playing = false;
+                Bricks2.playing = false; //for starting the game from the start screen -->no reload
             }
             //neue Position
             this.x += this.xd; //+2
             this.y += this.yd; //-2
         } //move     
         detectCollision(_rx, _ry, _rwidth, _rheight) {
-            let testX = this.x;
+            let testX = this.x; //test variables to check closest edge
             let testY = this.y;
             if (this.x < _rx) {
                 testX = _rx;
@@ -56,9 +56,9 @@ var Bricks2;
                 testY = _ry + _rheight;
             }
             //Abstand von n�chsten Ecken
-            let distX = this.x - testX; //left and right border
-            let distY = this.y - testY; //top and bottom
-            let dist = Math.sqrt((distX * distX) + (distY * distY));
+            let distX = this.x - testX; //distance to closest xPoint
+            let distY = this.y - testY; //dist to closest yPoint
+            let dist = Math.sqrt((distX * distX) + (distY * distY)); //Pythagoras calcluates direct distance to closest border
             //collision handling
             if (dist <= this.radius) {
                 if (distX == 0)
@@ -66,7 +66,7 @@ var Bricks2;
                 else if (distY == 0)
                     this.xd *= -1;
                 else {
-                    this.xd *= -1;
+                    this.xd *= -1; //if ball hits an edge
                     this.yd *= -1;
                 }
                 return true;

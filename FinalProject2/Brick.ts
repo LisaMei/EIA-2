@@ -6,7 +6,6 @@ namespace Bricks2 {
         color: string;
         width: number;
         height: number;
-        active: boolean;
         xSpacer: number;
         ySpacer: number;
         spacer:number; //2d array version
@@ -19,7 +18,6 @@ namespace Bricks2 {
             this.height = 20;
             this.width = 60;
             this.color = "#7f7f7f";
-            this.active = true;
             this.xSpacer = this.width + 20;
             this.ySpacer = this.height + 20;
             this.lives = 1;

@@ -24,12 +24,13 @@ namespace Bricks2 {
 
     export let bar: Bar;
     export let ball: Ball;
-//    export let bricks: Brick[] = []; //array for brickfield
+    export let bricks: Brick[] = []; //array for brickfield
     let brickNumber: number = 20;
     
-        let bricks: Brick[][] = [];   
-        let columnNr: number = 5;
-        let rowNr: number= 4;
+    //2d array version test
+//        let bricks: Brick[][] = [];   
+//        let columnNr: number = 5;
+//        let rowNr: number= 4;
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
@@ -73,7 +74,7 @@ namespace Bricks2 {
             drawGameOverScreen();
             //            document.addEventListener("touchstart", handleTouchStart, false);
         }
-        if (gameOver == false && score > 5) { //YOU WIN
+        if (gameOver == false && score>=30) { //YOU WIN
             win = true;
             drawWinScreen();
         }
@@ -81,112 +82,110 @@ namespace Bricks2 {
     } //animate
 
 
-//    function createBrickField(): void {
-//        let brickPosx: number = 50; //starting pos
-//        let brickPosy: number = 50;
-//        
-//        for (let i: number = 1; i <= brickNumber; i++) {  //bei 1 starten, um Proeblem mit 0 zu umgehen
-//            let brick: Brick = new Brick(brickPosx, brickPosy);
-//            let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
-//            if (i % 5 == 0) { //neue Reihe
-//                brickPosx = 50;
-//                brickPosy += brick.ySpacer;
-//
-//            } else {// x spacing zum nächsten brick
-//                brickPosx += brick.xSpacer;
-//            }
-//            brick.setRandomColor();
-//            if (i>15) {
-//                bricks[i-1] = brick2;
-//            } else {
-//                bricks[i-1] = brick; //brick in Array legen
-////                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
-//            }
-//        }
-//        
-//    }//createBrickField
+    function createBrickField(): void {
+        let brickPosx: number = 50; //starting pos
+        let brickPosy: number = 50;
+        
+        for (let i: number = 1; i <= brickNumber; i++) {  //bei 1 starten, um Proeblem mit 0 zu umgehen
+            let brick: Brick = new Brick(brickPosx, brickPosy);
+            let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
+            if (i % 5 == 0) { //neue Reihe
+                brickPosx = 50;
+                brickPosy += brick.ySpacer;
 
-        //2d array version
-        function createBrickField(): void {
-            
-            let brickPosx: number;
-            let brickPosy: number;
-            let brickPadding = 10;
-            let offsetTop = 20;
-            let offsetLeft = 20;
-    
-            for (let c: number = 0; c < columnNr; c++) {
-                bricks[c] = []; //in den Spaltenarray einen Array legen
-                for (let r: number = 0; r < rowNr; r++) {
-                    let brick: Brick = new Brick(brickPosx, brickPosy);  
-                    bricks[c][r] = brick;                  
-                    bricks[c][r].x = 0;
-                    bricks[c][r].y = 0;
-                    bricks[c][r].x = brickPosx;
-                    bricks[c][r].y = brickPosy;
-                    brickPosx = (c*(brick.width+brick.spacer))+offsetLeft;
-                    brickPosy = (r*(brick.height+brick.spacer))+offsetTop;
-                    
-                    //special bricks
-                }
-            }   
-        }
-
-    
-         //2d array version
-        function drawActiveBricks(): void {  
-            for (let c: number = 0; c < columnNr; c++) {            
-                for (let r: number = 0; r < rowNr; r++) {
-                    var b = bricks[c][r];
-                    b.draw();
-                }
+            } else {// x spacing zum nächsten brick
+                brickPosx += brick.xSpacer;
             }
-        }
-
-
-//    function drawActiveBricks(): void {
-//        for (let i: number = 0; i < bricks.length; i++) {
-//            bricks[i].draw();
-//
-//        }
-//    }
-
-        //2d array version
-        function spliceDeadBricks(): void {
-           
-            for (let c = 0; c < columnNr; c++) {
-                for (let r = 0; r < rowNr; r++) {
-                    let b = bricks[c][r];
-                    let hit: boolean = ball.detectCollision(b.x, b.y, b.width, b.height);
-                    if (hit == true && b.lives==0) {
-                        bricks.splice(r, 1);
-                        console.log("brick spliced");
-                        score++;
-                    }
-                }
-                }
+            brick.setRandomColor();
+            if (i>15) {
+                bricks[i-1] = brick2;
+            } else {
+                bricks[i-1] = brick; //brick in Array legen
+//                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
             }
+        } 
+    }//createBrickField
 
-
-//    function spliceDeadBricks(): void {
-//        for (let i: number = 0; i < bricks.length; i++) {
-//            let hit: boolean = ball.detectCollision(bricks[i].x, bricks[i].y, bricks[i].width, bricks[i].height);
-//
-//            if (hit == true) {
-//                bricks[i].lives -= 1;
-//                if (bricks[i].lives == 0) {
-//                    bricks.splice(i, 1);
-//                    score++;
-//                    if(i>=15){
-//                        score++;    
-//                    }
+//        //2d array version
+//        function createBrickField(): void {
+//            
+//            let brickPosx: number;
+//            let brickPosy: number;
+//            let brickPadding = 10;
+//            let offsetTop = 20;
+//            let offsetLeft = 20;
+//    
+//            for (let c: number = 0; c < columnNr; c++) {
+//                bricks[c] = []; //in den Spaltenarray einen Array legen
+//                for (let r: number = 0; r < rowNr; r++) {
+//                    let brick: Brick = new Brick(brickPosx, brickPosy);  
+//                    bricks[c][r] = brick;                  
+//                    bricks[c][r].x = 0;
+//                    bricks[c][r].y = 0;
+//                    bricks[c][r].x = brickPosx;
+//                    bricks[c][r].y = brickPosy;
+//                    brickPosx = (c*(brick.width+brick.spacer))+offsetLeft;
+//                    brickPosy = (r*(brick.height+brick.spacer))+offsetTop;
 //                    
-//                } else if (bricks[i].lives == 1) {
-//                    bricks[i].color = "#4d4d4d";
+//                    //special bricks
+//                }
+//            }   
+//        }
+//
+//    
+//         //2d array version
+//        function drawActiveBricks(): void {  
+//            for (let c: number = 0; c < columnNr; c++) {            
+//                for (let r: number = 0; r < rowNr; r++) {
+//                    var b = bricks[c][r];
+//                    b.draw();
 //                }
 //            }
 //        }
-//    }//spliceBricks
+
+
+    function drawActiveBricks(): void {
+        for (let i: number = 0; i < bricks.length; i++) {
+            bricks[i].draw();
+
+        }
+    }
+
+//        //2d array version
+//        function spliceDeadBricks(): void {
+//           
+//            for (let c = 0; c < columnNr; c++) {
+//                for (let r = 0; r < rowNr; r++) {
+//                    let b = bricks[c][r];
+//                    let hit: boolean = ball.detectCollision(b.x, b.y, b.width, b.height);
+//                    if (hit == true && b.lives==0) {
+//                        bricks.splice(r, 1);
+//                        console.log("brick spliced");
+//                        score++;
+//                    }
+//                }
+//                }
+//            }
+
+
+    function spliceDeadBricks(): void {
+        for (let i: number = 0; i < bricks.length; i++) {
+            let hit: boolean = ball.detectCollision(bricks[i].x, bricks[i].y, bricks[i].width, bricks[i].height);
+
+            if (hit == true) {
+                bricks[i].lives -= 1;
+                if (bricks[i].lives == 0) {                 
+                    score++;
+                    if(bricks[i].y==170){
+                        score++;    
+                    }
+                    bricks.splice(i, 1);             
+                } else if (bricks[i].lives == 1) {
+                    bricks[i].color = "#4d4d4d";
+                }
+            }
+        }
+    }//spliceBricks
 
 
     //Key is pressed

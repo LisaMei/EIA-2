@@ -8,7 +8,6 @@ var Bricks2;
             this.height = 20;
             this.width = 60;
             this.color = "#7f7f7f";
-            this.active = true;
             this.xSpacer = this.width + 20;
             this.ySpacer = this.height + 20;
             this.lives = 1;
