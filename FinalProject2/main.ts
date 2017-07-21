@@ -74,7 +74,7 @@ namespace Bricks2 {
             drawGameOverScreen();
             //            document.addEventListener("touchstart", handleTouchStart, false);
         }
-        if (gameOver == false && score>=30) { //YOU WIN
+        if (gameOver == false && score>=25) { //YOU WIN
             win = true;
             drawWinScreen();
         }
