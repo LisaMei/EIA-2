@@ -33,7 +33,6 @@ namespace Bricks2 {
         move(): void {
             let newX = this.x + this.xd;
 
-
             //linker oder rechter Rand erreicht
             if (newX > crc2.canvas.width - this.radius || newX < this.radius) {
                 this.xd = -this.xd;
@@ -45,22 +44,17 @@ namespace Bricks2 {
             }
          
             let barColl: boolean = this.detectCollision(bar.x, bar.y, bar.width, bar.height);
-           
 
             //unterer Rand erreicht
             if (this.y + this.yd >= crc2.canvas.height - this.radius) {
                 gameOver = true;
-                playing=false;
-                
+                playing=false;   
             }
 
             //neue Position
             this.x += this.xd; //+2
             this.y += this.yd; //-2
-        }//move
-
-
-        
+        }//move     
         
         detectCollision(_rx: number, _ry: number, _rwidth: number, _rheight: number) {
             let testX: number = this.x;
@@ -97,11 +91,8 @@ namespace Bricks2 {
             }
             return false;
         }
-
-
-
-
-
+        
+        
 
     }//class
 } //namespace

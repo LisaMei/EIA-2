@@ -11,14 +11,5 @@ namespace Bricks2 {
             this.color = "#808080";
             this.lives = 2;
         }
-
-        
-
-
-
-
-
-
-
     }//class
 } //namespace

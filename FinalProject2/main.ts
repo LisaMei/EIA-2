@@ -24,12 +24,12 @@ namespace Bricks2 {
 
     export let bar: Bar;
     export let ball: Ball;
-    export let bricks: Brick[] = []; //array for brickfield
+//    export let bricks: Brick[] = []; //array for brickfield
     let brickNumber: number = 20;
-    //    let bricks: Brick[][] = [];   
-    //    let columnNr: number = 5;
-    //    let rowNr: numbe4;
-
+    
+        let bricks: Brick[][] = [];   
+        let columnNr: number = 5;
+        let rowNr: number= 4;
 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement;
@@ -81,133 +81,112 @@ namespace Bricks2 {
     } //animate
 
 
-    function createBrickField(): void {
-        let brickPosx: number = 50; //starting pos
-        let brickPosy: number = 50;
-
-//        for (let i: number = 0; i < brickNumber; i++) {
+//    function createBrickField(): void {
+//        let brickPosx: number = 50; //starting pos
+//        let brickPosy: number = 50;
+//        
+//        for (let i: number = 1; i <= brickNumber; i++) {  //bei 1 starten, um Proeblem mit 0 zu umgehen
 //            let brick: Brick = new Brick(brickPosx, brickPosy);
 //            let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
-//            if (i % 5 == 0 && i != 0) { //neue Reihe
+//            if (i % 5 == 0) { //neue Reihe
 //                brickPosx = 50;
 //                brickPosy += brick.ySpacer;
 //
-//            } else if (i != 0) {// x spacing zum nächsten brick
+//            } else {// x spacing zum nächsten brick
 //                brickPosx += brick.xSpacer;
 //            }
 //            brick.setRandomColor();
-//            if (i == 15 || i == 16 || i == 17 || i == 18 || i == 19) {
-//                bricks[i] = brick2;
+//            if (i>15) {
+//                bricks[i-1] = brick2;
 //            } else {
-//                bricks[i] = brick; //brick in Array legen
-//                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
+//                bricks[i-1] = brick; //brick in Array legen
+////                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
 //            }
 //        }
-        
-        for (let i: number = 1; i <= brickNumber; i++) {  //bei 1 starten, um Proeblem mit 0 zu umgehen
-            let brick: Brick = new Brick(brickPosx, brickPosy);
-            let brick2: Brick2 = new Brick2(brickPosx, brickPosy);
-            if (i % 5 == 0) { //neue Reihe
-                brickPosx = 50;
-                brickPosy += brick.ySpacer;
+//        
+//    }//createBrickField
 
-            } else {// x spacing zum nächsten brick
-                brickPosx += brick.xSpacer;
-            }
-            brick.setRandomColor();
-            if (i>15) {
-                bricks[i-1] = brick2;
-            } else {
-                bricks[i-1] = brick; //brick in Array legen
-//                console.log(i + " " + bricks[i].x + " Spacer: " + bricks[i].xSpacer);
-            }
-        }
-        
-    }//createBrickField
-
-
-    //    function createBrickField(): void {
-    //        
-    //        let brickPosx: number;
-    //        let brickPosy: number;
-    //
-    //        for (let c: number = 0; c < columnNr; c++) {
-    //            bricks[c] = []; //in den Spaltenarray einen Array legen
-    //            for (let r: number = 0; r < rowNr; r++) {
-    //                let brick: Brick = new Brick(brickPosx, brickPosy);
-    //                bricks[c][r] = brick;
-    //                brickPosx = (c * (brick.width + brick.xSpacer));
-    //                brickPosy = (r * (brick.height + brick.ySpacer));
-    //
-    //                //                bricks[c][r].x = 0;
-    //                //                bricks[c][r].y = 0;
-    //                bricks[c][r].x = brickPosx;
-    //                bricks[c][r].y = brickPosy;
-    //                con.log(bricks[c][r]);
-    //
-    //            }
-    //        }
-    //
-    //    }
-
-    //    function drawBrickField(): void {
-    //        let columnNr: number = 5;
-    //        let rowNr: number = 4;
-    //
-    //
-    //        for (let c: number = 0; c < columnNr; c++) {            
-    //            for (let r: number = 0; r < rowNr; r++) {
-    //                var b = bricks[c][r];
-    //                b.draw();
-    //
-    //            }
-    //        }
-    //
-    //    }
-
-
-    function drawActiveBricks(): void {
-        for (let i: number = 0; i < bricks.length; i++) {
-            bricks[i].draw();
-
-        }
-    }
-
-
-    //    function spliceBricks(): void {
-    //       
-    //        for (let c = 0; c < columnNr; c++) {
-    //            for (let r = 0; r < rowNr; r++) {
-    //                let b = bricks[c][r];
-    //                let hit: boolean = ball.detectCollision(b.x, b.y, b.width, b.height);
-    //                if (hit == true) {
-    //                    bricks.splice([c][r], 1);
-    //                    console.log("brick spliced");
-    //                }
-    //            }
-    //            }
-    //        }
-
-
-    function spliceDeadBricks(): void {
-        for (let i: number = 0; i < bricks.length; i++) {
-            let hit: boolean = ball.detectCollision(bricks[i].x, bricks[i].y, bricks[i].width, bricks[i].height);
-
-            if (hit == true) {
-                bricks[i].lives -= 1;
-                if (bricks[i].lives == 0) {
-                    bricks.splice(i, 1);
-                    score++;
-                    if(i>=15){
-                        score++;    
-                    }
+        //2d array version
+        function createBrickField(): void {
+            
+            let brickPosx: number;
+            let brickPosy: number;
+            let brickPadding = 10;
+            let offsetTop = 20;
+            let offsetLeft = 20;
+    
+            for (let c: number = 0; c < columnNr; c++) {
+                bricks[c] = []; //in den Spaltenarray einen Array legen
+                for (let r: number = 0; r < rowNr; r++) {
+                    let brick: Brick = new Brick(brickPosx, brickPosy);  
+                    bricks[c][r] = brick;                  
+                    bricks[c][r].x = 0;
+                    bricks[c][r].y = 0;
+                    bricks[c][r].x = brickPosx;
+                    bricks[c][r].y = brickPosy;
+                    brickPosx = (c*(brick.width+brick.spacer))+offsetLeft;
+                    brickPosy = (r*(brick.height+brick.spacer))+offsetTop;
                     
-                } else if (bricks[i].lives == 1) {
-                    bricks[i].color = "#4d4d4d";
+                    //special bricks
+                }
+            }   
+        }
+
+    
+         //2d array version
+        function drawActiveBricks(): void {  
+            for (let c: number = 0; c < columnNr; c++) {            
+                for (let r: number = 0; r < rowNr; r++) {
+                    var b = bricks[c][r];
+                    b.draw();
                 }
             }
         }
-    }//spliceBricks
+
+
+//    function drawActiveBricks(): void {
+//        for (let i: number = 0; i < bricks.length; i++) {
+//            bricks[i].draw();
+//
+//        }
+//    }
+
+        //2d array version
+        function spliceDeadBricks(): void {
+           
+            for (let c = 0; c < columnNr; c++) {
+                for (let r = 0; r < rowNr; r++) {
+                    let b = bricks[c][r];
+                    let hit: boolean = ball.detectCollision(b.x, b.y, b.width, b.height);
+                    if (hit == true && b.lives==0) {
+                        bricks.splice(r, 1);
+                        console.log("brick spliced");
+                        score++;
+                    }
+                }
+                }
+            }
+
+
+//    function spliceDeadBricks(): void {
+//        for (let i: number = 0; i < bricks.length; i++) {
+//            let hit: boolean = ball.detectCollision(bricks[i].x, bricks[i].y, bricks[i].width, bricks[i].height);
+//
+//            if (hit == true) {
+//                bricks[i].lives -= 1;
+//                if (bricks[i].lives == 0) {
+//                    bricks.splice(i, 1);
+//                    score++;
+//                    if(i>=15){
+//                        score++;    
+//                    }
+//                    
+//                } else if (bricks[i].lives == 1) {
+//                    bricks[i].color = "#4d4d4d";
+//                }
+//            }
+//        }
+//    }//spliceBricks
 
 
     //Key is pressed
@@ -245,7 +224,7 @@ namespace Bricks2 {
 
     function handleMouseMove(_event: MouseEvent) {
         let mouseX = _event.clientX - crc2.canvas.offsetLeft;
-        if (mouseX >= bar.width/2 && mouseX <= crc2.canvas.width-bar.width/2) {
+        if (mouseX >= bar.width/2-20 && mouseX <= crc2.canvas.width-bar.width/2+20) {
             bar.x = mouseX - bar.width / 2;
         }
     }
@@ -268,7 +247,6 @@ namespace Bricks2 {
     function handleTouchStart(_event: TouchEvent) {
         if (gameOver == true) {
             reloadGame();
-
         }
     }
 
@@ -314,7 +292,7 @@ namespace Bricks2 {
         crc2.textAlign = 'center';
         crc2.font = "50px Courier New";
         crc2.fillStyle = "#000000";
-        crc2.fillText("GAME OVER", centerX, 100);
+        crc2.fillText("GAME OVER", centerX, 200);
         crc2.font = "16px Courier New";
         crc2.fillText("Hit spacebar or click to restart", centerX, 400);
     }
@@ -337,23 +315,4 @@ namespace Bricks2 {
         crc2.font = "16px Courier New";
         crc2.fillText("Hit spacebar or click to restart", centerX, 400);
     }
-
-
-    //    function resizeCanvas(): void {
-    //        let windowWidth:number=window.innerWidth;
-    //        let windowHeight:number=window.innerHeight
-    //        let scaleX:number = windowWidth/crc2.canvas.width;
-    //        let scaleY:number = windowHeight/crc2.canvas.height;
-    //        let screenRatio:number = windowWidth/windowHeight;
-    //        let optimalRatio:number=Math.min(scaleX, scaleY);
-    //        
-    //        if(screenRatio>=1.77&&screenRatio<=1.79){
-    //            crc2.canvas.style.width = windowWidth+"px";
-    //            crc2.canvas.style.height = windowHeight+"px";               
-    //        }else{
-    //            crc2.canvas.style.width = crc2.canvas.width*optimalRatio+"px";
-    //            crc2.canvas.style.height = crc2.canvas.height*optimalRatio+"px";      
-    //        }
-    //    }
-
 } //namespace

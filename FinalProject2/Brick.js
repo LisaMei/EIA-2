@@ -12,6 +12,7 @@ var Bricks2;
             this.xSpacer = this.width + 20;
             this.ySpacer = this.height + 20;
             this.lives = 1;
+            this.spacer = 20;
         }
         draw() {
             Bricks2.crc2.beginPath();

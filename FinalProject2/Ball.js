@@ -39,7 +39,7 @@ var Bricks2;
             //neue Position
             this.x += this.xd; //+2
             this.y += this.yd; //-2
-        } //move
+        } //move     
         detectCollision(_rx, _ry, _rwidth, _rheight) {
             let testX = this.x;
             let testY = this.y;

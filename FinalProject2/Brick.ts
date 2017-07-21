@@ -9,8 +9,8 @@ namespace Bricks2 {
         active: boolean;
         xSpacer: number;
         ySpacer: number;
+        spacer:number; //2d array version
         lives: number;
-
 
         constructor(_x: number, _y: number) {
             console.log("Brick");
@@ -23,6 +23,7 @@ namespace Bricks2 {
             this.xSpacer = this.width + 20;
             this.ySpacer = this.height + 20;
             this.lives = 1;
+            this.spacer=20;
         }
 
 
