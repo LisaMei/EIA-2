@@ -57,7 +57,7 @@ var Bricks2;
         if (Bricks2.gameOver == true) {
             drawGameOverScreen();
         }
-        if (Bricks2.gameOver == false && score >= 25) {
+        if (Bricks2.gameOver == false && score == 25) {
             win = true;
             drawWinScreen();
         }

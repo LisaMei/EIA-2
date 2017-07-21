@@ -5,8 +5,8 @@ var Bricks2;
             console.log("Ball");
             this.x = Bricks2.crc2.canvas.width / 2;
             this.y = Bricks2.crc2.canvas.height - 60;
-            this.xd = 2;
-            this.yd = -2;
+            this.xd = 2.5;
+            this.yd = -2.5;
             this.radius = 10;
         }
         update() {
