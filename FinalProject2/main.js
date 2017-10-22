@@ -269,7 +269,7 @@ var Bricks2;
         Bricks2.crc2.fillStyle = "#000000";
         Bricks2.crc2.fillText("YOU WIN !", centerX, 200);
         Bricks2.crc2.font = "16px Courier New";
-        Bricks2.crc2.fillText("Hit spacebar or click to restart", centerX, 400);
+        Bricks2.crc2.fillText("Hit spacebar or click to continue", centerX, 400);
     }
 })(Bricks2 || (Bricks2 = {})); //namespace
 //# sourceMappingURL=main.js.map

@@ -93,7 +93,7 @@ namespace Bricks2 {
                 brickPosx = 50;
                 brickPosy += brick.ySpacer;
 
-            } else {// x spacing zum nächsten brick
+            } else {// x spacing zum nï¿½chsten brick
                 brickPosx += brick.xSpacer;
             }
             brick.setRandomColor();
@@ -312,6 +312,6 @@ namespace Bricks2 {
         crc2.fillStyle = "#000000";
         crc2.fillText("YOU WIN !", centerX, 200);
         crc2.font = "16px Courier New";
-        crc2.fillText("Hit spacebar or click to restart", centerX, 400);
+        crc2.fillText("Hit spacebar or click to continue", centerX, 400);
     }
 } //namespace
